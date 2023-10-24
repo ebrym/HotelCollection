@@ -1,0 +1,250 @@
+﻿@model HotelCollection.Web.Models.RegisterViewModel
+@{
+        ViewData["Title"] = "Assign Role";
+    }
+
+
+
+<form role="form" method="post" asp-action="AssignUserRole">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Add User To Role</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label form-control-label">Search User : </label>
+                        <div class="col-md-4">
+                            <input id="User" name="User" type="text" class="form-control" />
+                        </div>
+                        <label class="col-md-2 col-form-label form-control-label">Role: </label>
+                        <div class="col-md-4">
+                            <select asp-for="Role" asp-items="@ViewBag.roles"
+                                    class="form-control custom-select" required>
+                                <option value="">Please select one</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label form-control-label">First Name : </label>
+                        <div class="col-md-4">
+                            <span id="sFirstName"></span>
+                        </div>
+                        <label class="col-md-2 col-form-label form-control-label">Last Name : </label>
+                        <div class="col-md-4">
+                            <span id="sLastName"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label form-control-label">User Name : </label>
+                        <div class="col-md-4">
+                            <span id="sUsername"></span>
+                        </div>
+                        <label class="col-md-2 col-form-label form-control-label">Email : </label>
+                        <div class="col-md-4">
+                            <span id="sEmail"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label form-control-label">Department : </label>
+                        <div class="col-md-4">
+                            <span id="sDepartment"></span>
+                        </div>
+                        <label class="col-md-2 col-form-label form-control-label">Unit : </label>
+                        <div class="col-md-4">
+                            <span id="userUnit"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label form-control-label">Job Title : </label>
+                        <div class="col-md-4">
+                            <span id="sJobTitle"></span>
+                        </div>
+                    </div>
+
+                    <input asp-for="FirstName" class="form-control" type="hidden">
+                    <input asp-for="LastName" class="form-control" type="hidden">
+                    <input asp-for="Username" class="form-control" type="hidden">
+                    <input asp-for="Email" class="form-control" type="hidden">
+                    <input asp-for="Department" class="form-control" type="hidden">
+                    <input asp-for="JobTitle" class="form-control" type="hidden">
+                    <input asp-for="Unit" class="form-control" type="hidden">
+
+
+                </div>
+            </div>
+            <div class="form-layout-footer mg-t-30">
+                <button class="btn btn-primary my-4">Submit</button>
+                <a class="btn btn-secondary" asp-controller="Account" asp-action="Roles">Cancel</a>
+            </div><!-- form-layout-footer -->
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</form>
+
+
+@*<link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">*@
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@*<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>*@
+<script type="text/javascript">
+    //function DoPostBack() {
+    //    var select = document.getElementById("Id");
+    //    var option = select.options[select.selectedIndex];
+    //    // alert(option.value); //CreateUserRole
+
+    //    // var project = $("#MarketerName").val();
+    //    if (option.value != "") {
+    //        var Table = document.getElementById("tblUserEdit");
+    //        Table.innerHTML = "";
+    //        document.forms[1].action = "/Account/AssignUserRole/";
+    //        document.forms[1].method = "POST";
+    //        document.forms[1].submit();
+    //    }
+    //}
+    //$.noConflict();
+      $(document).ready(function () {
+
+          $.noConflict();
+          //var searchString = $("#User").val();
+
+          $("#User").autocomplete({
+                minLength: 4,
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("GetUsers")',
+                        datatype: "json",
+                        data: {
+                            term: request.term
+                        },
+                        success: function (data) {
+                            response($.map(data, function (val, item) {
+                                //var object = new Object();
+                                //object.label = item.displayName;
+                                //object.value = item.displayName;
+                               
+
+                               // return object
+
+                                return {
+                                    label: val.displayName,
+                                    value: val.displayName,
+                                    FirstName: val.firstName,
+                                    LastName: val.lastName,
+                                    Email: val.email,
+                                    UserName: val.userName,
+                                    JobTitle: val.jobTitle,
+                                    Department: val.department,
+                                    Unit: val.unit,
+                                }
+                            }))
+                        }
+                    })
+                },
+              //focus: function (event, ui) {
+              //    $("#User").val(ui.item.label);
+              //    return false;
+              //},
+              select: function (event, ui) {
+                 // $("#User").val(ui.item.FirstName);
+                  var it = JSON.stringify(ui);
+
+                  //alert(it);//sFirstName
+                  $("#FirstName").val(ui.item.FirstName);
+                  $("#LastName").val(ui.item.LastName);
+                  $("#Email").val(ui.item.Email);
+                  $("#Username").val(ui.item.UserName);
+                  $("#JobTitle").val(ui.item.JobTitle);
+                  $("#Department").val(ui.item.Department);
+                  $("#Unit").val(ui.item.Unit);
+
+                //  alert(ui.item.Unit);
+                  $("#sFirstName").text(ui.item.FirstName);
+                  $("#sLastName").text(ui.item.LastName);
+                  $("#sEmail").text(ui.item.Email);
+                  $("#sUsername").text(ui.item.UserName);
+                  $("#sJobTitle").text(ui.item.JobTitle);
+                  $("#sDepartment").text(ui.item.Department);
+                  $("#userUnit").text(ui.item.Unit);
+                
+                  //$.get("/Home/GetSProductList", { CategoryID: ui.item.CategoryId }, function (data) {
+                    //    $("#ProductID").empty();
+                        //$.each(data, function (index, row) {
+                        //    $("#User").append("<option value='" + row.ProductID + "'>" + row.ProductName + "option>")
+                        //});
+
+                    //});
+
+
+
+
+                }
+            });
+        });
+</script>
+@*<script>
+
+        $(document).ready(function () {
+             $.noConflict();
+            $("#User").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("GetUsers")',
+                        datatype: $("#User").val(),
+                        data: {
+                            term: request.term
+                        },
+                        success: function (data) {
+                            response($.map(data, function (val, item) {
+                                return {
+                                    label: val.Name,
+                                    value: val.Name,
+                                    FirstName: val.FirstName
+                                }
+                            }))
+                        }
+                    })
+                },
+                select: function (event, ui) {
+                    //$.get("/Home/GetSProductList", { CategoryID: ui.item.CategoryId }, function (data) {
+                    //    $("#ProductID").empty();
+                    //    $.each(data, function (index, row) {
+                    //        $("#ProductID").append("<option value='" + row.ProductID + "'>" + row.ProductName + "option>")
+                    //    });
+
+                    //});
+                }
+            });
+        });
+    </script>*@  

@@ -1,0 +1,51 @@
+
+9/19/2019 10:12:41 AM
+------------------------------------------------------------------------------------------------
+Controller Name :- Approval
+Action Method Name :- Approve
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}Object reference not set to an instance of an object.
+Source ---
+{0}HotelCollection.Web
+StackTrace ---
+{0}   at HotelCollection.Web.Controllers.ApprovalController.<>c.<Approve>b__13_1(Approval u) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\ApprovalController.cs:line 120
+   at System.Linq.Enumerable.SelectListIterator`2.ToList()
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at HotelCollection.Web.Controllers.ApprovalController.Approve(Int32 Id) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\ApprovalController.cs:line 120
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}HotelCollection.Web.Models.ApprovalModel <Approve>b__13_1(HotelCollection.Data.Entity.Approval)
+
+
+9/19/2019 10:55:22 AM
+------------------------------------------------------------------------------------------------
+Controller Name :- Approval
+Action Method Name :- Approve
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}Object reference not set to an instance of an object.
+Source ---
+{0}HotelCollection.Web
+StackTrace ---
+{0}   at HotelCollection.Web.Controllers.ApprovalController.Approve(Int32 Id) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\ApprovalController.cs:line 105
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}Void MoveNext()
+

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.UserViewModel>
+@{
+    ViewBag.Title = "User Roles";
+}
+
+
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-0">Approvals</h3>
+            </div>
+            <div class="col-6 text-right">
+
+                <a asp-action="AssignUserRole" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="Assing Role to user">
+                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                    <span class="btn-inner--text">Assing Role to user</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table id="datatable1" class="table align-items-center table-flush">
+            <thead>
+                <tr>
+                    <th class="wd-15p">First name</th>
+                    <th class="wd-15p">Last name</th>
+                    <th class="wd-20p">Department</th>
+                    <th class="wd-15p">Unit</th>
+                    <th class="wd-10p">Email</th>
+                    <th class="wd-10p">Role</th>
+                    <th class="wd-10p"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Department</td>
+                    <td>@user.Unit</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                    <td>
+                        @*<a asp-controller="Account" asp-action="EditRole" asp-route-id="@role.Id" alt="Edit" class="btn btn-primary btn-icon"> <div><i class="fa fa-pencil"></i></div></a>|<a asp-action="Delete" asp-route-id="@role.Id" class="btn btn-danger btn-icon"><div><i class="fa fa-trash-o"></i></div></a>*@
+                        <a asp-action="EditAssignUserRole" asp-route-id="@user.Id" class="table-action" data-toggle="tooltip" data-original-title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- table-wrapper -->
+</div><!-- card -->
+
+
+
+    @*<script>
+        $('#datatable1').DataTable({
+            responsive: true,
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
+        });
+    </script>*@
+
+

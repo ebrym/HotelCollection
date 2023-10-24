@@ -1,0 +1,34 @@
+﻿@model HotelCollection.Web.Models.RoleViewModel
+@{
+    ViewData["Title"] = "Edit Roles";
+}
+<div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Add Role</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <!-- Form groups used in grid -->
+        <div class="row">
+            <div class="col-md-6">
+                <form role="form" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row">
+                        <label class="col-sm-4 form-control-label">First name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input asp-for="Name" type="text" class="form-control" placeholder="Enter role name" required>
+                        </div>
+                    </div><!-- row -->
+
+                    <input asp-for="Id" class="form-control" type="hidden" placeholder="Confirm Password">
+                    <div class="form-layout-footer mg-t-30">
+                        <button class="btn btn-info mg-r-5">Submit Form</button>
+                        <a class="btn btn-secondary" asp-controller="Account" asp-action="Roles">Cancel</a>
+                    </div><!-- form-layout-footer -->
+                </form>
+            </div><!-- card -->
+        </div><!-- col-6 -->
+
+    </div>
+</div> 

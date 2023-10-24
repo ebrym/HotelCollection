@@ -1,0 +1,72 @@
+﻿@model HotelCollection.Web.Models.ApprovalConfigModel
+@{
+    ViewData["Title"] = "Edit Approval Config";
+}
+
+<div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Setup Approval Config</h3>
+    </div>
+    <!-- Card body -->
+<div class="card-body">
+    <!-- Form groups used in grid -->
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label form-control-label"><span class="tx-danger">*</span>Department : </label>
+                    <div class="col-sm-4">
+                        <select asp-for="Department" asp-items="@ViewBag.department"
+                                class="form-control custom-select" required>
+                            <option value="">Please select one</option>
+                        </select>
+                        @*<select asp-for="ApprovalType"
+                                    class="form-control custom-select" required>
+                                <option value="">Please select one</option>
+                                <option value="Requisition">Requisition</option>
+                            </select>*@
+                    </div>
+                    <label class="col-md-2 col-form-label form-control-label"> <span class="tx-danger">*</span>Role :</label>
+                    <div class="col-sm-4">
+                        <select asp-for="RoleId" asp-items="@ViewBag.roles"
+                                class="form-control custom-select" required>
+                            <option value="">Please select one</option>
+                        </select>
+                    </div>
+
+                </div><!-- row -->
+                <div class="row">
+                    <label class="col-md-2 col-form-label form-control-label">Approval Level : <span class="tx-danger">*</span></label>
+                    <div class="col-sm-4">
+                        <select asp-for="ApprovalLevel"
+                                class="form-control custom-select" required>
+                            <option value="">Please select one</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <label class="col-md-2 col-form-label form-control-label"> Final Approval :</label>
+                    <div class="col-sm-4">
+                        <input asp-for="IsFinalLevel" type="checkbox" class="col-sm-1 form-control">
+                    </div>
+                </div><!-- row -->
+                <input asp-for="Id" type="hidden">
+                <div class="form-layout-footer mg-t-30">
+                    <button class="btn btn-info mg-r-5">Update</button>
+                    <a class="btn btn-secondary" asp-controller="ApprovalConfig" asp-action="Index">Cancel</a>
+                </div><!-- form-layout-footer -->
+            </form>
+        </div><!-- card -->
+    </div><!-- col-6 -->
+</div>
+</div>

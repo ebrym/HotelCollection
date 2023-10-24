@@ -1,0 +1,142 @@
+
+9/9/2019 7:55:55 AM
+------------------------------------------------------------------------------------------------
+Controller Name :- Requisition
+Action Method Name :- Index
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext, however instance members are not guaranteed to be thread safe. This could also be caused by a nested query being evaluated on the client, if this is the case rewrite the query avoiding nested invocations.
+Source ---
+{0}Microsoft.EntityFrameworkCore
+StackTrace ---
+{0}   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSectionAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.Aggregate_[TSource,TAccumulate,TResult](IAsyncEnumerable`1 source, TAccumulate seed, Func`3 accumulator, Func`2 resultSelector, CancellationToken cancellationToken) in D:\a\1\s\Ix.NET\Source\System.Interactive.Async\Aggregate.cs:line 120
+   at HotelCollection.Repository.PermissionRepo.RequisitionRepository.GetRequisitionsByUserAsync() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\Repos\RequisitionRepository.cs:line 67
+   at HotelCollection.Web.Controllers.RequisitionController.Index() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\RequisitionController.cs:line 61
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}System.IDisposable EnterCriticalSection()
+
+
+9/9/2019 8:00:49 AM
+------------------------------------------------------------------------------------------------
+Controller Name :- ItemCategory
+Action Method Name :- Index
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext, however instance members are not guaranteed to be thread safe. This could also be caused by a nested query being evaluated on the client, if this is the case rewrite the query avoiding nested invocations.
+Source ---
+{0}Microsoft.EntityFrameworkCore
+StackTrace ---
+{0}   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSectionAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.Aggregate_[TSource,TAccumulate,TResult](IAsyncEnumerable`1 source, TAccumulate seed, Func`3 accumulator, Func`2 resultSelector, CancellationToken cancellationToken) in D:\a\1\s\Ix.NET\Source\System.Interactive.Async\Aggregate.cs:line 120
+   at HotelCollection.Repository.PermissionRepo.ItemCategoryRepository.GetItemCategoryAsync() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\Repos\ItemCategoryRepository.cs:line 38
+   at HotelCollection.Web.Controllers.ItemCategoryController.Index() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\ItemCategoryController.cs:line 29
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}System.IDisposable EnterCriticalSection()
+
+
+9/9/2019 8:03:30 AM
+------------------------------------------------------------------------------------------------
+Controller Name :- Requisition
+Action Method Name :- Index
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext, however instance members are not guaranteed to be thread safe. This could also be caused by a nested query being evaluated on the client, if this is the case rewrite the query avoiding nested invocations.
+Source ---
+{0}Microsoft.EntityFrameworkCore
+StackTrace ---
+{0}   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSectionAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.Aggregate_[TSource,TAccumulate,TResult](IAsyncEnumerable`1 source, TAccumulate seed, Func`3 accumulator, Func`2 resultSelector, CancellationToken cancellationToken) in D:\a\1\s\Ix.NET\Source\System.Interactive.Async\Aggregate.cs:line 120
+   at HotelCollection.Repository.PermissionRepo.RequisitionRepository.GetRequisitionsByUserAsync() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\Repos\RequisitionRepository.cs:line 67
+   at HotelCollection.Web.Controllers.RequisitionController.Index() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\RequisitionController.cs:line 61
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}System.IDisposable EnterCriticalSection()
+
+
+9/9/2019 11:06:52 AM
+------------------------------------------------------------------------------------------------
+Controller Name :- Approval
+Action Method Name :- Index
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}Value cannot be null.
+Parameter name: user
+Source ---
+{0}Microsoft.Extensions.Identity.Core
+StackTrace ---
+{0}   at Microsoft.AspNetCore.Identity.UserManager`1.GetRolesAsync(TUser user)
+   at HotelCollection.Repository.AccountRepo.AccountManager.GetApprovalLevelByUserAsync(String email) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\AccountRepo\AccountManager.cs:line 436
+   at HotelCollection.Repository.ApprovalRepo.RfqApprovalRepository.GetPendingApprovalAsync() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\ApprovalRepo\ApprovalRepository.cs:line 43
+   at HotelCollection.Web.Controllers.ApprovalController.Index() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\ApprovalController.cs:line 64
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}Void MoveNext()
+
+
+9/9/2019 11:22:12 AM
+------------------------------------------------------------------------------------------------
+Controller Name :- Approval
+Action Method Name :- Index
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}Value cannot be null.
+Parameter name: user
+Source ---
+{0}HotelCollection.Repository
+StackTrace ---
+{0}   at HotelCollection.Repository.AccountRepo.AccountManager.GetApprovalLevelByUserAsync(String email) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\AccountRepo\AccountManager.cs:line 452
+   at HotelCollection.Repository.ApprovalRepo.RfqApprovalRepository.GetPendingApprovalAsync() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\ApprovalRepo\ApprovalRepository.cs:line 43
+   at HotelCollection.Web.Controllers.ApprovalController.Index() in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\ApprovalController.cs:line 64
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}Void MoveNext()
+

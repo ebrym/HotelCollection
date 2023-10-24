@@ -1,0 +1,271 @@
+﻿@model HotelCollection.Web.Models.RequisitionModel
+
+@{
+    ViewData["Title"] = "Approve Request";
+}
+<form asp-action="" method="post" enctype="multipart/form-data">
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Request Details for #-@Model.Id </h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group row">
+                        <label asp-for="StaffName" class="col-md-2 col-form-label form-control-label">Staff Name</label>
+                        <div class="col-md-4">
+                            @Model.StaffName
+                        </div>
+                        <label asp-for="StaffEmail" class="col-md-2 col-form-label form-control-label">Staff Email</label>
+                        <div class="col-md-4">
+                            @Model.StaffEmail
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Department" class="col-md-2 col-form-label form-control-label">Department</label>
+                        <div class="col-md-4">
+                            @Model.Department
+                        </div>
+                        <label asp-for="JobTitle" class="col-md-2 col-form-label form-control-label">Job Title</label>
+                        <div class="col-md-4">
+                            @Model.JobTitle
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="Unit" class="col-md-2 col-form-label form-control-label">Unit</label>
+                        <div class="col-md-4">
+                            @Model.Unit
+                        </div>
+                        <label asp-for="RequisitionType" class="col-md-2 col-form-label form-control-label">RequisitionType</label>
+                        <div class="col-md-4">
+                            @Model.RequisitionType
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label asp-for="ProjectId" class="col-md-2 col-form-label form-control-label">Project </label>
+                        <div class="col-md-4">
+                            @Model.ProjectName
+                        </div>
+                        <label asp-for="MarketerName" class="col-md-2 col-form-label form-control-label">Marketer</label>
+                        <div class="col-md-4">
+                            @Model.MarketerName
+                        </div>
+                    </div>
+                    <input asp-for="Id" class="form-control" type="hidden">
+                    <input asp-for="CurrentApprovalLevel" class="form-control" type="hidden">
+                    @*   <input asp-for="JobTitle" class="form-control" type="hidden">
+                        <input asp-for="Department" class="form-control" type="hidden">
+                        <input type="hidden" asp-for="ProjectCode" class="form-control" id="ProjectCode">
+                        <input type="hidden" asp-for="ProjectName" class="form-control" id="ProjectName">
+                        <input type="hidden" asp-for="MarketerEmail" class="form-control" id="MarketerEmail">
+                        <input type="hidden" asp-for="MarketerName" class="form-control" id="MarketerName">*@
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Items</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush" id="tdItems">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyItem">
+                                @{
+                                    var items = Model.Items as List<HotelCollection.Web.Models.ItemsModel>;
+                                }
+                                @for (int i = 0; i < items.Count(); i++)
+                                {
+                                    <tr id="item_@(i)">
+                                        <td>@(i + 1)</td>
+                                        <td class="table-user">
+                                            @items[i].ItemCategory
+                                        </td>
+                                        <td class="table-user">
+                                            @items[i].ItemDescription
+                                        </td>
+                                        <td class="table-user">
+                                            @items[i].Quantity
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Comment/Remarks</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+                    <label asp-for="Remarks" class="col-md-2 col-form-label form-control-label">Remarks</label>
+                    <div class="col-md-10">
+                        @Model.Remarks
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label asp-for="UploadDoc" class="col-md-2 col-form-label form-control-label">Supporting Document</label>
+                    <div class="col-md-5">
+                        @Model.DocumentPath
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Approval Stages</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>S/N</th>
+                                <th>Approval</th>
+                                <th>Comments</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                var comments = ViewBag.Comments as List<HotelCollection.Web.Models.ApprovalModel>;
+                            }
+                            @for (int i = 0; i < comments.Count(); i++)
+                            {
+                                <tr id="item_@(i)">
+                                    <td>@(i + 1)</td>
+                                    <td class="table-user">
+                                        @comments[i].ApprovalFullName
+                                    </td>
+                                    <td class="table-user">
+                                        @comments[i].Comment
+                                    </td>
+                                    <td class="table-user">
+                                        @comments[i].ApprovalDate
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Your Comments</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+                    <label asp-for="ApprovalComments" class="col-md-2 col-form-label form-control-label">Comments</label>
+                    <div class="col-md-10">
+                        <textarea asp-for="ApprovalComments" class="form-control" required></textarea>
+                        <span asp-validation-for="ApprovalComments" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <label class="custom-toggle">
+            <input type="checkbox" asp-for="Approved" value="true" checked />
+            <span id="toggleApprove" class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes" width="150px"></span>
+        </label>
+    </div>
+    <div class="text-center">
+        <button id="btnApprove" type="submit" class="btn btn-primary my-4">Approve</button>
+        <button id="btnReject" class="btn btn-danger" data-toggle="sweet-alert" data-sweet-alert="question">Reject</button>
+    </div>
+</form>
+<div style="display:none;">
+    <table id="sample_table">
+        <tr id="">
+            <td><span class="sn"></span>.</td>
+            <td class="table-user">
+                <select class="form-control itemCategory" required="" data-val="true" data-val-required="The ItemCategoryId field is required." id="items_0__ItemCategoryId" name="items[0].ItemCategoryId">
+                    <option value="0" selected="selected">Please select one</option>
+                </select>
+            </td>
+            <td class="table-user">
+                <input class="form-control itemDescription" type="text" id="items_0__ItemDescription" name="items[0].ItemDescription" value="" required="">
+            </td>
+            <td class="table-user">
+                <input class="form-control col-sm-10 itemQuantity" type="number" data-val="true" data-val-required="The Quantity field is required." id="items_0__Quantity" name="items[0].Quantity" value="0">
+            </td>
+            <td>
+                <a class="btn btn-danger text-white delete-record" data-id="0"><i class="fas fa-trash"></i></a>
+            </td>
+            <input class="form-control itemCategoryName" type="hidden" id="items_0__ItemCategory" name="items[0].ItemCategory" value="" required="">
+        </tr>
+       
+
+    </table>
+</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+<script>
+      
+    
+
+    $(document).ready(function () {
+        $.noConflict();
+        $('#btnReject').hide();
+
+
+        $('#toggleApprove').on('click', function () {
+           // alert("HERE");
+            $("#btnApprove").toggle(this.checked);
+            $('#btnReject').toggle(this.checked);
+        });
+
+
+
+    });
+   
+</script>

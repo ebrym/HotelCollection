@@ -1,0 +1,16 @@
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/bin/Debug/netcoreapp2.2/HotelCollection.Repository.deps.json
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/bin/Debug/netcoreapp2.2/HotelCollection.Repository.runtimeconfig.json
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/bin/Debug/netcoreapp2.2/HotelCollection.Repository.runtimeconfig.dev.json
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/bin/Debug/netcoreapp2.2/HotelCollection.Repository.dll
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/bin/Debug/netcoreapp2.2/HotelCollection.Repository.pdb
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/bin/Debug/netcoreapp2.2/HotelCollection.Data.dll
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/bin/Debug/netcoreapp2.2/HotelCollection.Data.pdb
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.csproj.AssemblyReference.cache
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.AssemblyInfoInputs.cache
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.AssemblyInfo.cs
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.csproj.CoreCompileInputs.cache
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.csproj.CopyComplete
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.dll
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.pdb
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/Debug/netcoreapp2.2/HotelCollection.Repository.genruntimeconfig.cache

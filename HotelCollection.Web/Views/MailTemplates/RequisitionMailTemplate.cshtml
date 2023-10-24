@@ -1,0 +1,82 @@
+﻿@model HotelCollection.Web.Models.RequisitionModel
+<HTML>
+<HEAD>
+    <TITLE>CYBERSPACE REQUISITION ::::: NOTIFICATION </TITLE>
+</HEAD>
+<BODY>
+    <table align="left" width="90%" border="1" cellspacing="10" cellpadding="10">
+        <tr>
+            <td align="center" valign="top">
+                <br />
+                <font face="Verdana, Arial, Helvetica, sans-serif" size="3">::::: CYBERSPACE REQUISITION NOTIFICATION :::::</font><br /><br />
+                                                                                                                                        <table border="1" style="border-color: black;" width="90%" cellpadding="5" cellspacing="5">
+                                                                                                                                            <tr><td align="left" colspan="2" style="width: 100%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>The following request(s) made by @Model.StaffName.ToUpper() requires your attention. See details below.</b></font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Requisition Number</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.Id</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Staff Email</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.StaffEmail</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Department</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.Department</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Unit</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.Unit</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Job Title</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.JobTitle</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Request Type</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.RequisitionType</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Project Code</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.ProjectCode</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Project Name</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.ProjectName</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Marketer</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.MarketerName</font></td></tr>
+                                                                                                                                            <tr><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Remarks</b></font></td><td align="left" style="width: 50%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">@Model.Remarks</font></td></tr>
+
+
+                                                                                                                                            <tr><td align="center" colspan="2" style="width: 100%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>ITEM DETAILS</b></font></td></tr>
+                                                                                                                                            <tr>
+                                                                                                                                                <td align="left" colspan="2" style="width: 100%" valign="top">
+                                                                                                                                                    <table border="1" style="border-color: black;width: 100%;" cellpadding="5" cellspacing="5">
+                                                                                                                                                        <thead class="thead-light">
+                                                                                                                                                            <tr>
+                                                                                                                                                                <th align="left" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>S/N</b></font></th>
+                                                                                                                                                                <th align="left" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Category</b></font></th>
+                                                                                                                                                                <th align="left" style="width: 100%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Description</b></font></th>
+                                                                                                                                                                <th align="Center" style="width: 100%" valign="top"><font align="left" face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>Quantity</b></font></th>
+                                                                                                                                                            </tr>
+                                                                                                                                                        </thead>
+                                                                                                                                                        <tbody>
+                                                                                                                                                            @{
+                                                                                                                                                                int j = 0;
+                                                                                                                                                            }
+                                                                                                                                                            @foreach (var item in @Model.Items)
+                                                                                                                                                            {
+                                                                                                                                                                <tr>
+                                                                                                                                                                    <td align="left" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><b>@(j = j + 1)</b></font></td>
+                                                                                                                                                                    <td align="left" style="width: 40%" valign="top">
+                                                                                                                                                                        <font face="Verdana, Arial, Helvetica, sans-serif" size="1">
+                                                                                                                                                                            <b>
+                                                                                                                                                                                @item.ItemCategory
+                                                                                                                                                                            </b>
+                                                                                                                                                                        </font>
+                                                                                                                                                                    </td>
+                                                                                                                                                                    <td align="left" style="width: 100%" valign="top">
+                                                                                                                                                                        <font face="Verdana, Arial, Helvetica, sans-serif" size="1">
+                                                                                                                                                                            <b>
+                                                                                                                                                                                @item.ItemDescription
+                                                                                                                                                                            </b>
+                                                                                                                                                                        </font>
+                                                                                                                                                                    </td>
+                                                                                                                                                                    <td align="center" style="width: 100%" valign="top">
+                                                                                                                                                                        <font face="Verdana, Arial, Helvetica, sans-serif" size="1">
+                                                                                                                                                                            <b>
+                                                                                                                                                                                @item.Quantity
+                                                                                                                                                                            </b>
+                                                                                                                                                                        </font>
+                                                                                                                                                                    </td>
+
+                                                                                                                                                                </tr>
+                                                                                                                                                            }
+                                                                                                                                                        </tbody>
+
+                                                                                                                                                    </table>
+                                                                                                                                                </td>
+
+                                                                                                                                            </tr>
+                                                                                                                                            <tr><td align="center" colspan="2" style="width: 100%" valign="top"><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><a href="@Model.AppLink"><b>CLICK HERE TO APPROVE THIS REQUEST</b></a></font></td></tr>
+                                                                                                                                        </table><br /><br />
+            </td>
+        </tr>
+    </table>
+</BODY>
+</HTML>

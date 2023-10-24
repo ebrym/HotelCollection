@@ -1,0 +1,15 @@
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/bin/Debug/netcoreapp2.2/HotelCollection.Infrastructure.deps.json
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/bin/Debug/netcoreapp2.2/HotelCollection.Infrastructure.dll
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/bin/Debug/netcoreapp2.2/HotelCollection.Infrastructure.pdb
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/bin/Debug/netcoreapp2.2/HotelCollection.Data.dll
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/bin/Debug/netcoreapp2.2/HotelCollection.Repository.dll
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/bin/Debug/netcoreapp2.2/HotelCollection.Repository.pdb
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/bin/Debug/netcoreapp2.2/HotelCollection.Data.pdb
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.csproj.AssemblyReference.cache
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.AssemblyInfoInputs.cache
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.AssemblyInfo.cs
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.csproj.CopyComplete
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.dll
+/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/Debug/netcoreapp2.2/HotelCollection.Infrastructure.pdb

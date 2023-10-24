@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.RoleViewModel>
+@{
+    ViewBag.Title = "Roles";
+}
+
+
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-0">Add Role</h3>
+            </div>
+            <div class="col-6 text-right">
+
+                <a asp-action="CreateRole" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="Create Role">
+                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                    <span class="btn-inner--text">Create Roles</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table id="datatable1" class="table align-items-center table-flush">
+            <thead class="thead-light">
+                <tr>
+                    <th class="wd-15p">Name</th>
+                    <th class="wd-10p"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>
+                            @*<a asp-controller="Account" asp-action="EditRole" asp-route-id="@role.Id" alt="Edit" class="btn btn-primary btn-icon"> <div><i class="fa fa-pencil"></i></div></a>|<a asp-action="Delete" asp-route-id="@role.Id" class="btn btn-danger btn-icon"><div><i class="fa fa-trash-o"></i></div></a>*@
+                            <a asp-action="EditRole" asp-route-id="@role.Id" class="table-action" data-toggle="tooltip" data-original-title="Edit">
+                                <i class="fas fa-user-edit"></i>
+                            </a>
+                            <a asp-action="" asp-route-id="@role.Id" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- table-wrapper -->
+</div><!-- card -->
+
+
+
+    @*<script>
+        $('#datatable1').DataTable({
+            responsive: true,
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
+        });
+    </script>*@
+
+

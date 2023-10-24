@@ -1,0 +1,89 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.ApprovalConfigModel>
+@{
+    ViewBag.Title = "Approval Config";
+}
+
+
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-0">Approval Configs</h3>
+            </div>
+            <div class="col-6 text-right">
+
+                <a asp-action="Create" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="Setup Approval Config">
+                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                    <span class="btn-inner--text">Setup Approval Configs</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table id="datatable1" class="table align-items-center table-flush">
+            <thead>
+                <tr>
+                    <th class="wd-15p">S/N</th>
+                    <th class="wd-15p">Role</th>
+                    <th class="wd-15p">Department</th>
+                    <th class="wd-15p">Level</th>
+                    <th class="wd-15p">Final</th>
+                    <th class="wd-10p"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                }
+                @foreach (var approvalConfig in Model)
+                {
+                <tr>
+                    <td>@(i = i + 1)</td>
+                    <td>@approvalConfig.Role</td>
+                    <td>@approvalConfig.Department</td>
+                    <td>@approvalConfig.ApprovalLevel</td>
+                    <td>@approvalConfig.IsFinalLevel</td>
+                    <td>
+                       
+                        <a asp-action="Edit" asp-route-id="@approvalConfig.Id" class="table-action" data-toggle="tooltip" data-original-title="Edit">
+                            <i class="fas fa-user-edit"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@approvalConfig.Id" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- table-wrapper -->
+</div><!-- card -->
+
+
+<script src="/lib/jquery/jquery.js"></script>
+<script src="/lib/datatables/jquery.dataTables.js"></script>
+<script src="/lib/datatables-responsive/dataTables.responsive.js"></script>
+<script src="../lib/select2/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // $.noConflict();
+        $(function () {
+            'use strict';
+
+            // for all datatable
+            $('#datatable1').DataTable({
+                responsive: true,
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                    lengthMenu: '_MENU_ items/page',
+                }
+            });
+            // Select2
+            $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+        });
+    });
+</script>
+

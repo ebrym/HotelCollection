@@ -1,0 +1,135 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.RequisitionModel>
+@{
+    ViewData["Title"] = "Requisition";
+}
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-0">My Request List</h3>
+            </div>
+            <div class="col-6 text-right">
+
+                <a asp-action="Create" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="New Request">
+                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                    <span class="btn-inner--text">New Request</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Light table -->
+    <div class="table-responsive">
+        <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+                <tr>
+                    <th>S/N</th>
+                    <th>Request No.</th>
+                    <th>Type</th>
+                    <th>Project Code</th>
+                    <th>Project Name</th>
+                    <th>Marketer</th>
+                    <th>Approval</th>
+                    @*<th>Current Level</th>*@
+                    <th>Remarks</th>
+                    @*<th>Document</th>*@
+                    <th>Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                }
+                @foreach (var req in Model)
+                {
+                    i = i + 1;
+                    <tr>
+                        <td>@(i)</td>
+                        <td class="table-user">
+                            <b>@Html.DisplayFor(modelItem => req.Id)</b>
+                        </td>
+                        <td class="table-user">
+                            <b>@Html.DisplayFor(modelItem => req.RequisitionType)</b>
+                        </td>
+                        <td class="table-user">
+                            <b>@(string.IsNullOrEmpty(req.ProjectCode) ? "-" : req.ProjectCode)</b>
+                        </td>
+                        <td class="table-user">
+                            <b>@(string.IsNullOrEmpty(req.ProjectName) ? "-" : req.ProjectName)</b>
+                        </td>
+                        <td class="table-user">
+                            <b>@(string.IsNullOrEmpty(req.MarketerName) ? "-" : req.MarketerName)</b>
+                        </td>
+                        <td class="table-user">
+                            <b>@(string.IsNullOrEmpty(req.ApprovalStatus) ? "-" : req.ApprovalStatus)</b>
+                        </td>
+                        @*<td class="table-user">
+                            <b>@(string.IsNullOrEmpty(req.CurrentApprovalLevel) ? "-" : req.CurrentApprovalLevel)</b>
+                        </td>*@
+                        <td class="table-user">
+                            <b>@(string.IsNullOrEmpty(req.Remarks) ? "-" : req.Remarks)</b>
+                        </td>
+                        @*<td class="table-user">
+                            <b>@(string.IsNullOrEmpty(req.DocumentPath) ? "-" : req.DocumentPath)</b>
+                        </td>*@
+                        <td class="table-user">
+                            <b>@req.DateCreated.ToString("dd/MM/yyyy")</b>
+                        </td>
+                        <td class="table-user">
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseItem_@(i)" role="button" aria-expanded="false" aria-controls="collapseItem_@(i)">
+                                View Items
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@req.Id" class="table-action" data-toggle="tooltip" data-original-title="Details">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            @*  <a asp-action="Delete" asp-route-id="@req.Id" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>*@
+                        </td>
+                    </tr>
+                    <tr class="collapse" id="collapseItem_@(i)">
+                        <td colspan="13">
+                            <h4 class="center"> ITEMS LIST for request no. (@req.Id)</h4>
+                            <table class="table align-items-center table-flush" id="tdItems">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int j = 0;
+                                    }
+                                    @foreach (var item in @req.Items)
+                                    {
+                                        <tr>
+                                            <td>@(j = j + 1)</td>
+                                            <td class="table-user">
+                                                @item.ItemCategory
+                                            </td>
+                                            <td class="table-user">
+                                                @item.ItemDescription
+                                            </td>
+                                            <td class="table-user">
+                                                @item.Quantity
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,323 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionManagement.Web/RequisitionManagement.Web.csproj": {}
+  },
+  "projects": {
+    "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Data/HotelCollection.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Data/HotelCollection.Data.csproj",
+        "projectName": "HotelCollection.Data",
+        "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Data/HotelCollection.Data.csproj",
+        "packagesPath": "/Users/ibrahim.abdullahi/.nuget/packages/",
+        "outputPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Data/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ibrahim.abdullahi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "targetAlias": "netcoreapp2.2",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "targetAlias": "netcoreapp2.2",
+          "dependencies": {
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/HotelCollection.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/HotelCollection.Repository.csproj",
+        "projectName": "HotelCollection.Repository",
+        "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/HotelCollection.Repository.csproj",
+        "packagesPath": "/Users/ibrahim.abdullahi/.nuget/packages/",
+        "outputPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ibrahim.abdullahi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "targetAlias": "netcoreapp2.2",
+            "projectReferences": {
+              "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Data/HotelCollection.Data.csproj": {
+                "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Data/HotelCollection.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "targetAlias": "netcoreapp2.2",
+          "dependencies": {
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "FluentNHibernate": {
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionManagement.Web/RequisitionManagement.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionManagement.Web/RequisitionManagement.Web.csproj",
+        "projectName": "RequisitionManagement.Web",
+        "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionManagement.Web/RequisitionManagement.Web.csproj",
+        "packagesPath": "/Users/ibrahim.abdullahi/.nuget/packages/",
+        "outputPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionManagement.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ibrahim.abdullahi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "targetAlias": "netcoreapp2.2",
+            "projectReferences": {
+              "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj": {
+                "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "targetAlias": "netcoreapp2.2",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj",
+        "projectName": "HotelCollection.Infrastructure",
+        "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj",
+        "packagesPath": "/Users/ibrahim.abdullahi/.nuget/packages/",
+        "outputPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ibrahim.abdullahi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "targetAlias": "netcoreapp2.2",
+            "projectReferences": {
+              "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/HotelCollection.Repository.csproj": {
+                "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Repository/HotelCollection.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "targetAlias": "netcoreapp2.2",
+          "dependencies": {
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "DinkToPdf": {
+              "target": "Package",
+              "version": "[1.0.8, )"
+            },
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Novell.Directory.Ldap.NETStandard": {
+              "target": "Package",
+              "version": "[2.3.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

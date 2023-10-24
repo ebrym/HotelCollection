@@ -1,0 +1,48 @@
+@model HotelCollection.Web.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Users";
+}
+
+
+<div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Add User</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <!-- Form groups used in grid -->
+        <div class="row">
+            <div class="col-md-6">
+                <form role="form" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row">
+                        <label class="col-md-2 col-form-label form-control-label">First Name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-4 mg-t-10 mg-sm-t-0">
+                            <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter First Name" required>
+                        </div>
+                        <label class="col-md-2 col-form-label form-control-label">Last Name: <span class="tx-danger">*</span></label>
+                                                <div class="col-sm-4 mg-t-10 mg-sm-t-0">
+                                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" required>
+                                                </div>
+                    </div><!-- row -->
+                    <div class="row">
+                        <label class="col-md-2 col-form-label form-control-label">Email: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-4 mg-t-10 mg-sm-t-0">
+                            <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email" required>
+                        </div>
+                        <label class="col-md-2 col-form-label form-control-label">Last Name: <span class="tx-danger">*</span></label>
+                                                <div class="col-sm-4 mg-t-10 mg-sm-t-0">
+                                                    <input asp-for="Role" type="text" class="form-control" placeholder="Enter Role" required>
+                                                </div>
+                    </div><!-- row -->
+                    <div class="form-layout-footer mg-t-30">
+                        <button class="btn btn-primary my-4">Submit</button>
+                        <a class="btn btn-secondary" asp-controller="Account" asp-action="CreateUser">Cancel</a>
+                    </div><!-- form-layout-footer -->
+                </form>
+            </div><!-- card -->
+        </div><!-- col-6 -->
+
+    </div>
+</div>

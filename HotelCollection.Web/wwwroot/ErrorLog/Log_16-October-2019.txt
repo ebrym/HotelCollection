@@ -1,0 +1,50 @@
+
+10/16/2019 2:11:34 PM
+------------------------------------------------------------------------------------------------
+Controller Name :- Store
+Action Method Name :- Disburse
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}Object reference not set to an instance of an object.
+Source ---
+{0}HotelCollection.Repository
+StackTrace ---
+{0}   at HotelCollection.Repository.ApprovalRepo.ApprovalConfigRepository.GetApprovalEmailByDepartmentAsync(String department, String approvalLevel) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\ApprovalRepo\ApprovalConfigRepository.cs:line 175
+   at HotelCollection.Web.Controllers.StoreController.Disburse(RequisitionModel requisition, Int32[] ItemId, Decimal[] QuantityIssued) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\StoreController.cs:line 211
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}Void MoveNext()
+
+
+10/16/2019 2:27:21 PM
+------------------------------------------------------------------------------------------------
+Controller Name :- Store
+Action Method Name :- Disburse
+------------------------------------------------------------------------------------------------
+Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+Message ---
+{0}Object reference not set to an instance of an object.
+Source ---
+{0}HotelCollection.Repository
+StackTrace ---
+{0}   at HotelCollection.Repository.ApprovalRepo.ApprovalConfigRepository.GetApprovalByDepartmentAsync(String department, String approvalLevel) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Repository\ApprovalRepo\ApprovalConfigRepository.cs:line 194
+   at HotelCollection.Web.Controllers.StoreController.Disburse(RequisitionModel requisition, Int32[] ItemId, Decimal[] QuantityIssued) in C:\Users\User\Source\Repos\CyberspaceRequisition\HotelCollection.Web\Controllers\StoreController.cs:line 211
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+TargetSite ---
+{0}Void MoveNext()
+

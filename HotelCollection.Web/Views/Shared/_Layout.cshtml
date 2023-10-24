@@ -1,0 +1,522 @@
+﻿
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Hotel Collection</title>
+    <!-- Extra details for Live View on GitHub Pages -->
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://www.creative-tim.com/product/argon-dashboard-pro" />
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/assets/img/brand/favicon.png" type="image/png">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="~/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+    <link rel="stylesheet" href="~/assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <!-- Page plugins -->
+    <!-- DataTable CSS-->
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="~/assets/css/argon.mine209.css?v=1.0.0" type="text/css">
+    <link rel="stylesheet" href="~/css/loading.css">
+    <link href="~/sweetAlert/sweetalert.css" rel="stylesheet" />
+    <script src="~/sweetAlert/sweetalert.min.js"></script>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    '../../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Sidenav -->
+    <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+        <div class="scrollbar-inner">
+            <!-- Brand -->
+            <div class="sidenav-header d-flex align-items-center">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    @*<img src="~/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">*@
+                    <span class="nav-link-text">Hotel Collection</span>
+                </a>
+                <div class="ml-auto">
+                    <!-- Sidenav toggler -->
+                    <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-inner">
+                <!-- Collapse -->
+                <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                    <!-- Nav items -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Index" class="nav-link active" role="button" aria-expanded="true" aria-controls="navbar-dashboards">
+                                <i class="ni ni-shop text-primary"></i>
+                                <span class="nav-link-text">Home</span>
+                            </a>
+                        </li>
+                        @* @if (HttpContextAccessor.HttpContext.User.FindFirst("ApplicationRole").Value.Contains("Administrator")) *@
+                        @* { *@
+                            <li class="nav-item">
+                                <a class="nav-link" href="#admin" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="admin">
+                                    <i class="ni ni-archive-2 text-green"></i>
+                                    <span class="nav-link-text">Admin</span>
+                                </a>
+                                <div class="collapse" id="admin">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a asp-controller="Account" asp-action="Roles" class="nav-link">Roles</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Account" asp-action="UserRoles" class="nav-link">User Role</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="#approvalconfig" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="approvalconfig">
+                                    <i class="ni ni-single-copy-04 text-pink"></i>
+                                    <span class="nav-link-text">Approval Config</span>
+                                </a>
+                                <div class="collapse" id="approvalconfig">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a asp-controller="ApprovalConfig" asp-action="Index" class="nav-link">List</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="ApprovalConfig" asp-action="Create" class="nav-link">Create</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Category" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
+                                    <i class="ni ni-ui-04 text-info"></i>
+                                    <span class="nav-link-text">Item Category</span>
+                                </a>
+                                <div id="Category" class="collapse">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a asp-controller="ItemCategory" asp-action="Index" class="nav-link">List</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="ItemCategory" asp-action="Create" class="nav-link">Create</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @* } *@
+                        @* *@
+                        <li class="nav-item">
+                            <a class="nav-link" href="#requisition" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="requisition">
+                                <i class="ni ni-books text-blue"></i>
+                                <span class="nav-link-text">Hotel Collection</span>
+                            </a>
+                            <div class="collapse" id="requisition">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a asp-controller="Requisition" asp-action="Index" class="nav-link">My Requests</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Requisition" asp-action="Create" class="nav-link">Make Request</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        @*@if (Convert.ToInt16(HttpContextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value) > 0)
+                            {*@
+                        <li class="nav-item">
+                            <a class="nav-link" href="#approval" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="approval">
+                                <i class="ni ni-check-bold text-green"></i>
+                                <span class="nav-link-text">Approval</span>
+                            </a>
+                            <div class="collapse" id="approval">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a asp-controller="Approval" asp-action="Index" class="nav-link">Pending Approvals</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        @* }*@
+
+                        @* @if (HttpContextAccessor.HttpContext.User.FindFirst("ApplicationRole").Value.Contains("Store")) *@
+                        @* { *@
+                        @*     <li class="nav-item"> *@
+                        @*         <a class="nav-link" href="#navbarstore" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbarstore"> *@
+                        @*             <i class="ni ni-cart text-red"></i> *@
+                        @*             <span class="nav-link-text">Store</span> *@
+                        @*         </a> *@
+                        @*         <div class="collapse" id="navbarstore"> *@
+                        @*             <ul class="nav nav-sm flex-column"> *@
+                        @*                 <li class="nav-item"> *@
+                        @*                     <a asp-controller="Store" asp-action="Index" class="nav-link">Disburse Request</a> *@
+                        @*                 </li> *@
+                        @*             </ul> *@
+                        @*         </div> *@
+                        @*     </li> *@
+                        @* } *@
+                        @* *@
+                        <li class="nav-item">
+                            <a class="nav-link" href="#navbarReport" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbarReport">
+                                <i class="ni ni-chart-pie-35 text-blue"></i>
+                                <span class="nav-link-text">Reports</span>
+                            </a>
+                            <div class="collapse" id="navbarReport">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a asp-controller="Report" asp-action="ByDepartmentAndRequisitionType" class="nav-link">Department</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Report" asp-action="ByProject" class="nav-link">Project</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Report" asp-action="ByDisbursedStatus" class="nav-link">Disbursed status</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Report" asp-action="ByApprovalStatus" class="nav-link">Approval Status</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        @*<li class="nav-item">
+                                <a class="nav-link" href="../charts.html">
+                                    <i class="ni ni-chart-pie-35 text-info"></i>
+                                    <span class="nav-link-text">Charts</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../calendar.html">
+                                    <i class="ni ni-calendar-grid-58 text-red"></i>
+                                    <span class="nav-link-text">Calendar</span>
+                                </a>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+        <!-- Topnav -->
+        <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <h1 class="text-white">Hotel Collection</h1>
+                    <!-- Navbar links -->
+                    <ul class="navbar-nav align-items-center ml-md-auto">
+                        <li class="nav-item d-xl-none">
+                            <!-- Sidenav toggler -->
+                            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item d-sm-none">
+                            <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+                                <i class="ni ni-zoom-split-in"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav align-items-center ml-auto ml-md-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="media align-items-center">
+                                    <span><i class="ni ni-single-02"></i></span>
+                                    <div class="media-body ml-2 d-none d-lg-block">
+                                        <span class="mb-0 text-sm  font-weight-bold">@HttpContextAccessor.HttpContext.User.Identity.Name</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                @*<div class="dropdown-header noti-title">
+                                        <h6 class="text-overflow m-0">Welcome!</h6>
+                                    </div>*@
+                                @*<a href="#!" class="dropdown-item">
+                                        <i class="ni ni-single-02"></i>
+                                        <span>My profile</span>
+                                    </a>
+                                    <a href="#!" class="dropdown-item">
+                                        <i class="ni ni-settings-gear-65"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                    <a href="#!" class="dropdown-item">
+                                        <i class="ni ni-calendar-grid-58"></i>
+                                        <span>Activity</span>
+                                    </a>
+                                    <a href="#!" class="dropdown-item">
+                                        <i class="ni ni-support-16"></i>
+                                        <span>Support</span>
+                                    </a>*@
+                                @*<div class="dropdown-divider"></div>*@
+
+                                <form asp-area="" asp-controller="Account" asp-action="Logout" method="get">
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="ni ni-user-run"></i>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header -->
+        <div class="header bg-primary pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-white d-inline-block mb-0"> @ViewData["Title"]</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item">
+                                        <a asp-controller="Home" asp-action="Index" class="nav-link active" role="button" aria-expanded="true" aria-controls="navbar-dashboards">
+                                            <i class="fas fa-home"></i>
+                                        </a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+                            <a asp-controller="Requisition" asp-action="Create" class="btn btn-sm btn-neutral">New Request</a>
+                            @*<a href="#" class="btn btn-sm btn-neutral">Filters</a>*@
+                        </div>
+                    </div>
+                    <!-- Card stats -->
+                    @*<div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-stats">
+                                    <!-- Card body -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Total traffic</h5>
+                                                <span class="h2 font-weight-bold mb-0">350,897</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                                    <i class="ni ni-active-40"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="mt-3 mb-0 text-sm">
+                                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                            <span class="text-nowrap">Since last month</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-stats">
+                                    <!-- Card body -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
+                                                <span class="h2 font-weight-bold mb-0">2,356</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                                    <i class="ni ni-chart-pie-35"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="mt-3 mb-0 text-sm">
+                                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                            <span class="text-nowrap">Since last month</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-stats">
+                                    <!-- Card body -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
+                                                <span class="h2 font-weight-bold mb-0">924</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                                    <i class="ni ni-money-coins"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="mt-3 mb-0 text-sm">
+                                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                            <span class="text-nowrap">Since last month</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-stats">
+                                    <!-- Card body -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                                                <span class="h2 font-weight-bold mb-0">49,65%</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                                    <i class="ni ni-chart-bar-32"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="mt-3 mb-0 text-sm">
+                                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                            <span class="text-nowrap">Since last month</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <!-- Page content -->
+        <div class="container-fluid mt--6">
+            @*  <partial name="_CookieConsentPartial" />*@
+            <partial name="_NotificationPanel" />
+            @RenderBody()
+            <partial name="_Loading" />
+            <!-- Footer -->
+            <footer class="footer pt-0">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6">
+                        <div class="copyright text-center text-lg-left text-muted">
+                            &copy; 2018 @*<a href="https://www.creative-tim.com/" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>*@
+                        </div>
+                    </div>
+                    @*<div class="col-lg-6">
+                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/" class="nav-link" target="_blank">Creative Tim</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="http://blog.creative-tim.com/" class="nav-link" target="_blank">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
+                                </li>
+                            </ul>
+                        </div>*@
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="~/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/js-cookie/js.cookie.js"></script>
+    <script src="~/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="~/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+    <script src="~/assets/vendor/lavalamp/js/jquery.lavalamp.min.js"></script>
+    <!-- Optional JS -->
+    <script src="~/assets/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="~/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+    <script src="~/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+
+    <script src="~/assets/vendor/cdnjs/jszip.min.js"></script>
+    <script src="~/assets/vendor/cdnjs/pdfmake.min.js"></script>
+    <script src="~/assets/vendor/cdnjs/vfs_fonts.js"></script>
+
+
+    <script src="~/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+
+    <!-- Argon JS -->
+    <script src="~/assets/js/argon.mine209.js?v=1.0.0"></script>
+    <!-- Demo JS - remove this in your project -->
+    <script src="~/assets/js/demo.min.js"></script>
+    <script>
+        // Facebook Pixel Code Don't Delete
+        ! function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window,
+            document, 'script', '../../../../connect.facebook.net/en_US/fbevents.js');
+
+        try {
+            fbq('init', '111649226022273');
+            fbq('track', "PageView");
+
+        } catch (err) {
+            console.log('Facebook Track Error:', err);
+        }
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&amp;ev=PageView&amp;noscript=1" />
+    </noscript>
+
+    <script type="text/javascript">
+        $(document).on('submit', 'form', function () {
+            displayBusyIndicator();
+        });
+        function displayBusyIndicator() {
+            $('.loading').show();
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+<!-- Mirrored from demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Feb 2019 09:19:36 GMT -->
+</html>

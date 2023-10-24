@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.RequisitionModel>
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Report Details</h3>
+    </div>
+
+    <div class="card-body">
+        <!-- Light table -->
+        <div class="table-responsive py-4">
+            <table id="reportTable" class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th>S/N</th>
+                        <th>Request No.</th>
+                        <th>Type</th>
+                        <th>Project Code</th>
+                        <th>Project Name</th>
+                        <th>Marketer</th>
+                        <th>Approval</th>
+                        @*<th>Current Level</th>*@
+                        <th>Remarks</th>
+                        @*<th>Document</th>*@
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var req in Model)
+                    {
+                        i = i + 1;
+                        <tr>
+                            <td>@(i)</td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.Id)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.RequisitionType)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@(string.IsNullOrEmpty(req.ProjectCode) ? "-" : req.ProjectCode)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@(string.IsNullOrEmpty(req.ProjectName) ? "-" : req.ProjectName)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@(string.IsNullOrEmpty(req.MarketerName) ? "-" : req.MarketerName)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@(string.IsNullOrEmpty(req.ApprovalStatus) ? "-" : req.ApprovalStatus)</b>
+                            </td>
+                            @*<td class="table-user">
+                                    <b>@(string.IsNullOrEmpty(req.CurrentApprovalLevel) ? "-" : req.CurrentApprovalLevel)</b>
+                                </td>*@
+                            <td class="table-user">
+                                <b>@(string.IsNullOrEmpty(req.Remarks) ? "-" : req.Remarks)</b>
+                            </td>
+                            @*<td class="table-user">
+                                    <b>@(string.IsNullOrEmpty(req.DocumentPath) ? "-" : req.DocumentPath)</b>
+                                </td>*@
+                            <td class="table-user">
+                                <b>@req.DateCreated.ToString("dd/MM/yyyy")</b>
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
