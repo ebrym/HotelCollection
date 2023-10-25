@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelCollection.Data", "Hot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelCollection.Repository", "HotelCollection.Repository\HotelCollection.Repository.csproj", "{7BFE6975-99AB-47A3-BC99-E74897857092}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelCollection.Infrastructure", "RequisitionMangement.Infrastructure\HotelCollection.Infrastructure.csproj", "{5CB95A36-3526-4DA1-8B76-AF1050B3BBBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelCollection.Infrastructure", "HotelCollection.Infrastructure\HotelCollection.Infrastructure.csproj", "{5CB95A36-3526-4DA1-8B76-AF1050B3BBBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCollection.Web", "HotelCollection.Web\HotelCollection.Web.csproj", "{2F9C602A-3737-4A44-8AB8-1358036E8674}"
 EndProject
