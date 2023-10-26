@@ -103,7 +103,7 @@
                                     <tr id="item_@(i)">
                                         <td>@(i + 1)</td>
                                         <td class="table-user">
-                                            @items[i].ItemCategory
+                                            @items[i].HotelCategory
                                         </td>
                                         <td class="table-user">
                                             @items[i].ItemDescription
@@ -229,7 +229,7 @@
         <tr id="">
             <td><span class="sn"></span>.</td>
             <td class="table-user">
-                <select class="form-control itemCategory" required="" data-val="true" data-val-required="The ItemCategoryId field is required." id="items_0__ItemCategoryId" name="items[0].ItemCategoryId">
+                <select class="form-control HotelCategory" required="" data-val="true" data-val-required="The HotelCategoryId field is required." id="items_0__HotelCategoryId" name="items[0].HotelCategoryId">
                     <option value="0" selected="selected">Please select one</option>
                 </select>
             </td>
@@ -242,7 +242,7 @@
             <td>
                 <a class="btn btn-danger text-white delete-record" data-id="0"><i class="fas fa-trash"></i></a>
             </td>
-            <input class="form-control itemCategoryName" type="hidden" id="items_0__ItemCategory" name="items[0].ItemCategory" value="" required="">
+            <input class="form-control HotelCategoryName" type="hidden" id="items_0__HotelCategory" name="items[0].HotelCategory" value="" required="">
         </tr>
        
 

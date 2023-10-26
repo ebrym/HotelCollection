@@ -42,29 +42,35 @@ namespace HotelCollection.Web.Filters
                 //var username = context.HttpContext.User.FindFirst("username").Value;
                 //if (!string.IsNullOrEmpty(username))
                 //{
-                    var objaudit = new AuditLog
-                    {
-                        UserName = context.HttpContext.User.FindFirst("username").Value ?? "",
-                        Id = 0,
-                        UserEmail = context.HttpContext.User.FindFirst("mail").Value ?? "",
-                        UserFullName = context.HttpContext.User.FindFirst("displayName").Value ?? "",
-                        SessionId = context.HttpContext.Session.Id ?? "",
-                        IpAddress = context.HttpContext.Connection.RemoteIpAddress.ToString() ?? "",
-                        PageAccessed = context.HttpContext.Request.GetDisplayUrl() ?? "",
-                        LoggedInAt = DateTime.Now,
-                        Method = context.HttpContext.Request.Method
-                    };
+                var user = context.HttpContext.User;
+                if(user != null)
+                {
+                     var objaudit = new AuditLog
+                                        {
+                                            UserName = context.HttpContext.User.Identity.Name ?? "",
+                                            Id = 0,
+                                            UserEmail = context.HttpContext.User.FindFirst("Email").Value ?? "",
+                                            UserFullName = context.HttpContext.User.FindFirst("FullName").Value ?? "",
+                                            SessionId = context.HttpContext.Session.Id ?? "",
+                                            IpAddress = context.HttpContext.Connection.RemoteIpAddress.ToString() ?? "",
+                                            PageAccessed = context.HttpContext.Request.GetDisplayUrl() ?? "",
+                                            LoggedInAt = DateTime.Now,
+                                            Method = context.HttpContext.Request.Method
+                                        };
+                     if (actionName == "Logout")
+                      {
+                          objaudit.LoggedOutAt = DateTime.Now;
+                      }
+                                          
+                      objaudit.LoginStatus = "A";
+                      objaudit.ControllerName = controllerName;
+                      objaudit.ActionName = actionName;
+  
+                       _auditLogRepo.CreateAudit(objaudit);
+                }
+                   
 
-                    if (actionName == "Logout")
-                    {
-                        objaudit.LoggedOutAt = DateTime.Now;
-                    }
-
-                    objaudit.LoginStatus = "A";
-                    objaudit.ControllerName = controllerName;
-                    objaudit.ActionName = actionName;
-
-                     _auditLogRepo.CreateAudit(objaudit);
+                   
 
                 //}
 

@@ -19,17 +19,17 @@ namespace HotelCollection.Repository.Repo
     {
         private readonly HotelCollectionContext _context;
         private readonly IHttpContextAccessor _contextAccessor;
-        private readonly IItemCategoryRepository _itemCategoryRepository;
+        private readonly IHotelCategoryRepository _HotelCategoryRepository;
         private readonly IAccountManager _accountManager;
         private readonly IApprovalConfigRepository _ApprovalConfigRepository;
 
         public RequisitionRepository(HotelCollectionContext context,
-                                     IItemCategoryRepository itemCategoryRepository,
+                                     IHotelCategoryRepository HotelCategoryRepository,
                                      IHttpContextAccessor contextAccessor, 
                                      IApprovalConfigRepository ApprovalConfigRepository,
                                      IAccountManager accountManager)
         {
-            _itemCategoryRepository = itemCategoryRepository;           
+            _HotelCategoryRepository = HotelCategoryRepository;           
             _contextAccessor = contextAccessor;           
             _accountManager = accountManager;
             _context = context;

@@ -50,7 +50,7 @@ namespace HotelCollection.Data.Migrations
                     b.ToTable("EmailSentLogs");
                 });
 
-            modelBuilder.Entity("HotelCollection.Data.Entity.ItemCategory", b =>
+            modelBuilder.Entity("HotelCollection.Data.Entity.HotelCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

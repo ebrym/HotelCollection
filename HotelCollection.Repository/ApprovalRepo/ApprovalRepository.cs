@@ -231,7 +231,7 @@ namespace HotelCollection.Repository.ApprovalRepo
                 for (int i = 0; i < QuantityIssued.Length; i++)
                 {
 
-                    var oldEntry = Request.RequisitionDetails.Where(x => x.ItemCategoryId == Id[i]).FirstOrDefault();
+                    var oldEntry = Request.RequisitionDetails.Where(x => x.HotelCategoryId == Id[i]).FirstOrDefault();
                     if (oldEntry == null)
                     {
                         return false;

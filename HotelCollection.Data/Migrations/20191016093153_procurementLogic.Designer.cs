@@ -324,7 +324,7 @@ namespace HotelCollection.Data.Migrations
                     b.ToTable("EmailSentLogs");
                 });
 
-            modelBuilder.Entity("HotelCollection.Data.Entity.ItemCategory", b =>
+            modelBuilder.Entity("HotelCollection.Data.Entity.HotelCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -426,7 +426,7 @@ namespace HotelCollection.Data.Migrations
 
                     b.Property<string>("IssuedBy");
 
-                    b.Property<int>("ItemCategoryId");
+                    b.Property<int>("HotelCategoryId");
 
                     b.Property<string>("ItemDescription");
 

@@ -12,7 +12,7 @@ namespace HotelCollection.Web.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<ItemCategoryModel, ItemCategory>().ReverseMap();
+            CreateMap<HotelCategoryModel, HotelCategory>().ReverseMap();
             CreateMap<Requisition, RequisitionModel>()
                 .ForMember(pts => pts.Items, opt => opt.MapFrom(ps => ps.RequisitionDetails))
                 .ReverseMap();

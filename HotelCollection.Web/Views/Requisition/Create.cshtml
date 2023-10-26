@@ -123,7 +123,7 @@
                                     <tr id="item_@(i)">
                                         <td>@(i + 1)</td>
                                         <td class="table-user">
-                                            <select asp-for="@items[i].ItemCategoryId" asp-items="@ViewBag.category"
+                                            <select asp-for="@items[i].HotelCategoryId" asp-items="@ViewBag.category"
                                                     class="form-control" required="">
                                                 <option value="0">Please select one</option>
                                             </select>
@@ -136,7 +136,7 @@
                                         </td>
                                         <td>  <a class="btn btn-danger text-white delete-record" data-id="@(i)" id="remove_@(i)"><i class="fas fa-trash"></i></a></td>
                                     </tr> 
-                                    <input asp-for="@items[i].ItemCategory" class="form-control " type="hidden">
+                                    <input asp-for="@items[i].HotelCategory" class="form-control " type="hidden">
                                 }
                             </tbody>
                         </table>
@@ -185,7 +185,7 @@
         <tr id="">
             <td><span class="sn"></span>.</td>
             <td class="table-user">
-                <select class="form-control itemCategory" required="" data-val="true" data-val-required="The ItemCategoryId field is required." id="items_0__ItemCategoryId" name="items[0].ItemCategoryId">
+                <select class="form-control HotelCategory" required="" data-val="true" data-val-required="The HotelCategoryId field is required." id="items_0__HotelCategoryId" name="items[0].HotelCategoryId">
                     <option value="0" selected="selected">Please select one</option>
                 </select>
             </td>
@@ -198,7 +198,7 @@
             <td>
                 <a class="btn btn-danger text-white delete-record" data-id="0"><i class="fas fa-trash"></i></a>
             </td>
-            <input class="form-control itemCategoryName" type="hidden" id="items_0__ItemCategory" name="items[0].ItemCategory" value="" required="">
+            <input class="form-control HotelCategoryName" type="hidden" id="items_0__HotelCategory" name="items[0].HotelCategory" value="" required="">
         </tr>
        
 
@@ -247,14 +247,14 @@
             //table.find(`#item_${id+1}`).each(function (i, el) {
             //    var $tds = $(this).find('td');
             //        //rowId = $tds.eq(0).text(),
-            //        //ItemCategory = $tds.eq(1).text(),
+            //        //HotelCategory = $tds.eq(1).text(),
             //        //ItemDescription = $tds.eq(2).text(),
             //        //Quantity = $tds.eq(2).text(),
             //        //Remove = $tds.eq(2).text();
             //    // do something with productId, product, Quantity
             //    alert("Here");
             //    alert(this.innerHTML);
-            //    //alert('Row ' + rowId + ':\nItemCategory: ' + ItemCategory
+            //    //alert('Row ' + rowId + ':\nHotelCategory: ' + HotelCategory
             //    //    + '\nDescription: ' + ItemDescription
             //    //    + '\nQuantity: ' + Quantity);
             //});
@@ -270,9 +270,9 @@
 
     $(document).ready(function () {
       
-        $('#items_0__ItemCategoryId').on('change', function () {
-            var selectedCategory = $('#items_0__ItemCategoryId option:selected').html();
-            $('#items_0__ItemCategory').val(selectedCategory);
+        $('#items_0__HotelCategoryId').on('change', function () {
+            var selectedCategory = $('#items_0__HotelCategoryId option:selected').html();
+            $('#items_0__HotelCategory').val(selectedCategory);
         });
 
         $("#Amount").on("keyup", function (event) {
@@ -345,10 +345,10 @@
                 element = content.clone();
             element.attr('id', 'item_' + size);
             element.find('.delete-record').attr('data-id', size);
-            element.find('.itemCategory').attr('id', "items_" + size + "__ItemCategoryId");
-            element.find('.itemCategory').attr('name', "items[" + size + "].ItemCategoryId");
-            element.find('.itemCategoryName').attr('id', "items_" + size + "__ItemCategory");
-            element.find('.itemCategoryName').attr('name', "items[" + size + "].ItemCategory");
+            element.find('.HotelCategory').attr('id', "items_" + size + "__HotelCategoryId");
+            element.find('.HotelCategory').attr('name', "items[" + size + "].HotelCategoryId");
+            element.find('.HotelCategoryName').attr('id', "items_" + size + "__HotelCategory");
+            element.find('.HotelCategoryName').attr('name', "items[" + size + "].HotelCategory");
             element.find('.itemDescription').attr('id', "items_" + size + "__ItemDescription"); //  id="items_0__ItemDescription" name="items[0].ItemDescription"
             element.find('.itemDescription').attr('name', "items[" + size + "].ItemDescription");
             element.find('.itemQuantity').attr('id', "items_" + size + "__Quantity");
@@ -359,12 +359,12 @@
             //alert(content);
 
              jQuery.each(category, function (i, val) {
-                 $(`#items_${size}__ItemCategoryId`).append($('<option></option>').attr('value', val.Value).text(val.Text));
+                 $(`#items_${size}__HotelCategoryId`).append($('<option></option>').attr('value', val.Value).text(val.Text));
             });
 
-            $(`#items_${size}__ItemCategoryId`).on('change', function () {
-                var selectedCategory = $(`#items_${size}__ItemCategoryId option:selected`).html();             
-                $(`#items_${size}__ItemCategory`).val(selectedCategory); 
+            $(`#items_${size}__HotelCategoryId`).on('change', function () {
+                var selectedCategory = $(`#items_${size}__HotelCategoryId option:selected`).html();             
+                $(`#items_${size}__HotelCategory`).val(selectedCategory); 
             });
 
           
@@ -381,10 +381,10 @@
                 $('#tbodyItem tr').each(function (index) {
                     $(this).find('span.sn').html(index + 1);
                     $(this).attr('id', 'item_' + (index));
-                    $(this).find('.itemCategory').attr('id', "items_" + index + "__ItemCategoryId");
-                    $(this).find('.itemCategory').attr('name', "items[" + index + "].ItemCategoryId");
-                    $(this).find('.itemCategoryName').attr('id', "items_" + size + "__ItemCategory");
-                    $(this).find('.itemCategoryName').attr('name', "items[" + size + "].ItemCategory");
+                    $(this).find('.HotelCategory').attr('id', "items_" + index + "__HotelCategoryId");
+                    $(this).find('.HotelCategory').attr('name', "items[" + index + "].HotelCategoryId");
+                    $(this).find('.HotelCategoryName').attr('id', "items_" + size + "__HotelCategory");
+                    $(this).find('.HotelCategoryName').attr('name', "items[" + size + "].HotelCategory");
                     $(this).find('.itemDescription').attr('id', "items_" + index + "__ItemDescription"); //  id="items_0__ItemDescription" name="items[0].ItemDescription"
                     $(this).find('.itemDescription').attr('name', "items[" + index + "].ItemDescription");
                     $(this).find('.itemQuantity').attr('id', "items_" + index + "__Quantity");

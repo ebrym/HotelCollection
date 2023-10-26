@@ -24,7 +24,7 @@ namespace HotelCollection.Web.Controllers
    // [Authorize]
     public class StoreController :  BaseController
     {
-        private readonly IItemCategoryRepository _itemCategoryRepository;
+        private readonly IHotelCategoryRepository _HotelCategoryRepository;
         private readonly IMapper _mapper;
         private readonly IProjectService _projectService;
         private readonly IHttpContextAccessor _contextAccessor;
@@ -37,7 +37,7 @@ namespace HotelCollection.Web.Controllers
         private readonly IApprovalConfigRepository _ApprovalConfigRepository;
         private IConfiguration _config;
 
-        public StoreController(IItemCategoryRepository itemCategoryRepository, 
+        public StoreController(IHotelCategoryRepository HotelCategoryRepository, 
                                      IHttpContextAccessor contextAccessor, 
                                      IRequisition requisitionRepository, 
                                      IProjectService projectService,
@@ -50,7 +50,7 @@ namespace HotelCollection.Web.Controllers
                                      IViewRenderService viewRender, 
                                      ISMTPService emailSender)
         {
-            _itemCategoryRepository = itemCategoryRepository;
+            _HotelCategoryRepository = HotelCategoryRepository;
             _projectService = projectService;
             _mapper = mapper;
             _contextAccessor = contextAccessor;
@@ -77,9 +77,9 @@ namespace HotelCollection.Web.Controllers
                 var item = myRequestList.Where(x => x.Id == request.Id)                                        
                                         .FirstOrDefault();
                 var newItems = item.RequisitionDetails.Select(u => new ItemsModel {
-                    ItemCategoryId = u.ItemCategoryId,
+                    HotelCategoryId = u.HotelCategoryId,
                     ItemDescription = u.ItemDescription,
-                    ItemCategory =  _itemCategoryRepository.GetItemCategoryByIdAsync(u.ItemCategoryId).Result.CategoryName,
+                    HotelCategory =  _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
                     Quantity=u.Quantity
                 }).ToList();
 
@@ -114,9 +114,9 @@ namespace HotelCollection.Web.Controllers
                 //                        .FirstOrDefault();
                 var newItems = myRequestList.RequisitionDetails.Select(u => new ItemsModel
                 {
-                    ItemCategoryId = u.ItemCategoryId,
+                    HotelCategoryId = u.HotelCategoryId,
                     ItemDescription = u.ItemDescription,
-                    ItemCategory = _itemCategoryRepository.GetItemCategoryByIdAsync(u.ItemCategoryId).Result.CategoryName,
+                    HotelCategory = _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
                     Quantity = u.Quantity,
                     IsProcurement = u.IsProcurement,
                     QuantityIssued = u.QuantityIssued
@@ -165,9 +165,9 @@ namespace HotelCollection.Web.Controllers
             bool[] IsProcurement = requisition.Items.Select(x=>x.IsProcurement).ToArray();
             var newItems = myRequestList.RequisitionDetails.Select(u => new ItemsModel
             {
-                ItemCategoryId = u.ItemCategoryId,
+                HotelCategoryId = u.HotelCategoryId,
                 ItemDescription = u.ItemDescription,
-                ItemCategory = _itemCategoryRepository.GetItemCategoryByIdAsync(u.ItemCategoryId).Result.CategoryName,
+                HotelCategory = _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
                 IsProcurement = u.IsProcurement,
                 Quantity = u.Quantity
             }).ToList();
@@ -176,7 +176,7 @@ namespace HotelCollection.Web.Controllers
             var isProcurementMail = false;
             for (int i = 0; i < QuantityIssued.Length; i++)
             {
-                var newitem = newItems.Where(x => x.ItemCategoryId == ItemId[i]).FirstOrDefault();                
+                var newitem = newItems.Where(x => x.HotelCategoryId == ItemId[i]).FirstOrDefault();                
                 newitem.QuantityIssued = Convert.ToInt16(QuantityIssued[i]);
                 newitem.IsProcurement = IsProcurement[i];
                 if (IsProcurement[i])

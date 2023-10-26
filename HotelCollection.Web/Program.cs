@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
@@ -10,6 +11,7 @@ using HotelCollection.Data.Entity;
 using HotelCollection.Infrastructure.Interface;
 using HotelCollection.Infrastructure.Models;
 using HotelCollection.Infrastructure.Services;
+using HotelCollection.Web.Filters;
 using HotelCollection.Web.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -42,7 +44,16 @@ builder.Services.AddIdentityCore<ApplicationUser>()
     .AddEntityFrameworkStores<HotelCollectionContext>();
           
 
-
+builder.Services.AddMvc( options=>{
+                 options.EnableEndpointRouting = false;
+//                 //options.Filters.Add(typeof(AuthenticateUser));
+//                 options.Filters.Add(typeof(CustomExceptionFilterAttribute));
+    options.Filters.Add(typeof(AuditFilter));
+});
+builder.Services.AddSession(options =>
+             {
+                 options.IdleTimeout = TimeSpan.FromMinutes(30);
+             });
 
 
 
@@ -71,7 +82,7 @@ app.UseStaticFiles();
 app.UpdateDatabase();
 app.Seeder();
 app.UseAuthentication();
-//app.UseSession();
+app.UseSession();
 
 app.UseRouting();
 

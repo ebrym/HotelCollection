@@ -40,8 +40,8 @@ namespace HotelCollection.Web.Models
     public class ItemsModel
     {
         public int Id { get; set; }
-        public int ItemCategoryId { get; set; }
-        public string ItemCategory { get; set; }
+        public int HotelCategoryId { get; set; }
+        public string HotelCategory { get; set; }
         public string ItemDescription { get; set; }
         public int Quantity { get; set; }
         public int QuantityIssued { get; set; }

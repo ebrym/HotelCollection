@@ -24,7 +24,7 @@ namespace HotelCollection.Web.Controllers
     //[Authorize]
     public class ApprovalController :  BaseController
     {
-        private readonly IItemCategoryRepository _itemCategoryRepository;
+        private readonly IHotelCategoryRepository _HotelCategoryRepository;
         private readonly IMapper _mapper;
         private readonly IProjectService _projectService;
         private readonly IHttpContextAccessor _contextAccessor;
@@ -37,7 +37,7 @@ namespace HotelCollection.Web.Controllers
         private readonly IApprovalConfigRepository _ApprovalConfigRepository;
         private IConfiguration _config;
 
-        public ApprovalController(IItemCategoryRepository itemCategoryRepository, 
+        public ApprovalController(IHotelCategoryRepository HotelCategoryRepository, 
                                      IHttpContextAccessor contextAccessor, 
                                      IRequisition requisitionRepository, 
                                      IProjectService projectService,
@@ -50,7 +50,7 @@ namespace HotelCollection.Web.Controllers
                                      IViewRenderService viewRender, 
                                      ISMTPService emailSender)
         {
-            _itemCategoryRepository = itemCategoryRepository;
+            _HotelCategoryRepository = HotelCategoryRepository;
             _projectService = projectService;
             _mapper = mapper;
             _contextAccessor = contextAccessor;
@@ -80,9 +80,9 @@ namespace HotelCollection.Web.Controllers
                 var item = myRequestList.Where(x => x.Id == request.Id)                                        
                                         .FirstOrDefault();
                 var newItems = item.RequisitionDetails.Select(u => new ItemsModel {
-                    ItemCategoryId = u.ItemCategoryId,
+                    HotelCategoryId = u.HotelCategoryId,
                     ItemDescription = u.ItemDescription,
-                    ItemCategory =  _itemCategoryRepository.GetItemCategoryByIdAsync(u.ItemCategoryId).Result.CategoryName,
+                    HotelCategory =  _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
                     Quantity=u.Quantity
                 }).ToList();
 
@@ -117,9 +117,9 @@ namespace HotelCollection.Web.Controllers
                 //                        .FirstOrDefault();
                 var newItems = myRequestList.RequisitionDetails.Select(u => new ItemsModel
                 {
-                    ItemCategoryId = u.ItemCategoryId,
+                    HotelCategoryId = u.HotelCategoryId,
                     ItemDescription = u.ItemDescription,
-                    ItemCategory = _itemCategoryRepository.GetItemCategoryByIdAsync(u.ItemCategoryId).Result.CategoryName,
+                    HotelCategory = _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
                     Quantity = u.Quantity
                 }).ToList();
 
@@ -164,9 +164,9 @@ namespace HotelCollection.Web.Controllers
             //                        .FirstOrDefault();
             var newItems = myRequestList.RequisitionDetails.Select(u => new ItemsModel
             {
-                ItemCategoryId = u.ItemCategoryId,
+                HotelCategoryId = u.HotelCategoryId,
                 ItemDescription = u.ItemDescription,
-                ItemCategory = _itemCategoryRepository.GetItemCategoryByIdAsync(u.ItemCategoryId).Result.CategoryName,
+                HotelCategory = _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
                 Quantity = u.Quantity
             }).ToList();
 

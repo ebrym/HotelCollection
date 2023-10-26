@@ -1,0 +1,33 @@
+﻿@model HotelCollection.Web.Models.HotelCategoryModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Add Hotel Category</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <!-- Form groups used in grid -->
+        <div class="row">
+            <div class="col-md-10">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                        <label asp-for="CategoryName" class="col-md-2 col-form-label form-control-label">Category Name</label>
+                        <div class="col-md-4">
+                            <input asp-for="CategoryName" class="form-control" type="text" placeholder="Enter Category Name">
+                            <span asp-validation-for="CategoryName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary my-4">Add Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

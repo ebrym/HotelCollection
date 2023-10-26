@@ -50,7 +50,7 @@ namespace HotelCollection.Data.Migrations
                     LastDateUpdated = table.Column<DateTime>(nullable: true),
                     CreatedBy = table.Column<string>(nullable: true),
                     UpdatedBy = table.Column<string>(nullable: true),
-                    ItemCategoryId = table.Column<int>(nullable: false),
+                    HotelCategoryId = table.Column<int>(nullable: false),
                     ItemDescription = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     RequisitionId = table.Column<int>(nullable: true)

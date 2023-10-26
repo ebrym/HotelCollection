@@ -118,10 +118,10 @@
                                 @for (int i = 0; i < items.Count(); i++)
                                 {
                                     <tr id="item_@(i)">
-                                        @Html.Hidden("ItemId", items[i].ItemCategoryId)
+                                        @Html.Hidden("ItemId", items[i].HotelCategoryId)
                                         <td>@(i + 1)</td>
                                         <td class="table-user">
-                                            @items[i].ItemCategory
+                                            @items[i].HotelCategory
                                         </td>
                                         <td class="table-user">
                                             @items[i].ItemDescription

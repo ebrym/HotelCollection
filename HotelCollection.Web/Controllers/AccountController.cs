@@ -81,6 +81,7 @@ namespace HotelCollection.Web.Controllers
                         }
 
                         claims.Add(new Claim("Email", user.Email));
+                        claims.Add(new Claim("FullName", user.FullName));
 
                         var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
                         if ( claimsPrincipal?.Identity is ClaimsIdentity claimsIdentity)

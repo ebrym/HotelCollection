@@ -216,7 +216,7 @@ namespace HotelCollection.Web.Controllers
                         // check if final approval <> selected final
                         if (finalApprovalCheck.FirstOrDefault().Id != getApprovalConfig.Id)
                         {
-                            Alert("Cannot create new Final Approval level for the selected department!! Please try again.", Enums.Enums.NotificationType.error);
+                            Alert("Cannot create new Final Approval level for the selected role!! Please try again.", Enums.Enums.NotificationType.error);
                             return View(ApprovalConfig);
                         }
 

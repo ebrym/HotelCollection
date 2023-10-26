@@ -19,7 +19,7 @@ using HotelCollection.Repository.AccountRepo;
 using HotelCollection.Repository.ApprovalRepo;
 using HotelCollection.Repository.EmailLogRepo;
 using HotelCollection.Repository.Interface;
-using HotelCollection.Repository.PermissionRepo;
+using HotelCollection.Repository.Repo;
 using HotelCollection.Repository.Repo;
 using HotelCollection.Repository.ReportRepo;
 using HotelCollection.Repository.Repos;
@@ -53,7 +53,7 @@ public static class ServiceExtension
            services.AddTransient<IViewRenderService, ViewRenderService>();
            services.AddScoped<IRequisition, RequisitionRepository>(); 
            services.AddScoped<IEmailSentLog, EmailSentLogRepository>(); 
-           services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>(); 
+           services.AddScoped<IHotelCategoryRepository, HotelCategoryRepository>(); 
            services.AddScoped<IReportRepo, ReportRepository>(); 
            services.AddScoped<IAuditLogRepository, AuditLogRepository>(); 
            services.AddScoped<ISMTPService, SMTPService>();

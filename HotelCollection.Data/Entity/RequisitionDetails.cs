@@ -6,7 +6,7 @@ namespace HotelCollection.Data.Entity
 {
    public class RequisitionDetails : BaseEntity.Entity
     {
-        public int ItemCategoryId { get; set; }
+        public int HotelCategoryId { get; set; }
         public string ItemDescription { get; set; }
         public int Quantity { get; set; }
         public int QuantityIssued { get; set; }
