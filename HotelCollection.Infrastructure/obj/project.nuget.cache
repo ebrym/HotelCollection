@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CR2+Mf6FNOaqqpvK5xoEVPk5LHD54F61/GSWoWaDRVIPyB4Q/Nj+YTHJGBlhbB4GqcjwVEj/zCpi9HeGBuejJg==",
+  "dgSpecHash": "b3rfZbOqDkGF4xQ/VKnjdZksKMWhh/7zruZTJbsFEiEUICj/9Tr7slg9JZB6pKtvkbQcTF4yrA3tCeX7XHFjPA==",
   "success": true,
-  "projectFilePath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj",
+  "projectFilePath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Infrastructure/HotelCollection.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/ibrahim.abdullahi/.nuget/packages/antlr3.runtime/3.5.1/antlr3.runtime.3.5.1.nupkg.sha512",
     "/Users/ibrahim.abdullahi/.nuget/packages/autofac/7.1.0/autofac.7.1.0.nupkg.sha512",

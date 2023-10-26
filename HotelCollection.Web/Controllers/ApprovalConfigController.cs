@@ -68,7 +68,7 @@ namespace HotelCollection.Web.Controllers
 
 
             ViewBag.roles = roleList;
-            ViewBag.department = "";//departmentList;
+            //ViewBag.department = "";//departmentList;
             return View();
 
 
@@ -97,20 +97,20 @@ namespace HotelCollection.Web.Controllers
                 // .OrderBy(a => a.Value)
                 // .ToList();
 
-                ViewBag.department = "";//departmentList;
+                //ViewBag.department = "";//departmentList;
 
 
                 var userApprovalCheck = await _ApprovalConfigRepository.CheckUserApprovalAsync(ApprovalConfig.RoleId, ApprovalConfig.Department);
                 if (userApprovalCheck.Count() > 0)
                 {
-                    Alert("Can not create multiple approval level for the selected department and role!! Please try again.", Enums.Enums.NotificationType.error);
+                    Alert("Can not create multiple approval level for the selected  role!! Please try again.", Enums.Enums.NotificationType.error);
                     return View(ApprovalConfig);
                 }
 
                 var finalApprovalCheck = await _ApprovalConfigRepository.GetFinalApprovalAsync(ApprovalConfig.Department);
                 if (finalApprovalCheck.Count() > 0)
                 {
-                    Alert("Cannot create new approval level because Final Approval has already been assigned for the selected department!! Please try again.", Enums.Enums.NotificationType.error);
+                    Alert("Cannot create new approval level because Final Approval has already been assigned for the role!! Please try again.", Enums.Enums.NotificationType.error);
                     return View(ApprovalConfig);
                 }
 

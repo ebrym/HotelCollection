@@ -11132,8 +11132,8 @@
     },
     "HotelCollection.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj",
-      "msbuildProject": "../RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj"
+      "path": "../HotelCollection.Infrastructure/HotelCollection.Infrastructure.csproj",
+      "msbuildProject": "../HotelCollection.Infrastructure/HotelCollection.Infrastructure.csproj"
     },
     "HotelCollection.Repository/1.0.0": {
       "type": "project",
@@ -11175,8 +11175,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj": {
-              "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj"
+            "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Infrastructure/HotelCollection.Infrastructure.csproj": {
+              "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Infrastructure/HotelCollection.Infrastructure.csproj"
             }
           }
         }

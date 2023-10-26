@@ -8,17 +8,24 @@
     <!-- Card header -->
     <div class="card-header border-0">
         <div class="row">
-            <div class="col-6">
-                <h3 class="mb-0">Approvals</h3>
+            <div class="col-8">
+                <h3 class="mb-0">User</h3>
             </div>
-            <div class="col-6 text-right">
-
-                <a asp-action="AssignUserRole" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="Assing Role to user">
-                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
-                    <span class="btn-inner--text">Assing Role to user</span>
-                </a>
             </div>
-        </div>
+        <div class="row">
+                <div class="col-6 text-right">
+                    <a asp-action="AssignUserRole" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="Assing Role to user">
+                        <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                        <span class="btn-inner--text">Assing Role to user</span>
+                    </a>
+                </div>
+                <div class="col-6 text-right">
+                    <a asp-action="CreateUser" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="New user">
+                        <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
+                        <span class="btn-inner--text">New user</span>
+                    </a>
+                </div>
+            </div>
     </div>
     <div class="table-responsive">
         <table id="datatable1" class="table align-items-center table-flush">

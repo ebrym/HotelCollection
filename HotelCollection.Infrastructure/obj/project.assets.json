@@ -11329,11 +11329,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj",
+      "projectUniqueName": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Infrastructure/HotelCollection.Infrastructure.csproj",
       "projectName": "HotelCollection.Infrastructure",
-      "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/HotelCollection.Infrastructure.csproj",
+      "projectPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Infrastructure/HotelCollection.Infrastructure.csproj",
       "packagesPath": "/Users/ibrahim.abdullahi/.nuget/packages/",
-      "outputPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/RequisitionMangement.Infrastructure/obj/",
+      "outputPath": "/Users/ibrahim.abdullahi/RiderProjects/HotelCollection/HotelCollection.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ibrahim.abdullahi/.nuget/NuGet/NuGet.Config"

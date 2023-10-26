@@ -51,7 +51,7 @@ namespace HotelCollection.Repository.ApprovalRepo
 
         public async Task<IEnumerable<ApprovalConfig>> GetFinalApprovalAsync(string department)
         {
-            return await _context.ApprovalConfigs.Where(x => x.IsFinalLevel == true && x.Department == department).ToListAsync();
+            return await _context.ApprovalConfigs.Where(x => x.IsFinalLevel == true).ToListAsync();
         }
 
 
@@ -61,7 +61,7 @@ namespace HotelCollection.Repository.ApprovalRepo
         }
         public async Task<IEnumerable<ApprovalConfig>> CheckUserApprovalAsync(int UserId, string department)
         {
-            return await _context.ApprovalConfigs.Where(x => x.RoleId == UserId && x.Department == department).ToListAsync();
+            return await _context.ApprovalConfigs.Where(x => x.RoleId == UserId).ToListAsync();
         }
 
         public async Task<ApprovalConfig> GetApprovalConfigByIdAsync(int Id)

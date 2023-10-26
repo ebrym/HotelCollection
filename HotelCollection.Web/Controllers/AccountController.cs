@@ -341,7 +341,7 @@ namespace HotelCollection.Web.Controllers
                     {
                         //check if user is in role
                         var checkuserrole = await _accountManager.IsUserInRoleExistAsync(user.Email, register.Role);
-                        if(!checkuserrole)
+                        if(checkuserrole)
                         {
                             Alert("User aready belongs to the selected role. Please, select a different role.", Enums.Enums.NotificationType.error);
 
@@ -354,10 +354,11 @@ namespace HotelCollection.Web.Controllers
                             if(addRole)
                             {
                                 Alert("Role assigned successfully.", Enums.Enums.NotificationType.success);
-                                return RedirectToAction("UserRoles");
+                                
+                               // return RedirectToAction("UserRoles");
                             }
                         }
-                        //return View(register);
+                        return View(register);
                     }    
 
                     
@@ -414,14 +415,14 @@ namespace HotelCollection.Web.Controllers
         }
 
 
-        public IActionResult GetUsers(string term)
+        public async Task<IActionResult> GetUsers(string term)
         {
             if (!string.IsNullOrEmpty(term))
             {
-                // var list = _authService.FindUserByNameOrUsernameFromAD(term)
-                //     .ToList();
+                var list = await _accountManager.GetUsers(term);
+                  
 
-                return Json("");
+                return Json(list);
             }
             else
             {

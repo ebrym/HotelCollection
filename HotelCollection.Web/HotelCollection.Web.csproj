@@ -52,7 +52,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\RequisitionMangement.Infrastructure\HotelCollection.Infrastructure.csproj" />
+    <ProjectReference Include="..\HotelCollection.Infrastructure\HotelCollection.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

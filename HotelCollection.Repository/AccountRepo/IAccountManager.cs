@@ -19,6 +19,7 @@ namespace HotelCollection.Repository.AccountRepo
         Task<(bool Succeeded, string[] Error)> DeleteUserAsync(long userId);
         Task<(bool Succeeded, string[] Error)> DeleteUserAsync(ApplicationUser user);
         Task<IEnumerable<ApplicationUser>> GetUsers();
+        Task<IEnumerable<ApplicationUser>> GetUsers(string user);
         Task<Role> GetRoleByIdAsync(long roleId);
         Task<Role> GetRoleByNameAsync(string roleName);
         Task<Role> GetRoleLoadRelatedAsync(string roleName);

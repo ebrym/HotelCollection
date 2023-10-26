@@ -70,7 +70,12 @@ namespace HotelCollection.Repository.AccountRepo
         {
             return await _userManager.Users.ToListAsync();
         }
-    
+        public async Task<IEnumerable<ApplicationUser>> GetUsers(string user )
+        {
+            return await _userManager.Users
+                .Where(x  => x.UserName == user || x.FirstName == user)
+                .ToListAsync();
+        }
 
         public async Task<IEnumerable<Role>> GetRoles()
         {
