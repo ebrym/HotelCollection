@@ -13,5 +13,6 @@ namespace HotelCollection.Data.Entity
             public string Email  { get; set; }
             public string CACNumber  { get; set; }
             public virtual HotelCategory Category  { get; set; }
+            public int CategoryId  { get; set; }
     }
 }

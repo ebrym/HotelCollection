@@ -12,7 +12,6 @@ namespace HotelCollection.Web.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<HotelCategoryModel, HotelCategory>().ReverseMap();
             CreateMap<Requisition, RequisitionModel>()
                 .ForMember(pts => pts.Items, opt => opt.MapFrom(ps => ps.RequisitionDetails))
                 .ReverseMap();
@@ -29,6 +28,8 @@ namespace HotelCollection.Web.Helpers
             CreateMap<ApprovalConfigModel, ApprovalConfig>().ReverseMap();
             
             CreateMap<Agent, AgentModel>().ReverseMap();
+            CreateMap<Hotel, HotelRegistrationModel>().ReverseMap();
+            CreateMap<HotelCategoryModel, HotelCategory>().ReverseMap();
 
             //CreateMap<List<RequisitionDetails>, List<ItemsModel>>().ReverseMap();
             //CreateMap<List<ItemsModel>, List<RequisitionDetails>>().ReverseMap();

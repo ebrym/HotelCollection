@@ -35,12 +35,15 @@ namespace HotelCollection.Repository.Repo
 
         public async Task<IEnumerable<Hotel>> GetHotelAsync()
         {
-            return await _context.Hotels.ToListAsync();
+            return await _context.Hotels
+                .Include(x=>x.Category)
+                .ToListAsync();
         }
 
         public async Task<Hotel> GetHotelByIdAsync(int Id)
         {
-            return await _context.Hotels.FindAsync(Id);
+            return await _context.Hotels
+                .FindAsync(Id);
         }
 
         public async Task<bool> UpdateHotelAsync(Hotel Hotel)

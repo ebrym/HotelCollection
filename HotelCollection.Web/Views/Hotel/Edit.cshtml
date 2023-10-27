@@ -1,0 +1,62 @@
+﻿@model HotelCollection.Web.Models.HotelRegistrationModel
+
+<div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Edit Hotel</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <!-- Form groups used in grid -->
+        <div class="row">
+            <div class="col-md-10">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                       <label asp-for="Name" class="col-md-2 col-form-label form-control-label">Name</label>
+                       <div class="col-md-4">
+                           <input asp-for="Name" class="form-control" type="text" placeholder="Enter Category Name">
+                           <span asp-validation-for="Name" class="text-danger"></span>
+                       </div>
+                       <label asp-for="Phone" class="col-md-2 col-form-label form-control-label">Phone</label>
+                       <div class="col-md-4">
+                           <input asp-for="Phone" class="form-control" type="text" placeholder="Enter Phone">
+                           <span asp-validation-for="Phone" class="text-danger"></span>
+                       </div>
+                   </div>
+                    <div class="form-group row">
+                        <label asp-for="Email" class="col-md-2 col-form-label form-control-label">Email</label>
+                        <div class="col-md-4">
+                            <input asp-for="Email" class="form-control" type="text" placeholder="Enter Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <label asp-for="Phone" class="col-md-2 col-form-label form-control-label">Address</label>
+                        <div class="col-md-4">
+                            <textarea asp-for="Address" multiple="2" class="form-control" type="text" placeholder="Enter Address"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label asp-for="CACNumber" class="col-md-2 col-form-label form-control-label"> CAC Number </label>
+                        <div class="col-md-4">
+                            <input asp-for="CACNumber" class="form-control" type="text" placeholder="Enter CAC Number">
+                            <span asp-validation-for="CACNumber" class="text-danger"></span>
+                        </div>
+                            <label asp-for="CategoryId" class="col-md-2 col-form-label form-control-label">Category </label>
+                          <div class="col-md-4">
+                              <select asp-for="CategoryId" asp-items="@ViewBag.hotelCategory"
+                                      class="form-control custom-select">
+                                  <option value="">Please select Category</option>
+                              </select>
+                          </div>
+                    </div>
+                   
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary my-4">Update</button> |
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
