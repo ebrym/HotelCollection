@@ -11,21 +11,21 @@ using HotelCollection.Repository.Interface;
 
 namespace HotelCollection.Repository.Repo
 {
-   public class HotelCategoryRepository : IHotelCategoryRepository
+   public class HotelRepository : IHotelRepository
     {
         private readonly HotelCollectionContext _context;
 
-        public HotelCategoryRepository(HotelCollectionContext context )
+        public HotelRepository(HotelCollectionContext context )
         {
             _context = context;
         }
 
-        public async Task<bool> CreateHotelCategoryAsync(HotelCategory category)
+        public async Task<bool> CreateHotelAsync(Hotel Hotel)
         {
-            if (category != null)
+            if (Hotel != null)
             {
 
-                await _context.AddAsync(category);
+                await _context.AddAsync(Hotel);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -33,21 +33,21 @@ namespace HotelCollection.Repository.Repo
             return false;
         }
 
-        public async Task<IEnumerable<HotelCategory>> GetHotelCategoryAsync()
+        public async Task<IEnumerable<Hotel>> GetHotelAsync()
         {
-            return await _context.HotelCategories.ToListAsync();
+            return await _context.Hotels.ToListAsync();
         }
 
-        public async Task<HotelCategory> GetHotelCategoryByIdAsync(int Id)
+        public async Task<Hotel> GetHotelByIdAsync(int Id)
         {
-            return await _context.HotelCategories.FindAsync(Id);
+            return await _context.Hotels.FindAsync(Id);
         }
 
-        public async Task<bool> UpdateHotelCategoryAsync(HotelCategory category)
+        public async Task<bool> UpdateHotelAsync(Hotel Hotel)
         {
-            if (category != null)
+            if (Hotel != null)
             {
-                _context.Update(category);
+                _context.Update(Hotel);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -55,9 +55,9 @@ namespace HotelCollection.Repository.Repo
             return false;
         }
 
-        public async Task<bool> DeleteHotelCategoryAsync(int Id)
+        public async Task<bool> DeleteHotelAsync(int Id)
         {
-            var category = await _context.HotelCategories.Where(x=>x.Id==Id).FirstAsync();
+            var category = await _context.Hotels.Where(x=>x.Id==Id).FirstAsync();
             if (category != null)
             {
                  _context.Remove(category);

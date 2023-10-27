@@ -26,7 +26,9 @@ namespace HotelCollection.Data
         // }
 
         public DbSet<EmailSentLog> EmailSentLogs { get; set; }
-        public DbSet<HotelCategory> ItemCategories { get; set; }
+        public DbSet<HotelCategory> HotelCategories { get; set; }
+        public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Agent> Agents { get; set; }
         public DbSet<Requisition> Requisitions { get; set; }
         public DbSet<RequisitionDetails> RequisitionDetails { get; set; }
         public DbSet<ApprovalConfig> ApprovalConfigs { get; set; }

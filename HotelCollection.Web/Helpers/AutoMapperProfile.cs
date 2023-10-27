@@ -27,6 +27,8 @@ namespace HotelCollection.Web.Helpers
             CreateMap<RoleViewModel, Role>().ReverseMap();
 
             CreateMap<ApprovalConfigModel, ApprovalConfig>().ReverseMap();
+            
+            CreateMap<Agent, AgentModel>().ReverseMap();
 
             //CreateMap<List<RequisitionDetails>, List<ItemsModel>>().ReverseMap();
             //CreateMap<List<ItemsModel>, List<RequisitionDetails>>().ReverseMap();

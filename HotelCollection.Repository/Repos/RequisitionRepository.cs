@@ -103,7 +103,7 @@ namespace HotelCollection.Repository.Repo
 
        public async Task<bool> DeleteRequisitionAsync(int Id)
         {
-            var category = await _context.ItemCategories.Where(x => x.Id == Id).FirstAsync();
+            var category = await _context.HotelCategories.Where(x => x.Id == Id).FirstAsync();
             if (category != null)
             {
                 _context.Remove(category);

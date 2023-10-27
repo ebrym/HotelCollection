@@ -60,6 +60,7 @@ public static class ServiceExtension
            services.AddScoped<IApprovalRepository, ApprovalRepository>();
            services.AddScoped<IApprovalConfigRepository, ApprovalConfigRepository>();
            services.AddScoped<IAccountManager, AccountManager>();
+           services.AddScoped<IAgentRepository, AgentRepository>();
             
            services.AddAutoMapper(typeof(Program));
            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));

@@ -41,6 +41,14 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 
@@ -53,6 +61,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HotelCollection.Infrastructure\HotelCollection.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Agent\Create.cshtml" />
+    <AdditionalFiles Include="Views\Agent\Edit.cshtml" />
+    <AdditionalFiles Include="Views\Agent\Index.cshtml" />
   </ItemGroup>
 
 </Project>
