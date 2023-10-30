@@ -1,0 +1,55 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.LocalGovernmentAreaModel>
+
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-0">Agents</h3>
+            </div>
+            <div class="col-6 text-right">
+
+                <a asp-action="Create" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="Create Item Category">
+                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                    <span class="btn-inner--text">New Local Government</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Light table -->
+    <div class="table-responsive">
+        <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+                <tr>
+                    <th>S/N</th>
+                    <th>NAME</th>
+                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(i = i + 1)</td>
+                        <td class="table-user">
+                            <b>@Html.DisplayFor(modelItem => item.LGAName)</b>
+                        </td>
+                       
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="table-action" data-toggle="tooltip" data-original-title="Edit Category">
+                                <i class="fas fa-user-edit"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete Category">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
