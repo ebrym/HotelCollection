@@ -56,7 +56,8 @@ namespace HotelCollection.Web.Controllers
       
                 if (ModelState.IsValid)
                 {
-                    var user =  _userManager.Users.FirstOrDefault(m => m.Email.Trim() == loginViewModel.Username);
+                    var user =  _userManager.Users.FirstOrDefault(m => m.Email.Trim() == loginViewModel.Username.Trim() || 
+                                                                                    m.UserName == loginViewModel.Username.Trim());
                 
                     //var user = await _accountManager.GetUserByEmailAsync(loginViewModel.Email);
                     if (user == null)

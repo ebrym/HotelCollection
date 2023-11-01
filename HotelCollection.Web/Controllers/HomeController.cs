@@ -48,7 +48,7 @@ namespace HotelCollection.Web.Controllers
             {
 
             }
-            Alert("Welcome to Requisition Management.", Enums.Enums.NotificationType.info);
+            Alert("Welcome to Hotel Collection Management.", Enums.Enums.NotificationType.info);
 
             return View();
         }
