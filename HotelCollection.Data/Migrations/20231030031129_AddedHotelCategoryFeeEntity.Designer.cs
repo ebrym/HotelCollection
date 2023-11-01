@@ -4,6 +4,7 @@ using HotelCollection.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelCollection.Data.Migrations
 {
     [DbContext(typeof(HotelCollectionContext))]
-    partial class HotelCollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20231030031129_AddedHotelCategoryFeeEntity")]
+    partial class AddedHotelCategoryFeeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -504,45 +507,6 @@ namespace HotelCollection.Data.Migrations
                     b.ToTable("LocalGovernmentAreas");
                 });
 
-            modelBuilder.Entity("HotelCollection.Data.Entity.PaymentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastDateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("PaymentTypes");
-                });
-
             modelBuilder.Entity("HotelCollection.Data.Entity.Requisition", b =>
                 {
                     b.Property<int>("Id")
@@ -854,17 +818,6 @@ namespace HotelCollection.Data.Migrations
                 });
 
             modelBuilder.Entity("HotelCollection.Data.Entity.HotelCategoryFee", b =>
-                {
-                    b.HasOne("HotelCollection.Data.Entity.HotelCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("HotelCollection.Data.Entity.PaymentType", b =>
                 {
                     b.HasOne("HotelCollection.Data.Entity.HotelCategory", "Category")
                         .WithMany()

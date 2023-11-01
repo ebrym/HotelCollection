@@ -62,7 +62,10 @@ public static class ServiceExtension
            services.AddScoped<IAccountManager, AccountManager>();
            services.AddScoped<IAgentRepository, AgentRepository>();
            services.AddScoped<IHotelRepository, HotelRepository>();
-           services.AddAutoMapper(typeof(Program));
+           services.AddScoped<ILocalGovernmentAreaRepository, LocalGovernmentAreaRepository>();
+           services.AddScoped<IHotelCategoryFeeRepository, HotelCategoryFeeRepository>();
+           services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
+        services.AddAutoMapper(typeof(Program));
            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
            
