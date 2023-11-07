@@ -65,6 +65,7 @@ public static class ServiceExtension
            services.AddScoped<ILocalGovernmentAreaRepository, LocalGovernmentAreaRepository>();
            services.AddScoped<IHotelCategoryFeeRepository, HotelCategoryFeeRepository>();
            services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
+        services.AddScoped<IPaymentSetupRepository, PaymentSetupRepository>();
         services.AddAutoMapper(typeof(Program));
            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

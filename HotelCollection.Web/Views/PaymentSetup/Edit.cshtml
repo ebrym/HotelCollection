@@ -1,0 +1,48 @@
+﻿@model HotelCollection.Web.Models.PaymentSetupModel
+
+<div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Edit Payment Setup</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <!-- Form groups used in grid -->
+        <div class="row">
+            <div class="col-md-10">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                    <div class="form-group row">
+
+                        <label asp-for="HotelId" class="col-md-2 col-form-label form-control-label">Hotel </label>
+                        <div class="col-md-4">
+                            <select asp-for="HotelId" asp-items="@ViewBag.hotel"
+                                    class="form-control custom-select">
+                                <option value="">Please select Hotel</option>
+                            </select>
+                        </div>
+                        <label asp-for="PaymentTypeId" class="col-md-2 col-form-label form-control-label">Payment Type </label>
+                        <div class="col-md-4">
+                            <select asp-for="PaymentTypeId" asp-items="@ViewBag.paymentType"
+                                    class="form-control custom-select">
+                                <option value="">Please select Payment Type </option>
+                            </select>
+                        </div>
+                        <label asp-for="Amount" class="col-md-2 col-form-label form-control-label"> Amount </label>
+                        <div class="col-md-4">
+                            <input asp-for="Amount" class="form-control" type="number" placeholder="Enter Amount">
+                            <span asp-validation-for="Amount" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary my-4">Update</button> |
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,7 +31,6 @@ namespace HotelCollection.Repository.Repos
         public async Task<IEnumerable<PaymentType>> GetPaymentTypeAsync()
         {
             return await _context.PaymentTypes
-                .Include(x => x.Category)
                 .ToListAsync();
         }
         public async Task<PaymentType> GetPaymentTypeByIdAsync(int Id)

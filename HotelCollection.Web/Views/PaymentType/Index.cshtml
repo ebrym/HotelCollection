@@ -22,7 +22,6 @@
             <thead class="thead-light">
                 <tr>
                     <th>S/N</th>
-                    <th>CATEGORY</th>
                     <th>PAYMENT TYPE</th>
                     <th></th>
                 </tr>
@@ -36,10 +35,6 @@
                     <tr>
                         <td>@(i = i + 1)</td>
 
-
-                        <td class="table-user">
-                            <b>@Html.DisplayFor(modelItem => item.Category.CategoryName)</b>
-                        </td>
                         <td class="table-user">
                             <b>@Html.DisplayFor(modelItem => item.Type)</b>
                         </td>
