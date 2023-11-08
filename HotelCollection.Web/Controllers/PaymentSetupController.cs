@@ -64,11 +64,11 @@ namespace HotelCollection.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Guid referenceNo = Guid.NewGuid();
+                
                 var mappedpaymentSetup = _mapper.Map<PaymentSetup>(PaymentSetup);
 
                 mappedpaymentSetup.Amount = PaymentSetup.Amount;
-                mappedpaymentSetup.ReferenceNo = referenceNo;
+                mappedpaymentSetup.ReferenceNo = BLL.GetUniqueReferenceNumber(12);
                 var result = await _PaymentSetupRepository.CreatePaymentSetupAsync(mappedpaymentSetup);
 
                 if (result)

@@ -14,7 +14,7 @@ namespace HotelCollection.Data.Entity
         public int PaymentTypeId { get; set; }
         public double Amount { get; set; }
 
-       public  Guid ReferenceNo { get; set; }
+       public  string ReferenceNo { get; set; }
        
     }
 }
