@@ -1,3 +1,5 @@
+using HotelCollection.Data.Entity;
+
 namespace HotelCollection.Web.Models;
 
 public class HotelRegistrationModel
@@ -10,4 +12,6 @@ public class HotelRegistrationModel
     public string CACNumber  { get; set; }
     public HotelCategoryModel Category{ get; set; }
     public int CategoryId { get; set; }
+    public  LocalGovernmentAreaModel LocalGovernmentArea { get; set; }
+    public int LGAId { get; set; }
 }

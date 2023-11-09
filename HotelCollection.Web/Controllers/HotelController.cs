@@ -18,13 +18,15 @@ namespace HotelCollection.Web.Controllers
     {
         private readonly IHotelRepository _HotelRepository;
         private readonly IHotelCategoryRepository _HotelCategoryRepository;
+        private readonly ILocalGovernmentAreaRepository _LocalGovernmentAreaRepository;
         private readonly IMapper _mapper;
 
-        public HotelController(IHotelRepository HotelRepository,IHotelCategoryRepository HotelCategoryRepository, IMapper mapper)
+        public HotelController(IHotelRepository HotelRepository,IHotelCategoryRepository HotelCategoryRepository, IMapper mapper, ILocalGovernmentAreaRepository LocalGovernmentAreaRepository)
         {
             _HotelRepository = HotelRepository;
             _HotelCategoryRepository = HotelCategoryRepository;
             _mapper = mapper;
+            _LocalGovernmentAreaRepository = LocalGovernmentAreaRepository;
         }
         public async Task<IActionResult> Index()
         {
@@ -45,7 +47,16 @@ namespace HotelCollection.Web.Controllers
             }).ToList();
 
             ViewBag.hotelCategory = dcategory;
-            
+
+            var lgaList = await _LocalGovernmentAreaRepository.GetLocalGovernmentAreaAsync();
+            var dlga = lgaList.Select(a => new SelectListItem()
+            {
+                Value = a.Id.ToString(),
+                Text = a.LGAName
+            }).ToList();
+
+            ViewBag.lga = dlga;
+
             return View();
         }
 
@@ -58,6 +69,7 @@ namespace HotelCollection.Web.Controllers
                 var mappedHotel = _mapper.Map<Hotel>(Hotel);
                 
                 mappedHotel.CategoryId = Hotel.CategoryId;
+                mappedHotel.LGAId = Hotel.LGAId;
                 var result = await _HotelRepository.CreateHotelAsync(mappedHotel);
 
                 if (result)
@@ -88,8 +100,17 @@ namespace HotelCollection.Web.Controllers
                 }).ToList();
 
                 ViewBag.hotelCategory = dcategory;
-                
-                
+
+                var lgaList = await _LocalGovernmentAreaRepository.GetLocalGovernmentAreaAsync();
+                var dlga = lgaList.Select(a => new SelectListItem()
+                {
+                    Value = a.Id.ToString(),
+                    Text = a.LGAName
+                }).ToList();
+
+                ViewBag.lga = dlga;
+
+
                 var Hotel = await _HotelRepository.GetHotelByIdAsync(Id);
 
                 HotelRegistrationModel cat = _mapper.Map<HotelRegistrationModel>(Hotel);
@@ -117,13 +138,15 @@ namespace HotelCollection.Web.Controllers
                 if (getHotel == null)
                     return View();
                 var category = await _HotelCategoryRepository.GetHotelCategoryByIdAsync(Hotel.CategoryId);
+                var lga = await _LocalGovernmentAreaRepository.GetLocalGovernmentAreaByIdAsync(Hotel.LGAId);
+
                 getHotel.Name = Hotel.Name;
                 getHotel.Email = Hotel.Email;
                 getHotel.Phone = Hotel.Phone;
                 getHotel.Address = Hotel.Address;
                 getHotel.CACNumber = Hotel.CACNumber;
                 getHotel.Category = category;
-                
+                getHotel.LocalGovernmentArea = lga;
                 var result = await _HotelRepository.UpdateHotelAsync(getHotel);
 
               
