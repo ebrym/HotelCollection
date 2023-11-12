@@ -37,6 +37,7 @@ namespace HotelCollection.Repository.Repo
         {
             return await _context.Hotels
                 .Include(x=>x.Category)
+                .Include(x => x.LocalGovernmentArea)
                 .ToListAsync();
         }
 

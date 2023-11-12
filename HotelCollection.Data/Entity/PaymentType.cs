@@ -9,8 +9,6 @@ namespace HotelCollection.Data.Entity
     public class PaymentType : BaseEntity.Entity
     {
         public string Type { get; set; }
-        public virtual HotelCategory Category { get; set; }
-        public int CategoryId { get; set; }
     }
     
 }

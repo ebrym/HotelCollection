@@ -14,5 +14,7 @@ namespace HotelCollection.Data.Entity
             public string CACNumber  { get; set; }
             public virtual HotelCategory Category  { get; set; }
             public int CategoryId  { get; set; }
+            public virtual LocalGovernmentArea LocalGovernmentArea { get; set; }
+            public int LGAId { get; set; }
     }
 }

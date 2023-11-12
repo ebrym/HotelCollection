@@ -16,13 +16,6 @@
 
                     <div class="form-group row">
 
-                        <label asp-for="CategoryId" class="col-md-2 col-form-label form-control-label">Category </label>
-                        <div class="col-md-4">
-                            <select asp-for="CategoryId" asp-items="@ViewBag.hotelCategory"
-                                    class="form-control custom-select">
-                                <option value="">Please select Hotel Category</option>
-                            </select>
-                        </div>
                         <label asp-for="Type" class="col-md-2 col-form-label form-control-label"> Payment Type </label>
                         <div class="col-md-4">
                             <input asp-for="Type" class="form-control" type="text" placeholder="Enter Fee">

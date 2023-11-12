@@ -4,6 +4,7 @@ using HotelCollection.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelCollection.Data.Migrations
 {
     [DbContext(typeof(HotelCollectionContext))]
-    partial class HotelCollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20231107054305_Payment_Setup_Entity")]
+    partial class Payment_Setup_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,14 +381,8 @@ namespace HotelCollection.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LGAId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("LastDateUpdated")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("LocalGovernmentAreaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -399,8 +396,6 @@ namespace HotelCollection.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("LocalGovernmentAreaId");
 
                     b.ToTable("Hotels");
                 });
@@ -544,8 +539,8 @@ namespace HotelCollection.Data.Migrations
                     b.Property<int>("PaymentTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ReferenceNo")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("ReferenceNo")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -900,13 +895,7 @@ namespace HotelCollection.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelCollection.Data.Entity.LocalGovernmentArea", "LocalGovernmentArea")
-                        .WithMany()
-                        .HasForeignKey("LocalGovernmentAreaId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("LocalGovernmentArea");
                 });
 
             modelBuilder.Entity("HotelCollection.Data.Entity.HotelCategoryFee", b =>
