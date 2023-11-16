@@ -19,15 +19,17 @@ namespace HotelCollection.Repository.ApprovalRepo
         Task<IEnumerable<ApprovalConfig>> CheckUserApprovalAsync(int UserId);
         Task<IEnumerable<ApprovalConfig>> CheckUserApprovalAsync(int UserId, string department);
         Task<int> GetApprovalLevelByUserAsync(string email);
-        Task<int> GetApprovalRoleByDepartmentAsync(string department);
+        Task<int> GetApprovalRoleByPaymentTypeAsync(string department);
         Task<string> GetApprovalEmailByUnitAsync(string department, string unit);
-        Task<string> GetApprovalEmailByDepartmentAsync(string department, string approvalLevel);
+        Task<string> GetApprovalEmailByPaymentTypeAsync(string department, string approvalLevel);
         Task<string> GetNextApprovalsAsync(int requestId);
         Task<int> GetNextApprovalLevelAsync(int level, int roleId);
-        Task<string> GetApprovalByDepartmentAsync(string department, string approvalLevel);
-        Task<string> GetApprovalByDepartmentAsync(string department);
+        Task<string> GetApprovalByPaymentTypeAsync(string department, string approvalLevel);
+        Task<string> GetApprovalByPaymentTypeAsync(string department);
         Task<string> GetUsersEmailByRoleAsync(int roleId);
         Task<string> GetUsersEmailByRoleAsync(string role);
+
+        Task<bool> IsFinalApprovalsAsync(int requestId);
 
     }
 }

@@ -8,10 +8,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HotelCollection.Data.Entity;
+using HotelCollection.Infrastructure.Interface;
+using HotelCollection.Repository.AccountRepo;
+using HotelCollection.Repository.ApprovalRepo;
 using HotelCollection.Repository.Interface;
 using static HotelCollection.Web.Enums.Enums;
 using HotelCollection.Repository.Repo;
 using HotelCollection.Web.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelCollection.Web.Controllers
 {
@@ -21,12 +25,27 @@ namespace HotelCollection.Web.Controllers
         private readonly IHotelRepository _HotelRepository;
         private readonly IPaymentTypeRepository _PaymentTypeRepository;
         private readonly IMapper _mapper;
-        public PaymentSetupController(IPaymentSetupRepository PaymentSetupRepository,IPaymentTypeRepository PaymentTypeRepository, IHotelRepository HotelRepository, IMapper mapper)
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IAccountManager _accountManager;
+        private IViewRenderService _viewRender;
+        private readonly ISMTPService _emailSender;
+        private readonly IApprovalConfigRepository _ApprovalConfigRepository;
+        private readonly IApprovalRepository _approvalRepository;
+        public PaymentSetupController(IPaymentSetupRepository PaymentSetupRepository,
+            IPaymentTypeRepository PaymentTypeRepository, 
+            IHotelRepository HotelRepository, IMapper mapper,
+            IHttpContextAccessor contextAccessor, 
+            IViewRenderService viewRender,
+            IApprovalRepository approvalRepository,
+            ISMTPService emailSender)
         {
             _PaymentSetupRepository = PaymentSetupRepository;
             _PaymentTypeRepository = PaymentTypeRepository;
             _HotelRepository = HotelRepository;
             _mapper = mapper;
+            _contextAccessor = contextAccessor;
+            _approvalRepository = approvalRepository;
+            _emailSender = emailSender;
         }
         public async Task<IActionResult> Index()
         {
@@ -69,8 +88,31 @@ namespace HotelCollection.Web.Controllers
 
                 mappedpaymentSetup.Amount = PaymentSetup.Amount;
                 mappedpaymentSetup.ReferenceNo = BLL.GetUniqueReferenceNumber(12);
-                var result = await _PaymentSetupRepository.CreatePaymentSetupAsync(mappedpaymentSetup);
 
+                //var logonUserEmail = _contextAccessor.HttpContext.User.FindFirst("Email").Value;
+                var getAllUserEmail = "";
+                //var checkUserInIdentity = _contextAccessor.HttpContext.User.FindFirst("Email").Value;
+                var userApprovalLevel = _contextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value;
+                if (Convert.ToInt16(userApprovalLevel) > 0)
+                {
+                    // await _ApprovalConfigRepository.GetApprovalLevelByUserAsync(requisition.StaffEmail);
+                    mappedpaymentSetup.CurrentApprovalLevel = (Convert.ToInt16(userApprovalLevel) + 1).ToString();
+
+                    // user in identity
+                    //var approvalRoleBydepartment = await _ApprovalConfigRepository.GetApprovalRoleByDepartmentAsync(requisition.Department);
+                   // getAllUserEmail = await _ApprovalConfigRepository.GetApprovalEmailByPaymentTypeAsync(mappedpaymentSetup.PaymentType.Type,
+                   //     mappedpaymentSetup.CurrentApprovalLevel);
+                }
+                else
+                {
+                    //user not in identity
+                    mappedpaymentSetup.CurrentApprovalLevel = "1";
+                    //getAllUserEmail = await _ApprovalConfigRepository.GetApprovalEmailByUnitAsync(mappedpaymentSetup.PaymentType.Type, 
+                    //    mappedpaymentSetup.CurrentApprovalLevel);
+                }
+                
+                var result = await _PaymentSetupRepository.CreatePaymentSetupAsync(mappedpaymentSetup);
+                
                 if (result)
                 {
                     Alert("Payment Setup created successfully.", Enums.Enums.NotificationType.success);

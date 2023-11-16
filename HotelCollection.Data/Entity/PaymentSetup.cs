@@ -13,8 +13,9 @@ namespace HotelCollection.Data.Entity
         public virtual PaymentType PaymentType { get; set; }
         public int PaymentTypeId { get; set; }
         public double Amount { get; set; }
-
        public  string ReferenceNo { get; set; }
+       public string ApprovalStatus { get; set; }
+       public string CurrentApprovalLevel { get; set; }
        
     }
 }

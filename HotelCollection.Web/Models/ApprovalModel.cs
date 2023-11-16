@@ -10,7 +10,7 @@ namespace HotelCollection.Web.Models
         public bool ApprovalStatus { get; set; }
         public int ApprovalLevel { get; set; }
         public string ApprovalFullName { get; set; }
-        public int RequisitionId {get;set;}
+        public int PaymentId {get;set;}
         public int  ApprovalConfigId { get; set; }
         public DateTime ApprovalDate { get; set; }
     }

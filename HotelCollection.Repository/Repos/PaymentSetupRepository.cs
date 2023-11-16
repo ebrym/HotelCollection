@@ -32,7 +32,9 @@ namespace HotelCollection.Repository.Repos
         }
         public async Task<IEnumerable<PaymentSetup>> GetPaymentSetupAsync()
         {
-            return await _context.PaymentSetups.Include(x => x.Hotel).Include(y => y.PaymentType).ToListAsync();
+            return await _context.PaymentSetups.Include(x => x.Hotel)
+                .Include(y => y.PaymentType)
+                .ToListAsync();
         }
         public async Task<PaymentSetup> GetPaymentSetupByIdAsync(int Id)
         {

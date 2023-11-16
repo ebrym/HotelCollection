@@ -70,4 +70,13 @@
     <AdditionalFiles Include="Views\Agent\Index.cshtml" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Requisition\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Requisition\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Requisition\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Store\Disburse.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Store\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

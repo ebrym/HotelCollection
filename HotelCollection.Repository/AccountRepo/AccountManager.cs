@@ -534,7 +534,7 @@ namespace HotelCollection.Repository.AccountRepo
                     {
                         level = apLevel.ApprovalLevel;
                         isFinalApproval = apLevel.IsFinalLevel;
-                        ApprovalLevelDepartment = apLevel.Department;
+                        ApprovalLevelDepartment = apLevel.PaymentType;
                         break;
                     }
                 }

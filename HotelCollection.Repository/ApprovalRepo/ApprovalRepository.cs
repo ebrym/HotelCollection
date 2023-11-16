@@ -22,36 +22,40 @@ namespace HotelCollection.Repository.ApprovalRepo
         private readonly HotelCollectionContext _context;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IAccountManager _accountManager;
+        private readonly IApprovalConfigRepository _approvalConfig;
         private IConfiguration _config;
 
         public ApprovalRepository(HotelCollectionContext context,
-                                     IAccountManager accountManager, IConfiguration config, IHttpContextAccessor contextAccessor)
+                                     IAccountManager accountManager, IConfiguration config, 
+                                     IHttpContextAccessor contextAccessor,
+                                     IApprovalConfigRepository approvalConfig)
         {
             _context = context;
             _config = config;
             _contextAccessor = contextAccessor;
             _accountManager = accountManager;
+            _approvalConfig = approvalConfig;
         }
 
-        public async Task<bool> CreateApprovalAsync(Requisition approval, bool isApproved)
+        public async Task<bool> CreateApprovalAsync(PaymentSetup approval, string remarks, bool isApproved)
         {
             try
             {
-                var approvaleUser = _contextAccessor.HttpContext.User.FindFirst("mail").Value;
+                var approvaleUser = _contextAccessor.HttpContext.User.FindFirst("Email").Value;
                 //var approvalRole = _contextAccessor.HttpContext.User.FindFirst("mail").Value;
                 var approvalLevel = _contextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value;
-                var isFinalApproval = _contextAccessor.HttpContext.User.FindFirst("IsFinalApproval").Value;
+                var isFinalApproval = await _approvalConfig.IsFinalApprovalsAsync(approval.Id);//_contextAccessor.HttpContext.User.FindFirst("IsFinalApproval").Value;
 
-                var request = await _context.Requisitions.Where(x => x.Id == approval.Id).FirstOrDefaultAsync();
+                var request = await _context.PaymentSetups.Where(x => x.Id == approval.Id).FirstOrDefaultAsync();
                 using (var transaction = await _context.Database.BeginTransactionAsync(System.Data.IsolationLevel.ReadUncommitted))
                 {
 
 
                     Approval aprv = new Approval
                     {
-                        Comment = approval.Remarks,
+                        Comment = remarks,
                         ApproverUserId = await _accountManager.GetUserByEmailAsync(approvaleUser),
-                        RequisitionId= request.Id,
+                        PaymentId= request.Id,
                         ApprovalLevel= Convert.ToInt16(request.CurrentApprovalLevel)
 
                     };
@@ -61,7 +65,7 @@ namespace HotelCollection.Repository.ApprovalRepo
                     if (isApproved)
                     {
                         // increment if not final approval
-                        if (!Convert.ToBoolean(isFinalApproval))
+                        if (!isFinalApproval)
                             request.CurrentApprovalLevel = (Convert.ToInt16(request.CurrentApprovalLevel) + 1).ToString();
                         else
                             request.ApprovalStatus = "Completed";
@@ -73,7 +77,7 @@ namespace HotelCollection.Repository.ApprovalRepo
 
                    
 
-                    _context.Update<Requisition>(request);
+                    _context.Update<PaymentSetup>(request);
 
                     await _context.SaveChangesAsync();
                     transaction.Commit();
@@ -88,7 +92,7 @@ namespace HotelCollection.Repository.ApprovalRepo
             
         }
 
-        public async Task<Requisition> GetRequisitionApprovalDetailsAsync(int Id)
+        public async Task<PaymentSetup> GetPaymentApprovalDetailsAsync(int Id)
         {
            // var reqDetails = await _context.Requisitions.Where(x => x.Id == Id && x.IsDeleted == false).Include(x => x.RequisitionDetails).FirstOrDefaultAsync();
 
@@ -96,81 +100,82 @@ namespace HotelCollection.Repository.ApprovalRepo
             var currentUser = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
 
             var userApprovalLevel = _contextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value;
-
-            var department = _contextAccessor.HttpContext.User.FindFirst("department").Value;
-            var unit = _contextAccessor.HttpContext.User.FindFirst("unit").Value;
-            Requisition userReq = new Requisition();
+            PaymentSetup userReq = new PaymentSetup();
 
             if (userApprovalLevel =="1")
             {
 
-                 userReq = await _context.Requisitions.Where(x => x.Id == Id  && 
+                 userReq = await _context.PaymentSetups.Where(x => x.Id == Id  && 
                                                              x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
                                                              x.IsDeleted == false &&
-                                                             x.Department == department && 
-                                                             x.Unit == unit  && 
                                                              x.ApprovalStatus == null)
-                                                         .Include(x => x.RequisitionDetails)
+                     .Include(x=> x.Hotel)
+                     .ThenInclude(x=>x.LocalGovernmentArea)
+                     .Include(x=> x.Hotel)
+                     .ThenInclude(x=>x.Category)
+                     .Include(x=> x.PaymentType)
                                                          .FirstOrDefaultAsync();
 
             }
             else
             {
-                 userReq = await _context.Requisitions.Where(x => x.Id == Id && 
-                                                                     x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
-                                                                     x.IsDeleted == false && 
-                                                                     x.Department == department && 
-                                                                     x.ApprovalStatus == null)
-                                                      .Include(x => x.RequisitionDetails)
+                 userReq = await _context.PaymentSetups.Where(x => x.Id == Id && 
+                                                                   x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
+                                                                   x.IsDeleted == false && 
+                                                                   x.ApprovalStatus == null)
+                     .Include(x=> x.Hotel)
+                     .ThenInclude(x=>x.LocalGovernmentArea)
+                     .Include(x=> x.Hotel)
+                     .ThenInclude(x=>x.Category)
+                     .Include(x=> x.PaymentType)
                                                       .FirstOrDefaultAsync();
             }
             return userReq;
         }
 
 
-        public async Task<IEnumerable<Requisition>> GetPendingApprovalAsync()
+        public async Task<IEnumerable<PaymentSetup>> GetPendingApprovalAsync()
         {
 
             //get current logged on user
             var currentUser = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
-            //var userApprovalLevel = await _accountManager.GetApprovalLevelByUserAsync(currentUser);
             var userApprovalLevel = _contextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value;
-            var department = _contextAccessor.HttpContext.User.FindFirst("department").Value;
             var isFinalApproval = _contextAccessor.HttpContext.User.FindFirst("IsFinalApproval").Value;
-            var ApprovalLevelDepartment = _contextAccessor.HttpContext.User.FindFirst("ApprovalLevelDepartment").Value;
       
-            var unit = _contextAccessor.HttpContext.User.FindFirst("unit").Value;
-            List<Requisition> userReq = new List<Requisition>();
+            List<PaymentSetup> userReq = new List<PaymentSetup>();
 
             // for unit level approval 1
             if (userApprovalLevel == "1")
             {
 
-                userReq = await _context.Requisitions.Where(x => x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
-                                                                    x.IsDeleted == false && 
-                                                                    x.Department.ToUpper() == ApprovalLevelDepartment &&
-                                                                    x.Unit == unit &&
-                                                                    x.ApprovalStatus == null)
-                                                         .Include(x => x.RequisitionDetails)
+                userReq = await _context.PaymentSetups.Where(x => x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
+                                                                 x.IsDeleted == false && 
+                                                                 x.ApprovalStatus == null)
                                                          .OrderByDescending(x => x.DateCreated)
+                                                         .Include(x=>x.Hotel)
+                                                            .ThenInclude(x=>x.Category)
+                                                         .Include(x=>x.PaymentType)
                                                          .ToListAsync();            }
             else
             {
                 // for other level
                 if (Convert.ToBoolean(isFinalApproval))
-                    userReq = await _context.Requisitions.Where(x => x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
-                                                                        x.IsDeleted == false &&
-                                                                        x.ApprovalStatus == null)
-                                                          .Include(x => x.RequisitionDetails)
+                    userReq = await _context.PaymentSetups.Where(x => x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
+                                                                     x.IsDeleted == false &&
+                                                                     x.ApprovalStatus == null)
                                                           .OrderByDescending(x => x.DateCreated)
+                                                          .Include(x=>x.Hotel)
+                                                          .ThenInclude(x=>x.Category)
+                                                          .Include(x=>x.PaymentType)
                                                           .ToListAsync();
                 else
-                    userReq = await _context.Requisitions.Where(x => x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
-                                                                        x.IsDeleted == false &&
-                                                                        x.Department.ToUpper() == ApprovalLevelDepartment &&
-                                                                        x.ApprovalStatus == null)
-                                                           .Include(x => x.RequisitionDetails)
+                    userReq = await _context.PaymentSetups.Where(x => x.CurrentApprovalLevel == userApprovalLevel.ToString() && 
+                                                                     x.IsDeleted == false &&
+                                                                     x.ApprovalStatus == null)
                                                            .OrderByDescending(x => x.DateCreated)
+                                                           .Include(x=>x.Hotel)
+                                                           .ThenInclude(x=>x.Category)
+                                                           .Include(x=>x.PaymentType)
                                                            .ToListAsync();
 
             }
@@ -178,7 +183,7 @@ namespace HotelCollection.Repository.ApprovalRepo
         }
         public async Task<IEnumerable<Approval>> GetApprovalCommentsAsync(int requestId)
         {
-            var comments = await _context.Approvals.Where(x => x.RequisitionId == requestId)
+            var comments = await _context.Approvals.Where(x => x.PaymentId == requestId)
                                         .OrderByDescending(x=>x.DateCreated)
                                         .Include(x=>x.ApproverUserId)
                                         .ToListAsync();
@@ -195,25 +200,27 @@ namespace HotelCollection.Repository.ApprovalRepo
         //    return userReq;
         //}
 
-        public async Task<IEnumerable<Requisition>> GetApprovedRequestsAsync()
+        public async Task<IEnumerable<PaymentSetup>> GetApprovedRequestsAsync()
         {
-            var userReq = await _context.Requisitions.Where(x => x.ApprovalStatus != null && x.Status != "Complete")
-                                                         .Include(x => x.RequisitionDetails)
+            var userReq = await _context.PaymentSetups.Where(x => x.ApprovalStatus != null && 
+                                                                  x.ApprovalStatus != "Complete")
                                                          .OrderByDescending(x => x.DateCreated)
+                                                         .Include(x=>x.Hotel)
+                                                         .ThenInclude(x=>x.Category)
+                                                         .Include(x=>x.PaymentType)
                                                          .ToListAsync();
             return userReq;
         }
 
-        public async Task<Requisition> GetRequisitionDetailsAsync(int Id)
+        public async Task<PaymentSetup> GetPaymentDetailsAsync(int Id)
         {
            
-            Requisition userReq = new Requisition();
+            PaymentSetup userReq = new PaymentSetup();
 
           
 
-                userReq = await _context.Requisitions.Where(x => x.Id == Id &&
-                                                            x.ApprovalStatus != null)
-                                                        .Include(x => x.RequisitionDetails)
+                userReq = await _context.PaymentSetups.Where(x => x.Id == Id &&
+                                                                 x.ApprovalStatus != null)
                                                         .FirstOrDefaultAsync();
 
            

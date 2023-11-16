@@ -68,30 +68,9 @@ namespace HotelCollection.Web.Controllers
             var myRequestList = await _approvalRepository.GetPendingApprovalAsync();
 
 
-            List<RequisitionModel> myRequests = _mapper.Map<List<RequisitionModel>>(myRequestList);
+            List<PaymentSetupModel> myRequests = _mapper.Map<List<PaymentSetupModel>>(myRequestList);
 
-            foreach (var request in myRequests)
-            {
-
-               // var mail = await _ApprovalConfigRepository.GetNextApprovalsAsync(request.Id);
-                request.ApprovalStatus = await _ApprovalConfigRepository.GetApprovalByDepartmentAsync(request.Department, request.CurrentApprovalLevel);
-                List<ItemsModel> items = new List<ItemsModel>();
-
-                var item = myRequestList.Where(x => x.Id == request.Id)                                        
-                                        .FirstOrDefault();
-                var newItems = item.RequisitionDetails.Select(u => new ItemsModel {
-                    HotelCategoryId = u.HotelCategoryId,
-                    ItemDescription = u.ItemDescription,
-                    HotelCategory =  _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
-                    Quantity=u.Quantity
-                }).ToList();
-
-                var ditem = _mapper.Map<List<ItemsModel>>(newItems);
-                    items.AddRange(ditem);
-
-                request.Items = items;   
-
-            }
+            
 
             return View(myRequests);
         }
@@ -100,91 +79,54 @@ namespace HotelCollection.Web.Controllers
         {
 
 
-            var myRequestList = await _approvalRepository.GetRequisitionApprovalDetailsAsync(Id);
+            var myRequestList = await _approvalRepository.GetPaymentApprovalDetailsAsync(Id);
             if (myRequestList == null)
             {
 
-                Alert("You are not authorise to approve the selected Request.", Enums.Enums.NotificationType.info);
+                Alert("You are not authorise to approve the selected Payment.", Enums.Enums.NotificationType.info);
                 return RedirectToAction("Index");
             }
+            PaymentSetupModel myRequests = _mapper.Map<PaymentSetupModel>(myRequestList);
+            
+            
             var approvalComments = await _approvalRepository.GetApprovalCommentsAsync(Id);
-            RequisitionModel myRequests = _mapper.Map<RequisitionModel>(myRequestList);
 
-           
-                List<ItemsModel> items = new List<ItemsModel>();
+            List<ApprovalModel> approvals = new List<ApprovalModel>();
 
-                //var item = myRequestList.Where(x => x.Id == request.Id)
-                //                        .FirstOrDefault();
-                var newItems = myRequestList.RequisitionDetails.Select(u => new ItemsModel
-                {
-                    HotelCategoryId = u.HotelCategoryId,
-                    ItemDescription = u.ItemDescription,
-                    HotelCategory = _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
-                    Quantity = u.Quantity
-                }).ToList();
+            var newApprovals = approvalComments.Select(u => new ApprovalModel
+            {
+                ApprovalFullName = u.ApproverUserId.FullName,
+                Comment = u.Comment,
+                ApprovalDate = u.DateCreated,
+                PaymentId = u.PaymentId
+            }).ToList();
 
-                var ditem = _mapper.Map<List<ItemsModel>>(newItems);
-                items.AddRange(ditem);
-
-                myRequests.Items = items;
-
-                List<ApprovalModel> approvals = new List<ApprovalModel>();
-
-                var newApprovals = approvalComments.Select(u => new ApprovalModel
-                {
-                    ApprovalFullName = u.ApproverUserId.FullName,
-                    Comment = u.Comment,
-                    ApprovalDate = u.DateCreated,
-                    RequisitionId = u.RequisitionId
-                }).ToList();
-
-                ViewBag.Comments = newApprovals;
-
-                return View(myRequests);
+            ViewBag.Comments = newApprovals;
+            return View(myRequests);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Approve(RequisitionModel requisition)
+        public async Task<IActionResult> Approve(PaymentSetupModel request)
         {
             // view return to be optimized.
-            var myRequestList = await _approvalRepository.GetRequisitionApprovalDetailsAsync(requisition.Id);
+            var myRequestList = await _approvalRepository.GetPaymentApprovalDetailsAsync(request.Id);
             if (myRequestList == null)
             {
 
                 Alert("You are not authorise to approve the selected Request.", Enums.Enums.NotificationType.info);
                 return RedirectToAction("Index");
             }
-            var approvalComments = await _approvalRepository.GetApprovalCommentsAsync(requisition.Id);
-            RequisitionModel myRequests = _mapper.Map<RequisitionModel>(myRequestList);
+            PaymentSetupModel myRequests = _mapper.Map<PaymentSetupModel>(myRequestList);
 
 
-            List<ItemsModel> items = new List<ItemsModel>();
-
-            //var item = myRequestList.Where(x => x.Id == request.Id)
-            //                        .FirstOrDefault();
-            var newItems = myRequestList.RequisitionDetails.Select(u => new ItemsModel
-            {
-                HotelCategoryId = u.HotelCategoryId,
-                ItemDescription = u.ItemDescription,
-                HotelCategory = _HotelCategoryRepository.GetHotelCategoryByIdAsync(u.HotelCategoryId).Result.CategoryName,
-                Quantity = u.Quantity
-            }).ToList();
-
-            var ditem = _mapper.Map<List<ItemsModel>>(newItems);
-            items.AddRange(ditem);
-
-            myRequests.Items = items;
+           
             
             // aproval process
             if (ModelState.IsValid)
             {
-                var mappedRequisition = _mapper.Map<Requisition>(myRequests);
-                mappedRequisition.Remarks = requisition.ApprovalComments;
+                var mappedRequisition = _mapper.Map<PaymentSetup>(myRequests);
 
-
-
-              
-                var result =await _approvalRepository.CreateApprovalAsync(mappedRequisition, requisition.Approved);
+                var result =await _approvalRepository.CreateApprovalAsync(mappedRequisition,request.ApprovalComments, request.Approved);
 
 
                 if (result)
@@ -198,31 +140,31 @@ namespace HotelCollection.Web.Controllers
                     myRequests.AppLink = requisitionUrl;
 
                     // check if approved or rejected
-                    if (requisition.Approved)
+                    if (request.Approved)
                     {
                         if (!Convert.ToBoolean(isFinalApproval))
                         {
                             getAllUserEmail = await _ApprovalConfigRepository.GetNextApprovalsAsync(myRequests.Id);
-                            emailBody = await _viewRender.RenderToStringAsync("/Views/MailTemplates/RequisitionMailTemplate.cshtml", myRequests);
+                           // emailBody = await _viewRender.RenderToStringAsync("/Views/MailTemplates/RequisitionMailTemplate.cshtml", myRequests);
                         }
-                        else
-                        {
-                            getAllUserEmail = myRequests.StaffEmail + "," + await _ApprovalConfigRepository.GetUsersEmailByRoleAsync("Store");
-                            emailBody = await _viewRender.RenderToStringAsync("/Views/MailTemplates/RequisitionApprovedTemplate.cshtml", myRequests);
-                        }
+                        // else
+                        // {
+                        //     getAllUserEmail = myRequests.StaffEmail + "," + await _ApprovalConfigRepository.GetUsersEmailByRoleAsync("Store");
+                        //     emailBody = await _viewRender.RenderToStringAsync("/Views/MailTemplates/RequisitionApprovedTemplate.cshtml", myRequests);
+                        // }
                     }
                     else
                     {
-                        myRequests.Remarks = requisition.ApprovalComments;
-                        getAllUserEmail = myRequests.StaffEmail;
-                        emailBody = await _viewRender.RenderToStringAsync("/Views/MailTemplates/RequisitionRejectedTemplate.cshtml", myRequests);
+                        myRequests.ApprovalComments = request.ApprovalComments;
+                       // getAllUserEmail = myRequests.;
+                       // emailBody = await _viewRender.RenderToStringAsync("/Views/MailTemplates/RequisitionRejectedTemplate.cshtml", myRequests);
                     }
 
                     // email section
-                     var subject = "REQUISITION APPROVAL NOTIFICATION";
-                    await _emailSender.SendEmailAsync(getAllUserEmail, subject, emailBody, "");
+                     var subject = "PAYMENT APPROVAL NOTIFICATION";
+                   // await _emailSender.SendEmailAsync(getAllUserEmail, subject, emailBody, "");
 
-                    Alert("Requisition created successfully.", Enums.Enums.NotificationType.success);
+                    Alert("Payment Approved created successfully.", Enums.Enums.NotificationType.success);
                     return RedirectToAction("Index");
                 }
                 else
@@ -242,10 +184,10 @@ namespace HotelCollection.Web.Controllers
 
 
       
-        public ActionResult AccessDenied()
-        {
-            return View();
-        }
+        // public ActionResult AccessDenied()
+        // {
+        //     return View();
+        // }
 
 
     }

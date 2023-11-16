@@ -34,6 +34,8 @@ namespace HotelCollection.Web.Helpers
             CreateMap<HotelCategoryFee, HotelCategoryFeeModel>().ReverseMap();
             CreateMap<PaymentType, PaymentTypeModel>().ReverseMap();
             CreateMap<PaymentSetup, PaymentSetupModel>().ReverseMap();
+            
+            //CreateMap<List<PaymentSetup>, List<PaymentSetupModel>>().ReverseMap();
 
             //CreateMap<List<RequisitionDetails>, List<ItemsModel>>().ReverseMap();
             //CreateMap<List<ItemsModel>, List<RequisitionDetails>>().ReverseMap();

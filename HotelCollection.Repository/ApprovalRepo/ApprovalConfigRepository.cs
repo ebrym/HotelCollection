@@ -49,7 +49,7 @@ namespace HotelCollection.Repository.ApprovalRepo
             return await _context.ApprovalConfigs. Where(x=> x.IsFinalLevel == true).ToListAsync();
         }
 
-        public async Task<IEnumerable<ApprovalConfig>> GetFinalApprovalAsync(string department)
+        public async Task<IEnumerable<ApprovalConfig>> GetFinalApprovalAsync(string PaymentType)
         {
             return await _context.ApprovalConfigs.Where(x => x.IsFinalLevel == true).ToListAsync();
         }
@@ -59,9 +59,9 @@ namespace HotelCollection.Repository.ApprovalRepo
         {
             return await _context.ApprovalConfigs.Where(x => x.RoleId == UserId ).ToListAsync();
         }
-        public async Task<IEnumerable<ApprovalConfig>> CheckUserApprovalAsync(int UserId, string department)
+        public async Task<IEnumerable<ApprovalConfig>> CheckUserApprovalAsync(int UserId, string PaymentType)
         {
-            return await _context.ApprovalConfigs.Where(x => x.RoleId == UserId).ToListAsync();
+            return await _context.ApprovalConfigs.Where(x => x.RoleId == UserId && x.PaymentType == PaymentType).ToListAsync();
         }
 
         public async Task<ApprovalConfig> GetApprovalConfigByIdAsync(int Id)
@@ -123,13 +123,13 @@ namespace HotelCollection.Repository.ApprovalRepo
             }
             return 0;
         }
-        public async Task<int> GetApprovalRoleByDepartmentAsync(string department)
+        public async Task<int> GetApprovalRoleByPaymentTypeAsync(string PaymentType)
         {
-            var roles = await _context.Roles.Where(x => x.Name.Contains(department)).ToListAsync();        
+            var roles = await _context.Roles.Where(x => x.Name.Contains(PaymentType)).ToListAsync();        
             int roleId = 0;
             foreach (var item in roles)
             {
-                var approvalLevel = await _context.ApprovalConfigs.Where(x => x.RoleId == item.Id && x.ApprovalLevel == 1 && x.Department == department).FirstOrDefaultAsync();
+                var approvalLevel = await _context.ApprovalConfigs.Where(x => x.RoleId == item.Id && x.ApprovalLevel == 1 && x.PaymentType == PaymentType).FirstOrDefaultAsync();
                 if (approvalLevel != null)
                 {
                     roleId = approvalLevel.RoleId;
@@ -152,9 +152,9 @@ namespace HotelCollection.Repository.ApprovalRepo
             return usernames;
         }
 
-        public async Task<string> GetApprovalEmailByUnitAsync(string department, string unit)
+        public async Task<string> GetApprovalEmailByUnitAsync(string PaymentType, string unit)
         {
-            var users =  await _context.Users.Where(x => x.Department.ToLower() == department.ToLower() && x.Unit.ToLower() == unit.ToLower()).ToListAsync();
+            var users =  await _context.Users.Where(x => x.Unit.ToLower() == unit.ToLower()).ToListAsync();
             if (users == null)
                 return "";
 
@@ -163,10 +163,10 @@ namespace HotelCollection.Repository.ApprovalRepo
             return usernames;            
         }
 
-        public async Task<string> GetApprovalEmailByDepartmentAsync(string department, string approvalLevel)
+        public async Task<string> GetApprovalEmailByPaymentTypeAsync(string PaymentType, string approvalLevel)
         {
             // approval role from config.
-            var approvalRole = await _context.ApprovalConfigs.Where(x => x.ApprovalLevel == Convert.ToInt16(approvalLevel) && x.Department == department && x.IsActive == true)
+            var approvalRole = await _context.ApprovalConfigs.Where(x => x.ApprovalLevel == Convert.ToInt16(approvalLevel) && x.PaymentType == PaymentType && x.IsActive == true)
                                         .Select(x=>x.RoleId)
                                         .FirstOrDefaultAsync();
             // get the role name
@@ -176,16 +176,16 @@ namespace HotelCollection.Repository.ApprovalRepo
             if (users == null)  return "";
 
 
-            var userEmail =  users.Where(x => x.Department.ToLower() == department.ToLower()).ToList();
-            var approvals = userEmail.Select(e => e.Email).ToArray();
+            //var userEmail =  users.Where(x => x.PaymentType.ToLower() == PaymentType.ToLower()).ToList();
+            var approvals = users.Select(e => e.Email).ToArray();
             var approvalEmails = string.Join(",", approvals);
             return approvalEmails;
         }
         public async Task<string> GetNextApprovalsAsync(int requestId)
         {
             // approval role from config.
-            var request = await _context.Requisitions.Where(x => x.Id == requestId).FirstOrDefaultAsync();
-            var approvalRole = await _context.ApprovalConfigs.Where(x => x.ApprovalLevel == Convert.ToInt16(request.CurrentApprovalLevel) && x.Department == request.Department && x.IsActive == true)
+            var request = await _context.PaymentSetups.Where(x => x.Id == requestId).FirstOrDefaultAsync();
+            var approvalRole = await _context.ApprovalConfigs.Where(x => x.ApprovalLevel == Convert.ToInt16(request.CurrentApprovalLevel) && x.PaymentType == request.PaymentType.Type && x.IsActive == true)
                                         .Select(x => x.RoleId)
                                         .FirstOrDefaultAsync();
             // get the role name
@@ -195,15 +195,15 @@ namespace HotelCollection.Repository.ApprovalRepo
             if (users == null) return "";
 
 
-            var userEmail = users.Where(x => x.Department.ToLower() == request.Department.ToLower()).ToList();
-            var approvals = userEmail.Select(e => e.Email).ToArray();
+            //var userEmail = users.Where(x => x.PaymentType.ToLower() == request.PaymentType.ToLower()).ToList();
+            var approvals = users.Select(e => e.Email).ToArray();
             var approvalEmails = string.Join(",", approvals);
             return approvalEmails;
         }
-        public async Task<string> GetApprovalByDepartmentAsync(string department, string approvalLevel)
+        public async Task<string> GetApprovalByPaymentTypeAsync(string PaymentType, string approvalLevel)
         {
             // approval role from config.
-            var approvalRole = await _context.ApprovalConfigs.Where(x => x.ApprovalLevel == Convert.ToInt16(approvalLevel) && x.Department == department && x.IsActive == true)
+            var approvalRole = await _context.ApprovalConfigs.Where(x => x.ApprovalLevel == Convert.ToInt16(approvalLevel) && x.PaymentType == PaymentType && x.IsActive == true)
                                         .Select(x => x.RoleId)
                                         .FirstOrDefaultAsync();
             // get the role name
@@ -213,15 +213,15 @@ namespace HotelCollection.Repository.ApprovalRepo
             if (users == null) return "";
 
 
-            var userEmail = users.Where(x => x.Department.ToLower() == department.ToLower()).ToList();
-            var approvals = userEmail.Select(e => e.FullName).ToArray();
+            //var userEmail = users.Where(x => x.PaymentType.ToLower() == PaymentType.ToLower()).ToList();
+            var approvals = users.Select(e => e.FullName).ToArray();
             var approvalEmails = string.Join(",", approvals);
             return approvalEmails;
         }
-        public async Task<string> GetApprovalByDepartmentAsync(string department)
+        public async Task<string> GetApprovalByPaymentTypeAsync(string PaymentType)
         {
             // approval role from config.
-            var approvalRole = await _context.ApprovalConfigs.Where(x => x.Department == department && x.IsActive == true)
+            var approvalRole = await _context.ApprovalConfigs.Where(x => x.PaymentType == PaymentType && x.IsActive == true)
                                         .Select(x => x.RoleId)
                                         .FirstOrDefaultAsync();
             // get the role name
@@ -231,8 +231,8 @@ namespace HotelCollection.Repository.ApprovalRepo
             if (users == null) return "";
 
 
-            var userEmail = users.Where(x => x.Department.ToLower() == department.ToLower()).ToList();
-            var approvals = userEmail.Select(e => e.FullName).ToArray();
+            //var userEmail = users.Where(x => x.PaymentType.ToLower() == PaymentType.ToLower()).ToList();
+            var approvals = users.Select(e => e.FullName).ToArray();
             var approvalEmails = string.Join(",", approvals);
             return approvalEmails;
         }
@@ -246,6 +246,15 @@ namespace HotelCollection.Repository.ApprovalRepo
             var userEmail = users.Select(e => e.Email).ToArray();
             var usernames = string.Join(",", userEmail);
             return usernames;
+        }
+        
+        public async Task<bool> IsFinalApprovalsAsync(int requestId)
+        {
+            // approval role from config.
+            var request = await _context.PaymentSetups.Where(x => x.Id == requestId).FirstOrDefaultAsync();
+            var approvalConfig = await _context.ApprovalConfigs.Where(x => x.ApprovalLevel == Convert.ToInt16(request.CurrentApprovalLevel) && x.PaymentType == request.PaymentType.Type && x.IsActive == true)
+                .FirstOrDefaultAsync();
+            return approvalConfig.IsFinalLevel;
         }
     }
 }

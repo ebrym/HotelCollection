@@ -1,9 +1,9 @@
-﻿@model HotelCollection.Web.Models.RequisitionModel
+﻿@model HotelCollection.Web.Models.PaymentSetupModel
 
 @{
     ViewData["Title"] = "Approve Request";
 }
-<form asp-action="" method="post" enctype="multipart/form-data">
+<form asp-action="Approve" method="post" enctype="multipart/form-data">
     <div class="card mb-4">
         <!-- Card header -->
         <div class="card-header">
@@ -17,44 +17,54 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group row">
-                        <label asp-for="StaffName" class="col-md-2 col-form-label form-control-label">Staff Name</label>
+                        <label asp-for="Hotel.Name" class="col-md-2 col-form-label form-control-label">Hotel</label>
                         <div class="col-md-4">
-                            @Model.StaffName
+                            @Model.Hotel.Name
                         </div>
-                        <label asp-for="StaffEmail" class="col-md-2 col-form-label form-control-label">Staff Email</label>
+                        <label asp-for="@Model.Hotel.Category.CategoryName" class="col-md-2 col-form-label form-control-label">Category</label>
                         <div class="col-md-4">
-                            @Model.StaffEmail
+                            @Model.Hotel.Category.CategoryName
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label asp-for="Department" class="col-md-2 col-form-label form-control-label">Department</label>
+                        <label asp-for="Hotel.Address" class="col-md-2 col-form-label form-control-label">Address</label>
                         <div class="col-md-4">
-                            @Model.Department
+                            @Model.Hotel.Address
                         </div>
-                        <label asp-for="JobTitle" class="col-md-2 col-form-label form-control-label">Job Title</label>
+                        <label asp-for="@Model.Hotel.LocalGovernmentArea.LGAName" class="col-md-2 col-form-label form-control-label">LGA</label>
                         <div class="col-md-4">
-                            @Model.JobTitle
+                            @Model.Hotel.LocalGovernmentArea.LGAName
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Hotel.CACNumber" class="col-md-2 col-form-label form-control-label">CACNumber</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.CACNumber
+                        </div>
+                        <label asp-for="@Model.Hotel.Phone" class="col-md-2 col-form-label form-control-label">Phone</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.Phone
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="PaymentType.Type" class="col-md-2 col-form-label form-control-label">Payment Type</label>
+                        <div class="col-md-4">
+                            @Model.PaymentType.Type
+                        </div>
+                        <label asp-for="Amount" class="col-md-2 col-form-label form-control-label">Amount</label>
+                        <div class="col-md-4">
+                            @Model.Amount
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label asp-for="Unit" class="col-md-2 col-form-label form-control-label">Unit</label>
+                        <label asp-for="ReferenceNo" class="col-md-2 col-form-label form-control-label">Reference</label>
                         <div class="col-md-4">
-                            @Model.Unit
+                            @Model.ReferenceNo
                         </div>
-                        <label asp-for="RequisitionType" class="col-md-2 col-form-label form-control-label">RequisitionType</label>
+                        <label asp-for="DateCreated" class="col-md-2 col-form-label form-control-label">Date</label>
                         <div class="col-md-4">
-                            @Model.RequisitionType
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label asp-for="ProjectId" class="col-md-2 col-form-label form-control-label">Project </label>
-                        <div class="col-md-4">
-                            @Model.ProjectName
-                        </div>
-                        <label asp-for="MarketerName" class="col-md-2 col-form-label form-control-label">Marketer</label>
-                        <div class="col-md-4">
-                            @Model.MarketerName
+                            @Model.DateCreated
                         </div>
                     </div>
                     <input asp-for="Id" class="form-control" type="hidden">
@@ -72,81 +82,7 @@
         </div>
     </div>
 
-    <div class="card mb-4">
-        <!-- Card header -->
-        <div class="card-header">
-            <h3 class="mb-0">Items</h3>
-        </div>
-        <!-- Card body -->
-        <div class="card-body">
-            <!-- Form groups used in grid -->
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush" id="tdItems">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Category</th>
-                                    <th>Description</th>
-                                    <th>Quantity</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyItem">
-                                @{
-                                    var items = Model.Items as List<HotelCollection.Web.Models.ItemsModel>;
-                                }
-                                @for (int i = 0; i < items.Count(); i++)
-                                {
-                                    <tr id="item_@(i)">
-                                        <td>@(i + 1)</td>
-                                        <td class="table-user">
-                                            @items[i].HotelCategory
-                                        </td>
-                                        <td class="table-user">
-                                            @items[i].ItemDescription
-                                        </td>
-                                        <td class="table-user">
-                                            @items[i].Quantity
-                                        </td>
-
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="card mb-4">
-        <!-- Card header -->
-        <div class="card-header">
-            <h3 class="mb-0">Comment/Remarks</h3>
-        </div>
-        <!-- Card body -->
-        <div class="card-body">
-            <!-- Form groups used in grid -->
-            <div class="row">
-                <div class="col-md-12">
-                    <label asp-for="Remarks" class="col-md-2 col-form-label form-control-label">Remarks</label>
-                    <div class="col-md-10">
-                        @Model.Remarks
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <label asp-for="UploadDoc" class="col-md-2 col-form-label form-control-label">Supporting Document</label>
-                    <div class="col-md-5">
-                        @Model.DocumentPath
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     <div class="card mb-4">
         <!-- Card header -->
         <div class="card-header">
@@ -224,30 +160,7 @@
         <button id="btnReject" class="btn btn-danger" data-toggle="sweet-alert" data-sweet-alert="question">Reject</button>
     </div>
 </form>
-<div style="display:none;">
-    <table id="sample_table">
-        <tr id="">
-            <td><span class="sn"></span>.</td>
-            <td class="table-user">
-                <select class="form-control HotelCategory" required="" data-val="true" data-val-required="The HotelCategoryId field is required." id="items_0__HotelCategoryId" name="items[0].HotelCategoryId">
-                    <option value="0" selected="selected">Please select one</option>
-                </select>
-            </td>
-            <td class="table-user">
-                <input class="form-control itemDescription" type="text" id="items_0__ItemDescription" name="items[0].ItemDescription" value="" required="">
-            </td>
-            <td class="table-user">
-                <input class="form-control col-sm-10 itemQuantity" type="number" data-val="true" data-val-required="The Quantity field is required." id="items_0__Quantity" name="items[0].Quantity" value="0">
-            </td>
-            <td>
-                <a class="btn btn-danger text-white delete-record" data-id="0"><i class="fas fa-trash"></i></a>
-            </td>
-            <input class="form-control HotelCategoryName" type="hidden" id="items_0__HotelCategory" name="items[0].HotelCategory" value="" required="">
-        </tr>
-       
 
-    </table>
-</div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
 <script>
       

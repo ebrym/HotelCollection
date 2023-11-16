@@ -239,16 +239,16 @@
                                 <i class="ni ni-books text-blue"></i>
                                 <span class="nav-link-text">Hotel Collection</span>
                             </a>
-                            <div class="collapse" id="requisition">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="Requisition" asp-action="Index" class="nav-link">My Requests</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="Requisition" asp-action="Create" class="nav-link">Make Request</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            @* <div class="collapse" id="requisition"> *@
+                            @*     <ul class="nav nav-sm flex-column"> *@
+                            @*         <li class="nav-item"> *@
+                            @*             <a asp-controller="Requisition" asp-action="Index" class="nav-link">My Requests</a> *@
+                            @*         </li> *@
+                            @*         <li class="nav-item"> *@
+                            @*             <a asp-controller="Requisition" asp-action="Create" class="nav-link">Make Request</a> *@
+                            @*         </li> *@
+                            @*     </ul> *@
+                            @* </div> *@
                         </li>
                         @*@if (Convert.ToInt16(HttpContextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value) > 0)
                             {*@
@@ -409,10 +409,10 @@
                                 </ol>
                             </nav>
                         </div>
-                        <div class="col-lg-6 col-5 text-right">
-                            <a asp-controller="Requisition" asp-action="Create" class="btn btn-sm btn-neutral">New Request</a>
-                            @*<a href="#" class="btn btn-sm btn-neutral">Filters</a>*@
-                        </div>
+                        @* <div class="col-lg-6 col-5 text-right"> *@
+                        @*     <a asp-controller="PaymentSetu" asp-action="Create" class="btn btn-sm btn-neutral">New Request</a> *@
+                        @*     $1$<a href="#" class="btn btn-sm btn-neutral">Filters</a>#1# *@
+                        @* </div> *@
                     </div>
                     <!-- Card stats -->
                     @*<div class="row">

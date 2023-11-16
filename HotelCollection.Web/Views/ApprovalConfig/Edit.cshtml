@@ -16,18 +16,18 @@
             <form role="form" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group row">
-                  @*  <label class="col-md-2 col-form-label form-control-label"><span class="tx-danger">*</span>Department : </label>
+                    <label class="col-md-2 col-form-label form-control-label"><span class="tx-danger">*</span>Payment Type : </label>
                     <div class="col-sm-4">
-                        <select asp-for="Department" asp-items="@ViewBag.department"
+                        <select asp-for="PaymentType" asp-items="@ViewBag.paymentType"
                                 class="form-control custom-select" required>
                             <option value="">Please select one</option>
                         </select>
-                        <select asp-for="ApprovalType"
-                                    class="form-control custom-select" required>
-                                <option value="">Please select one</option>
-                                <option value="Requisition">Requisition</option>
-                            </select>
-                    </div>*@
+                        @* <select asp-for="ApprovalType" *@
+                        @*         class="form-control custom-select" required> *@
+                        @*     <option value="">Please select one</option> *@
+                        @*     <option value="Requisition">Requisition</option> *@
+                        @* </select> *@
+                    </div>  
                     <label class="col-md-2 col-form-label form-control-label"> <span class="tx-danger">*</span>Role :</label>
                     <div class="col-sm-4">
                         <select asp-for="RoleId" asp-items="@ViewBag.roles"

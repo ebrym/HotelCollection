@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using HotelCollection.Repository.AccountRepo;
 using HotelCollection.Repository.ApprovalRepo;
 using HotelCollection.Data.Entity;
+using HotelCollection.Repository.Interface;
 using static HotelCollection.Web.Enums.Enums;
 using HotelCollection.Web.Models;
 
@@ -20,12 +21,16 @@ namespace HotelCollection.Web.Controllers
         private readonly IApprovalConfigRepository _ApprovalConfigRepository;
         private readonly IMapper _mapper;
         private readonly IAccountManager _accountManager;
+        private readonly IPaymentTypeRepository _paymentType;
 
-        public ApprovalConfigController(IApprovalConfigRepository ApprovalConfigRepository, IMapper mapper, IAccountManager accountManager)
+        public ApprovalConfigController(IApprovalConfigRepository ApprovalConfigRepository, 
+            IMapper mapper, IAccountManager accountManager,
+            IPaymentTypeRepository paymentType)
         {
             _ApprovalConfigRepository = ApprovalConfigRepository;
             _accountManager = accountManager;
             _mapper = mapper;
+            _paymentType = paymentType;
         }
         public async Task<IActionResult> Index()
         {
@@ -57,18 +62,18 @@ namespace HotelCollection.Web.Controllers
             }).ToList();
 
 
-            // var department = await _authService.DepartmentFromAD();
-            // var departmentList = department.Select(a => new SelectListItem()
-            // {
-            //     Value = a.ToString(),
-            //     Text = a.ToString()
-            // }).Distinct()
-            // .OrderBy(a=>a.Value)
-            // .ToList();
+             var paymentType = await _paymentType.GetPaymentTypeAsync();
+            var paymentTypeList = paymentType.Select(a => new SelectListItem()
+            {
+                Value = a.Type.ToString(),
+                Text = a.Type.ToString()
+            }).Distinct()
+            .OrderBy(a=>a.Value)
+            .ToList();
 
 
             ViewBag.roles = roleList;
-            //ViewBag.department = "";//departmentList;
+            ViewBag.paymentType = paymentTypeList;
             return View();
 
 
@@ -88,26 +93,28 @@ namespace HotelCollection.Web.Controllers
                     Text = a.Name
                 }).ToList();
                 ViewBag.roles = roleList;
-                // var department = await _authService.DepartmentFromAD();
-                // var departmentList = department.Select(a => new SelectListItem()
-                // {
-                //     Value = a.ToString(),
-                //     Text = a.ToString()
-                // }).Distinct()
-                // .OrderBy(a => a.Value)
-                // .ToList();
-
-                //ViewBag.department = "";//departmentList;
+                var paymentType = await _paymentType.GetPaymentTypeAsync();
+                var paymentTypeList = paymentType.Select(a => new SelectListItem()
+                    {
+                        Value = a.Type.ToString(),
+                        Text = a.Type.ToString()
+                    }).Distinct()
+                    .OrderBy(a=>a.Value)
+                    .ToList();
 
 
-                var userApprovalCheck = await _ApprovalConfigRepository.CheckUserApprovalAsync(ApprovalConfig.RoleId, ApprovalConfig.Department);
+                
+                ViewBag.paymentType = paymentTypeList;
+
+
+                var userApprovalCheck = await _ApprovalConfigRepository.CheckUserApprovalAsync(ApprovalConfig.RoleId, ApprovalConfig.PaymentType);
                 if (userApprovalCheck.Count() > 0)
                 {
                     Alert("Can not create multiple approval level for the selected  role!! Please try again.", Enums.Enums.NotificationType.error);
                     return View(ApprovalConfig);
                 }
 
-                var finalApprovalCheck = await _ApprovalConfigRepository.GetFinalApprovalAsync(ApprovalConfig.Department);
+                var finalApprovalCheck = await _ApprovalConfigRepository.GetFinalApprovalAsync(ApprovalConfig.PaymentType);
                 if (finalApprovalCheck.Count() > 0)
                 {
                     Alert("Cannot create new approval level because Final Approval has already been assigned for the role!! Please try again.", Enums.Enums.NotificationType.error);
@@ -146,16 +153,17 @@ namespace HotelCollection.Web.Controllers
                 }).ToList();
                 ViewBag.roles = roleList;
 
-                // var department = await _authService.DepartmentFromAD();
-                // var departmentList = department.Select(a => new SelectListItem()
-                // {
-                //     Value = a.ToString(),
-                //     Text = a.ToString()
-                // }).Distinct()
-                // .OrderBy(a => a.Value)
-                // .ToList();
+                var paymentType = await _paymentType.GetPaymentTypeAsync();
+                var paymentTypeList = paymentType.Select(a => new SelectListItem()
+                    {
+                        Value = a.Type.ToString(),
+                        Text = a.Type.ToString()
+                    }).Distinct()
+                    .OrderBy(a=>a.Value)
+                    .ToList();
 
-                ViewBag.department = "";//departmentList;
+                
+                ViewBag.paymentType = paymentTypeList;
 
                 var ApprovalConfig = await _ApprovalConfigRepository.GetApprovalConfigByIdAsync(Id);
 
@@ -192,25 +200,26 @@ namespace HotelCollection.Web.Controllers
                     }).ToList();
                     ViewBag.roles = roleList;
 
-                    // var department = await _authService.DepartmentFromAD();
-                    // var departmentList = department.Select(a => new SelectListItem()
-                    // {
-                    //     Value = a.ToString(),
-                    //     Text = a.ToString()
-                    // }).Distinct()
-                    // .OrderBy(a => a.Value)
-                    // .ToList();
+                    var paymentType = await _paymentType.GetPaymentTypeAsync();
+                    var paymentTypeList = paymentType.Select(a => new SelectListItem()
+                        {
+                            Value = a.Type.ToString(),
+                            Text = a.Type.ToString()
+                        }).Distinct()
+                        .OrderBy(a=>a.Value)
+                        .ToList();
 
-                    ViewBag.department = "";//departmentList;
+                    
+                    ViewBag.paymentType = paymentTypeList;
 
                     var getApprovalConfig = await _ApprovalConfigRepository.GetApprovalConfigByIdAsync(ApprovalConfig.Id);
                     if (getApprovalConfig == null)
                     {
                         Alert("Invalid approval config. Please try again.", Enums.Enums.NotificationType.error);
-                        return View(getApprovalConfig);
+                        return View(ApprovalConfig);
                     }
 
-                    var finalApprovalCheck = await _ApprovalConfigRepository.GetFinalApprovalAsync(ApprovalConfig.Department);
+                    var finalApprovalCheck = await _ApprovalConfigRepository.GetFinalApprovalAsync(ApprovalConfig.PaymentType);
                     if(ApprovalConfig.IsFinalLevel)
                     {
                         // check if final approval <> selected final
@@ -224,6 +233,7 @@ namespace HotelCollection.Web.Controllers
                
 
                     getApprovalConfig.RoleId = ApprovalConfig.RoleId;
+                    getApprovalConfig.PaymentType = ApprovalConfig.PaymentType;
                     getApprovalConfig.ApprovalLevel = ApprovalConfig.ApprovalLevel;
                     getApprovalConfig.ApprovalType = ApprovalConfig.ApprovalType;
                     getApprovalConfig.IsFinalLevel = ApprovalConfig.IsFinalLevel;

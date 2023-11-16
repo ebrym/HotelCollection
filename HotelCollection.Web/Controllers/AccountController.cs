@@ -83,21 +83,41 @@ namespace HotelCollection.Web.Controllers
 
                         claims.Add(new Claim("Email", user.Email));
                         claims.Add(new Claim("FullName", user.FullName));
+                        
+                        
+                        // approvals
+                        var userApprovalLevel = await _accountManager.GetApprovalLevelByUserAsync(user.Email);
+                        claims.Add(new Claim("UserApprovalLevel", userApprovalLevel.Item1.ToString()));
+                        claims.Add(new Claim("IsFinalApproval", userApprovalLevel.Item2.ToString()));
+                        //claims.Add(new Claim("ApprovalLevelDepartment", userApprovalLevel.Item3.ToString()));
 
+                        var appuser = await _accountManager.FindByEmailAsync(user.Email);
+                        
+                        //check if user is doesn't have role 
+                        if (appuser == null)
+                        {
+                            claims.Add(new Claim("ApplicationRole", "Default"));
+                        }
+                        else
+                        {
+                            var ApplicationRole = await _accountManager.GetRolesAsync(appuser);
+                            claims.Add(new Claim("ApplicationRole", string.Join(",", ApplicationRole)));
+
+                        }
                         var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
                         if ( claimsPrincipal?.Identity is ClaimsIdentity claimsIdentity)
                         {
                             claimsIdentity.AddClaims(claims);
                         }
 
-                    var props = new AuthenticationProperties();
-                    props.IsPersistent = true;
-
+                     var props = new AuthenticationProperties();
+                     props.IsPersistent = true;
+                    
                     await _signInManager.Context.SignInAsync(
                        CookieAuthenticationDefaults.
                        AuthenticationScheme,
                        claimsPrincipal, props);
-
+                    
                     return RedirectToAction("Index", "Home");
                     }
                     else
@@ -186,7 +206,7 @@ namespace HotelCollection.Web.Controllers
                 if (result)
                 {
                     Alert("Account created sucsessfully.", Enums.Enums.NotificationType.success);
-                    return RedirectToAction("Users");
+                    return RedirectToAction("CreateUser");
                 }
                 else
                 {
@@ -199,62 +219,60 @@ namespace HotelCollection.Web.Controllers
             return View(user);
         }
 
-        public async Task<IActionResult> Users()
-        {
+        // public async Task<IActionResult> Users()
+        // {
+        //     var users = await _accountManager.GetUsers();
+        //
+        //     List<UserViewModel> userList = _mapper.Map<List<UserViewModel>>(users);
+        //     return View(userList);
+        // }
 
-            var users = await _accountManager.GetUsers();
-
-            List<UserViewModel> userList = _mapper.Map<List<UserViewModel>>(users);
-            return View(userList);
-
-        }
-
-        public async Task<IActionResult> EditUser(int id)
-        {
-            try
-            {
-                var users = await _accountManager.GetUserByIdAsync(id);
-
-                RegisterViewModel user = _mapper.Map<RegisterViewModel>(users);
-                return View(user);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
-        [HttpPost]
-        public async Task<IActionResult> EditUser(RegisterViewModel user)
-        {
-
-            if (ModelState.IsValid)
-            {
-                var getUser = await _accountManager.GetUserByIdAsync(user.Id);
-                if (getUser == null)
-                    return View(user);
-                getUser.FirstName = user.FirstName;
-                getUser.LastName = user.LastName;
-                getUser.Department = user.Department;
-
-                // var mappedUser = _mapper.Map<User>(user);
-                getUser.SecurityStamp = Guid.NewGuid().ToString();
-                var result = await _accountManager.UpdateUserAsync(getUser);
-
-                if (result.Succeeded)
-                {
-                    Alert("Account updated sucsessfully.", Enums.Enums.NotificationType.success);
-                    return RedirectToAction("Users");
-                }
-                else
-                {
-                    Alert("User account could not be updated. Please try again later.", Enums.Enums.NotificationType.error);
-                    return View(user);
-                }
-            }
-            Alert("Entries could not be validate. Please try again.", Enums.Enums.NotificationType.error);
-            return View(user);
-        }
+        // public async Task<IActionResult> EditUser(int id)
+        // {
+        //     try
+        //     {
+        //         var users = await _accountManager.GetUserByIdAsync(id);
+        //
+        //         RegisterViewModel user = _mapper.Map<RegisterViewModel>(users);
+        //         return View(user);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         throw ex;
+        //     }
+        //
+        // }
+        // [HttpPost]
+        // public async Task<IActionResult> EditUser(RegisterViewModel user)
+        // {
+        //
+        //     if (ModelState.IsValid)
+        //     {
+        //         var getUser = await _accountManager.GetUserByIdAsync(user.Id);
+        //         if (getUser == null)
+        //             return View(user);
+        //         getUser.FirstName = user.FirstName;
+        //         getUser.LastName = user.LastName;
+        //         getUser.Department = user.Department;
+        //
+        //         // var mappedUser = _mapper.Map<User>(user);
+        //         getUser.SecurityStamp = Guid.NewGuid().ToString();
+        //         var result = await _accountManager.UpdateUserAsync(getUser);
+        //
+        //         if (result.Succeeded)
+        //         {
+        //             Alert("Account updated sucsessfully.", Enums.Enums.NotificationType.success);
+        //             return RedirectToAction("Users");
+        //         }
+        //         else
+        //         {
+        //             Alert("User account could not be updated. Please try again later.", Enums.Enums.NotificationType.error);
+        //             return View(user);
+        //         }
+        //     }
+        //     Alert("Entries could not be validate. Please try again.", Enums.Enums.NotificationType.error);
+        //     return View(user);
+        // }
 
         //[PermissionValidation("can_create_user", "can_assign_permission")]
         public async Task<IActionResult> AssignUserRole()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HotelCollection.Web.Models.RequisitionModel>
+﻿@model IEnumerable<HotelCollection.Web.Models.PaymentSetupModel>
 @{
     ViewData["Title"] = "Pending Approval";
 }
@@ -11,9 +11,9 @@
             </div>
             <div class="col-6 text-right">
 
-                <a asp-controller="Requisition" asp-action="Create" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="New Request">
+                <a asp-controller="PaymentSetup" asp-action="Create" class="btn btn-sm btn-default btn-round btn-icon" data-toggle="tooltip" data-original-title="New Request">
                     <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
-                    <span class="btn-inner--text">New Request</span>
+                    <span class="btn-inner--text">New Payment</span>
                 </a>
             </div>
         </div>
@@ -24,13 +24,12 @@
             <thead class="thead-light">
                 <tr>
                     <th>S/N</th>
-                    <th>Request No.</th>
-                    <th>Type</th>
-                    <th>Project Code</th>
-                    <th>Project Name</th>
-                    <th>Marketer</th>
+                    <th>Reference</th>
+                    <th>Hotel</th>
+                    <th>Category</th>
+                    <th>Payment Type</th>
+                    <th>Amount</th>
                     <th>Approval Status</th>
-                    <th>Remarks</th>
                     <th>Date</th>
                     <th></th>
                     <th></th>
@@ -46,75 +45,35 @@
                     <tr>
                         <td>@(i)</td>
                         <td class="table-user">
-                            <b>@Html.DisplayFor(modelItem => req.Id)</b>
+                            <b>@Html.DisplayFor(modelItem => req.ReferenceNo)</b>
                         </td>
                         <td class="table-user">
-                            <b>@Html.DisplayFor(modelItem => req.RequisitionType)</b>
+                            <b>@Html.DisplayFor(modelItem => req.Hotel.Name)</b>
                         </td>
                         <td class="table-user">
-                            <b>@(string.IsNullOrEmpty(req.ProjectCode) ? "-" : req.ProjectCode)</b>
+                            <b>@Html.DisplayFor(modelItem => req.Hotel.Category.CategoryName)</b>
                         </td>
-                        <td class="table-user">
-                            <b>@(string.IsNullOrEmpty(req.ProjectName) ? "-" : req.ProjectName)</b>
+                         <td class="table-user">
+                            <b>@Html.DisplayFor(modelItem => req.PaymentType.Type)</b>
                         </td>
-                        <td class="table-user">
-                            <b>@(string.IsNullOrEmpty(req.MarketerName) ? "-" : req.MarketerName)</b>
+                         <td class="table-user">
+                            <b>@Html.DisplayFor(modelItem => req.Amount)</b>
                         </td>
                         <td class="table-user">
                             <b>@(string.IsNullOrEmpty(req.ApprovalStatus) ? "-" : req.ApprovalStatus)</b>
                         </td>
                         <td class="table-user">
-                            <b>@(string.IsNullOrEmpty(req.Remarks) ? "-" : req.Remarks)</b>
-                        </td>
-                        <td class="table-user">
                             <b>@req.DateCreated.ToString("dd/MM/yyyy")</b>
                         </td>
-                        <td class="table-user">
-                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseItem_@(i)" role="button" aria-expanded="false" aria-controls="collapseItem_@(i)">
-                                View Items
-                            </a>
-                        </td>
+                        @* <td class="table-user"> *@
+                        @*     <a class="btn btn-primary" data-toggle="collapse" href="#collapseItem_@(i)" role="button" aria-expanded="false" aria-controls="collapseItem_@(i)"> *@
+                        @*         View Items *@
+                        @*     </a> *@
+                        @* </td> *@
                         <td>
                             <a asp-action="Approve" asp-route-id="@req.Id" class="table-action" data-toggle="tooltip" data-original-title="Approve">
                                 <i class="fas fa-check text-green"></i>
                             </a>                           
-                        </td>
-                    </tr>
-                    <tr class="collapse" id="collapseItem_@(i)">
-                        <td colspan="13">
-                            <h4 class="center"> ITEMS LIST for request no. (@req.Id)</h4>
-                            <table class="table align-items-center table-flush" id="tdItems">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>S/N</th>
-                                        <th>Category</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        int j = 0;
-                                    }
-                                    @foreach (var item in @req.Items)
-                                    {
-                                        <tr>
-                                            <td>@(j = j + 1)</td>
-                                            <td class="table-user">
-                                                @item.HotelCategory
-                                            </td>
-                                            <td class="table-user">
-                                                @item.ItemDescription
-                                            </td>
-                                            <td class="table-user">
-                                                @item.Quantity
-                                            </td>
-
-                                        </tr>
-                                    }
-                                </tbody>
-
-                            </table>
                         </td>
                     </tr>
                 }

@@ -11,7 +11,7 @@ namespace HotelCollection.Data.Entity
         public int ApprovalLevel { get; set; }
         // public virtual Role ApproverRoleId { get; set; }
         public ApplicationUser ApproverUserId { get; set; }
-        public int RequisitionId {get;set;}
+        public int PaymentId {get;set;}
         public int  ApprovalConfigId { get; set; }
     }
 }

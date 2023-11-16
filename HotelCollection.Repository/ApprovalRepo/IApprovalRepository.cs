@@ -13,13 +13,13 @@ namespace HotelCollection.Repository.ApprovalRepo
     {
         //Task<IEnumerable<Requisition>> GetApprovalDueAsync();
         
-        Task<IEnumerable<Requisition>> GetPendingApprovalAsync();
-        Task<bool> CreateApprovalAsync(Requisition approval, bool isApproved);
+        Task<IEnumerable<PaymentSetup>> GetPendingApprovalAsync();
+        Task<bool> CreateApprovalAsync(PaymentSetup approval, string remarks, bool isApproved);
         Task<IEnumerable<Approval>> GetApprovalCommentsAsync(int requestId);
-        Task<Requisition> GetRequisitionApprovalDetailsAsync(int Id);
+        Task<PaymentSetup> GetPaymentApprovalDetailsAsync(int Id);
 
-        Task<IEnumerable<Requisition>> GetApprovedRequestsAsync();
-        Task<Requisition> GetRequisitionDetailsAsync(int Id);
+        Task<IEnumerable<PaymentSetup>> GetApprovedRequestsAsync();
+        Task<PaymentSetup> GetPaymentDetailsAsync(int Id);
         Task<bool> DisburseRequest(string Status,int requestId, int[] Id, decimal[] QuantityIssued, bool[] IsProcurement);
     }
 }
