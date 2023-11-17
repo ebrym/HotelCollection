@@ -16,6 +16,7 @@ namespace HotelCollection.Data.Entity
        public  string ReferenceNo { get; set; }
        public string ApprovalStatus { get; set; }
        public string CurrentApprovalLevel { get; set; }
+       public string PaymentStatus { get; set; }
        
     }
 }

@@ -134,6 +134,7 @@ namespace HotelCollection.Repository.ApprovalRepo
         }
 
 
+      
         public async Task<IEnumerable<PaymentSetup>> GetPendingApprovalAsync()
         {
 

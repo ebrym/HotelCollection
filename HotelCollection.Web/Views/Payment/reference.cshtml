@@ -1,0 +1,108 @@
+﻿@model HotelCollection.Web.Models.PaymentSetupModel
+
+@{
+    ViewData["Title"] = "Payment Details";
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+<form asp-action="Reference" method="post">
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Request Details for #-@Model.Id </h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group row">
+                        <label asp-for="Hotel.Name" class="col-md-2 col-form-label form-control-label">Hotel</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.Name
+                        </div>
+                        <label asp-for="@Model.Hotel.Category.CategoryName" class="col-md-2 col-form-label form-control-label">Category</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.Category.CategoryName
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Hotel.Address" class="col-md-2 col-form-label form-control-label">Address</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.Address
+                        </div>
+                        <label asp-for="@Model.Hotel.LocalGovernmentArea.LGAName" class="col-md-2 col-form-label form-control-label">LGA</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.LocalGovernmentArea.LGAName
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Hotel.CACNumber" class="col-md-2 col-form-label form-control-label">CACNumber</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.CACNumber
+                        </div>
+                        <label asp-for="@Model.Hotel.Phone" class="col-md-2 col-form-label form-control-label">Phone</label>
+                        <div class="col-md-4">
+                            @Model.Hotel.Phone
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="PaymentType.Type" class="col-md-2 col-form-label form-control-label">Payment Type</label>
+                        <div class="col-md-4">
+                            @Model.PaymentType.Type
+                        </div>
+                        <label asp-for="Amount" class="col-md-2 col-form-label form-control-label">Amount</label>
+                        <div class="col-md-4">
+                            @Model.Amount
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="ReferenceNo" class="col-md-2 col-form-label form-control-label">Reference</label>
+                        <div class="col-md-4">
+                            @Model.ReferenceNo
+                        </div>
+                        <label asp-for="DateCreated" class="col-md-2 col-form-label form-control-label">Date</label>
+                        <div class="col-md-4">
+                            @Model.DateCreated
+                        </div>
+                    </div>
+                    <input asp-for="Id" class="form-control" type="hidden">
+                    <input asp-for="CurrentApprovalLevel" class="form-control" type="hidden">
+                    <input asp-for="@Model.Hotel.Email" class="form-control" type="hidden">
+                    <input asp-for="@Model.Hotel.Name" class="form-control" type="hidden">
+                        <input asp-for="@Model.ReferenceNo" class="form-control" type="hidden">
+                        <input type="hidden" asp-for="@Model.Amount" class="form-control" id="ProjectCode">
+                        <input type="hidden" asp-for="@Model.PaymentType.Type" class="form-control" id="ProjectName">
+                        @* <input type="hidden" asp-for="MarketerEmail" class="form-control" id="MarketerEmail">
+                          <input type="hidden" asp-for="MarketerName" class="form-control" id="MarketerName">*@
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Payment Method</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="table-responsive">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button id="btnApprove" type="submit" class="btn btn-primary my-4" >Proceed With Payment</button>
+    </div>
+   
+</form>
+

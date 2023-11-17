@@ -1,0 +1,98 @@
+@model HotelCollection.Web.Models.PaymentModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Payment</title>
+       <link rel="stylesheet" href="~/assets/css/argon.mine209.css?v=1.0.0" type="text/css">
+</head>
+<body>
+<form id="paymentForm">
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Request Details for #-@Model.Reference </h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <!-- Form groups used in grid -->
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label form-control-label">Hotel</label>
+                        <div class="col-md-4">
+                            @Model.HotelName
+                        </div>
+                        <label  class="col-md-2 col-form-label form-control-label">Email</label>
+                        <div class="col-md-4">
+                            @Model.Email
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="col-md-2 col-form-label form-control-label">Payment Type</label>
+                        <div class="col-md-4">
+                            @Model.PaymentType
+                        </div>
+                        <label  class="col-md-2 col-form-label form-control-label">Amount</label>
+                        <div class="col-md-4">
+                            @Model.Amount
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label  class="col-md-2 col-form-label form-control-label">Reference</label>
+                        <div class="col-md-4">
+                            @Model.Reference
+                        </div>
+                        @* <label  class="col-md-2 col-form-label form-control-label">Date</label> *@
+                        @* <div class="col-md-4"> *@
+                        @*     @Model.DateCreated *@
+                        @* </div> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="text-center">
+            <button id="btnApprove" type="submit" class="btn btn-primary my-4" onclick="payWithPaystack()">Pay</button>
+        </div>
+<input asp-for="@Model.Email" class="form-control" type="hidden" >
+<input asp-for="@Model.Reference" class="form-control" type="hidden" >
+<input type="hidden" asp-for="@Model.Amount" class="form-control">
+</form>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script>
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener("submit", payWithPaystack, false);
+    
+    function payWithPaystack(e) {
+      e.preventDefault();
+    
+      let handler = PaystackPop.setup({
+        key: 'pk_test_6021bef74aeb2e8276bf85e3744f5c20a9af29af', // Replace with your public key
+        email: document.getElementById("Email").value,
+        amount: document.getElementById("Amount").value * 100,
+        ref: document.getElementById("Reference").value, //''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        // label: "Optional string that replaces customer email"
+        onClose: function(){
+          alert('Window closed.');
+        },
+        callback: function(response){
+          let message = 'Payment complete! Reference: ' + response.reference;
+          alert(message);
+        }
+      });
+    
+      handler.openIframe();
+    }
+    
+    
+    </script>
+
+</body>
+</html>

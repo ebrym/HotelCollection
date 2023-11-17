@@ -68,6 +68,8 @@
     <AdditionalFiles Include="Views\Agent\Create.cshtml" />
     <AdditionalFiles Include="Views\Agent\Edit.cshtml" />
     <AdditionalFiles Include="Views\Agent\Index.cshtml" />
+    <AdditionalFiles Include="Views\Payment\Approve.cshtml" />
+    <AdditionalFiles Include="Views\Payment\Index.cshtml" />
   </ItemGroup>
 
 
