@@ -13,5 +13,8 @@ namespace HotelCollection.Repository.Interface
         Task<IEnumerable<Requisition>> GetByProject(int projectId, DateTime startDate, DateTime endDate);
         Task<IEnumerable<Requisition>> GetByDisbursedStatus(string disburseStatus, DateTime startDate, DateTime endDate);
         Task<IEnumerable<Requisition>> GetByApprovalStatus(string approvalStatus, DateTime startDate, DateTime endDate);
+        Task<IEnumerable<Hotel>> GetAllHotels();
+        Task<IEnumerable<Hotel>> GetHotelsByCategory(int categoryid);
+        Task<IEnumerable<Hotel>> GetByHotelsByLGA(int lgaId);
     }
 }

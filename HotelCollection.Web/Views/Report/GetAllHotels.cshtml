@@ -1,0 +1,34 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.HotelRegistrationModel>
+
+<form method="post">
+    <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Search Parameter</h3>
+        </div>
+        <!-- Card body -->
+       
+    </div>
+</form>
+
+@await Html.PartialAsync("_HotelReportPartial", Model)
+
+@section Scripts
+    {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#reportTable').DataTable(
+                {
+                    dom: "Bfrtip",
+                    buttons: [
+                        'copy', 'excel', 'print', 'pdf'
+                    ]
+                }
+            );
+
+            $('.buttons-copy, .buttons-pdf, .buttons-excel, .buttons-print').removeClass('btn btn-secondary').addClass('btn-primary mb-2 mr-2');
+        });
+
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<HotelCollection.Web.Models.HotelRegistrationModel>
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Report Details</h3>
+    </div>
+
+    <div class="card-body">
+        <!-- Light table -->
+        <div class="table-responsive py-4">
+            <table id="reportTable" class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th>S/N</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>PHONE</th>
+                        <th>EMAIL</th>
+                        <th>ADDRESS</th>
+                        <th>CAC NUMBER</th>
+                        <th>CATEGORY</th>
+                        <th>L.G.A.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var req in Model)
+                    {
+                        i = i + 1;
+                        <tr>
+                            <td>@(i)</td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.Id)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.Name)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.Phone)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.Email)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.Address)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.CACNumber)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.Category.CategoryName)</b>
+                            </td>
+                            <td class="table-user">
+                                <b>@Html.DisplayFor(modelItem => req.LocalGovernmentArea.LGAName)</b>
+                            </td>
+                           
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
