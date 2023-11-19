@@ -67,6 +67,7 @@ public static class ServiceExtension
            services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
         services.AddScoped<IPaymentSetupRepository, PaymentSetupRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<IPaymentTransaction, PaymentTransactionRepository>();
         services.AddAutoMapper(typeof(Program));
            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

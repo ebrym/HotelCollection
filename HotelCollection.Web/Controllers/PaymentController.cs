@@ -26,6 +26,7 @@ namespace HotelCollection.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IPaymentRepository _paymentRepository;
+        private readonly IPaymentTransaction _paymentTransaction;
         private IHostingEnvironment _hostingEnv;
         private readonly IAccountManager _accountManager;
         private IViewRenderService _viewRender;
@@ -40,7 +41,8 @@ namespace HotelCollection.Web.Controllers
                                      IAccountManager accountManager,
                                      IHostingEnvironment hostingEnv,
                                      IViewRenderService viewRender, 
-                                     ISMTPService emailSender)
+                                     ISMTPService emailSender,
+                                     IPaymentTransaction paymentTransaction)
         {
             _mapper = mapper;
             _contextAccessor = contextAccessor;
@@ -50,6 +52,7 @@ namespace HotelCollection.Web.Controllers
              _paymentRepository =  paymentRepository;
             _emailSender = emailSender;
             _config = config;
+            _paymentTransaction = paymentTransaction;
     }
 
         public async Task<IActionResult> Index()
@@ -59,7 +62,7 @@ namespace HotelCollection.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string reference)
         {
-            Response.Redirect("~/Payment/Reference/" + reference);
+            Response.Redirect("/payment/Reference/" + reference);
             return View();
         }
         public async Task<IActionResult> Reference(string id)
@@ -115,6 +118,30 @@ namespace HotelCollection.Web.Controllers
             return View(payment);
         }
 
+        [HttpGet("Transaction/{reference}")]
+        public async Task<IActionResult> TransactionUpdate(string reference)
+        {
+            var transaction = await _paymentTransaction.GetTransactionByReference(reference);
+            var paymentSetup = await _paymentRepository.GetPaymentDetailsByReferenceAsync(reference);
+            
+            if (transaction == null && paymentSetup != null)
+            {
+                var paymentModel = new PaymentTransaction
+                {
+                    Amount = Convert.ToDecimal(paymentSetup.Amount), // 100 ,
+                    PaymentSetup = paymentSetup,
+                    Reference = reference,
+                    Status = "Paid",
+                    PaymentMode = "Card",
+                    PaymentSetupId = paymentSetup.Id
+                };
+                await _paymentTransaction.CreatePaymentTransactionAsync(paymentModel);
+
+            }
+            
+            
+            return null;
+        }
 
     }
 }

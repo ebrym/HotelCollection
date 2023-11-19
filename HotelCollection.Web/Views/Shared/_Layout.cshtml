@@ -81,8 +81,8 @@
                                 <span class="nav-link-text">Home</span>
                             </a>
                         </li>
-                        @* @if (HttpContextAccessor.HttpContext.User.FindFirst("ApplicationRole").Value.Contains("Administrator")) *@
-                        @* { *@
+                         @if (HttpContextAccessor.HttpContext.User.FindFirst("ApplicationRole").Value.Contains("Admin")) 
+                         { 
                             <li class="nav-item">
                                 <a class="nav-link" href="#admin" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="admin">
                                     <i class="ni ni-archive-2 text-green"></i>
@@ -90,155 +90,200 @@
                                 </a>
                                 <div class="collapse" id="admin">
                                     <ul class="nav nav-sm flex-column">
-                                       
                                         <li class="nav-item">
-                                            <a asp-controller="Account" asp-action="Roles" class="nav-link">Roles</a>
+                                            <a asp-controller="Account" asp-action="Roles" class="nav-link">
+                                                <i class="ni ni-building text-blue text-sm opacity-10"></i>
+                                            <span class="nav-link-text">Roles</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a asp-controller="Account" asp-action="UserRoles" class="nav-link">Users</a>
+                                            <a asp-controller="Account" asp-action="UserRoles" class="nav-link">
+                                                <i class="ni ni-briefcase-24 text-green text-sm opacity-10"></i>
+                                            <span class="nav-link-text">Users</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="ApprovalConfig" asp-action="Index" class="nav-link">
+                                            <i class="ni ni-badge text-orange text-sm opacity-10"></i>
+                                        <span class="nav-link-text">Approval Config</span></a>
+                                        </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="HotelCategory" asp-action="Index" class="nav-link">
+                                            <i class="ni ni-basket text-pink text-sm opacity-10"></i>
+                                        <span class="nav-link-text">Hotel Category</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Agent" asp-action="Index" class="nav-link">
+                                            <i class="ni ni-camera-compact text-cyan text-sm opacity-10"></i>
+                                        <span class="nav-link-text">Agents</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="LocalGovernmentArea" asp-action="Index" class="nav-link">
+                                            <i class="ni ni-atom text-purple text-sm opacity-10"></i>
+                                        <span class="nav-link-text">L.G.A.</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="HotelCategoryFee" asp-action="Index" class="nav-link">
+                                            <i class="ni ni-delivery-fast text-yellow text-sm opacity-10"></i>
+                                        <span class="nav-link-text">Category Fee</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="PaymentType" asp-action="Index" class="nav-link">  
+                                            <i class="ni ni-archive-2 text-danger text-sm opacity-10"></i>
+                                        <span class="nav-link-text">Payment Type</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Hotel" asp-action="Index" class="nav-link">
+                                             <i class="ni ni-istanbul text-success text-sm opacity-10"></i>
+                                            <span class="nav-link-text">Hotel</span>
+                                            </a>
+                                    </li>
+                                        <li class="nav-item">
+                                             <a asp-controller="PaymentSetup" asp-action="Index" class="nav-link">
+                                            <i class="ni ni-credit-card text-warning text-sm opacity-10"></i>
+                                                  <span class="nav-link-text">Payments</span>
+                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                         
-                            <li class="nav-item">
-                                <a class="nav-link" href="#approvalconfig" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="approvalconfig">
-                                    <i class="ni ni-single-copy-04 text-pink"></i>
-                                    <span class="nav-link-text">Approval Config</span>
-                                </a>
-                                <div class="collapse" id="approvalconfig">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a asp-controller="ApprovalConfig" asp-action="Index" class="nav-link">List</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a asp-controller="ApprovalConfig" asp-action="Create" class="nav-link">Create</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#Category" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">Hotel Category</span>
-                            </a>
-                            <div id="Category" class="collapse">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="HotelCategory" asp-action="Index" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="HotelCategory" asp-action="Create" class="nav-link">Create</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#Agent" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">Agent</span>
-                            </a>
-                            <div id="Agent" class="collapse">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="Agent" asp-action="Index" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="Agent" asp-action="Create" class="nav-link">Create</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#LocalGovernmentArea" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">Local Government</span>
-                            </a>
-                            <div id="LocalGovernmentArea" class="collapse">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="LocalGovernmentArea" asp-action="Index" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="LocalGovernmentArea" asp-action="Create" class="nav-link">Create</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#HotelCategoryFee" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">Hotel Category Fee</span>
-                            </a>
-                            <div id="HotelCategoryFee" class="collapse">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="HotelCategoryFee" asp-action="Index" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="HotelCategoryFee" asp-action="Create" class="nav-link">Create</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#PaymentType" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">Payment Type</span>
-                            </a>
-                            <div id="PaymentType" class="collapse">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="PaymentType" asp-action="Index" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="PaymentType" asp-action="Create" class="nav-link">Create</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#PaymentSetup" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">Payment Setup</span>
-                            </a>
-                            <div id="PaymentSetup" class="collapse">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="PaymentSetup" asp-action="Index" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="PaymentSetup" asp-action="Create" class="nav-link">Create</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-
-                          <li class="nav-item">
-                            <a class="nav-link" href="#Hotel" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category">
-                                <i class="ni ni-ui-04 fa-building-o"></i>
-                                <span class="nav-link-text">Hotel</span>
-                            </a>
-                            <div id="Hotel" class="collapse">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="Hotel" asp-action="Index" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a asp-controller="Hotel" asp-action="Create" class="nav-link">Create</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        @* } *@
+                        @*     <li class="nav-item"> *@
+                        @*         <a class="nav-link" href="#approvalconfig" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="approvalconfig"> *@
+                        @*             <i class="ni ni-single-copy-04 text-pink"></i> *@
+                        @*             <span class="nav-link-text">Approval Config</span> *@
+                        @*         </a> *@
+                        @*         <div class="collapse" id="approvalconfig"> *@
+                        @*             <ul class="nav nav-sm flex-column"> *@
+                        @*                 <li class="nav-item"> *@
+                        @*                     <a asp-controller="ApprovalConfig" asp-action="Index" class="nav-link">List</a> *@
+                        @*                 </li> *@
+                        @*                 <li class="nav-item"> *@
+                        @*                     <a asp-controller="ApprovalConfig" asp-action="Create" class="nav-link">Create</a> *@
+                        @*                 </li> *@
+                        @*             </ul> *@
+                        @*         </div> *@
+                        @*     </li> *@
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#Category" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category"> *@
+                        @*         <i class="ni ni-ui-04 text-info"></i> *@
+                        @*         <span class="nav-link-text">Hotel Category</span> *@
+                        @*     </a> *@
+                        @*     <div id="Category" class="collapse"> *@
+                        @*         <ul class="nav nav-sm flex-column"> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="HotelCategory" asp-action="Index" class="nav-link">List</a> *@
+                        @*             </li> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="HotelCategory" asp-action="Create" class="nav-link">Create</a> *@
+                        @*             </li> *@
+                        @*         </ul> *@
+                        @*     </div> *@
+                        @* </li> *@
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#Agent" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category"> *@
+                        @*         <i class="ni ni-ui-04 text-info"></i> *@
+                        @*         <span class="nav-link-text">Agent</span> *@
+                        @*     </a> *@
+                        @*     <div id="Agent" class="collapse"> *@
+                        @*         <ul class="nav nav-sm flex-column"> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="Agent" asp-action="Index" class="nav-link">List</a> *@
+                        @*             </li> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="Agent" asp-action="Create" class="nav-link">Create</a> *@
+                        @*             </li> *@
+                        @*         </ul> *@
+                        @*     </div> *@
+                        @* </li> *@
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#LocalGovernmentArea" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category"> *@
+                        @*         <i class="ni ni-ui-04 text-info"></i> *@
+                        @*         <span class="nav-link-text">Local Government</span> *@
+                        @*     </a> *@
+                        @*     <div id="LocalGovernmentArea" class="collapse"> *@
+                        @*         <ul class="nav nav-sm flex-column"> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="LocalGovernmentArea" asp-action="Index" class="nav-link">List</a> *@
+                        @*             </li> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="LocalGovernmentArea" asp-action="Create" class="nav-link">Create</a> *@
+                        @*             </li> *@
+                        @*         </ul> *@
+                        @*     </div> *@
+                        @* </li> *@
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#HotelCategoryFee" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category"> *@
+                        @*         <i class="ni ni-ui-04 text-info"></i> *@
+                        @*         <span class="nav-link-text">Hotel Category Fee</span> *@
+                        @*     </a> *@
+                        @*     <div id="HotelCategoryFee" class="collapse"> *@
+                        @*         <ul class="nav nav-sm flex-column"> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="HotelCategoryFee" asp-action="Index" class="nav-link">List</a> *@
+                        @*             </li> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="HotelCategoryFee" asp-action="Create" class="nav-link">Create</a> *@
+                        @*             </li> *@
+                        @*         </ul> *@
+                        @*     </div> *@
+                        @* </li> *@
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#PaymentType" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category"> *@
+                        @*         <i class="ni ni-ui-04 text-info"></i> *@
+                        @*         <span class="nav-link-text">Payment Type</span> *@
+                        @*     </a> *@
+                        @*     <div id="PaymentType" class="collapse"> *@
+                        @*         <ul class="nav nav-sm flex-column"> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="PaymentType" asp-action="Index" class="nav-link">List</a> *@
+                        @*             </li> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="PaymentType" asp-action="Create" class="nav-link">Create</a> *@
+                        @*             </li> *@
+                        @*         </ul> *@
+                        @*     </div> *@
+                        @* </li> *@
                         @* *@
-                        <li class="nav-item">
-                            <a class="nav-link" href="#requisition" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="requisition">
-                                <i class="ni ni-books text-blue"></i>
-                                <span class="nav-link-text">Hotel Collection</span>
-                            </a>
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#PaymentSetup" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category"> *@
+                        @*         <i class="ni ni-ui-04 text-info"></i> *@
+                        @*         <span class="nav-link-text">Payment Setup</span> *@
+                        @*     </a> *@
+                        @*     <div id="PaymentSetup" class="collapse"> *@
+                        @*         <ul class="nav nav-sm flex-column"> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="PaymentSetup" asp-action="Index" class="nav-link">List</a> *@
+                        @*             </li> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="PaymentSetup" asp-action="Create" class="nav-link">Create</a> *@
+                        @*             </li> *@
+                        @*         </ul> *@
+                        @*     </div> *@
+                        @* </li> *@
+                        @* *@
+                        @* *@
+                        @*   <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#Hotel" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="Category"> *@
+                        @*         <i class="ni ni-ui-04 fa-building-o"></i> *@
+                        @*         <span class="nav-link-text">Hotel</span> *@
+                        @*     </a> *@
+                        @*     <div id="Hotel" class="collapse"> *@
+                        @*         <ul class="nav nav-sm flex-column"> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="Hotel" asp-action="Index" class="nav-link">List</a> *@
+                        @*             </li> *@
+                        @*             <li class="nav-item"> *@
+                        @*                 <a asp-controller="Hotel" asp-action="Create" class="nav-link">Create</a> *@
+                        @*             </li> *@
+                        @*         </ul> *@
+                        @*     </div> *@
+                        @* </li> *@
+                         } 
+                        @* *@
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link" href="#requisition" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="requisition"> *@
+                        @*         <i class="ni ni-books text-blue"></i> *@
+                        @*         <span class="nav-link-text">Hotel Collection</span> *@
+                        @*     </a> *@
                             @* <div class="collapse" id="requisition"> *@
                             @*     <ul class="nav nav-sm flex-column"> *@
                             @*         <li class="nav-item"> *@
@@ -249,23 +294,23 @@
                             @*         </li> *@
                             @*     </ul> *@
                             @* </div> *@
-                        </li>
-                        @*@if (Convert.ToInt16(HttpContextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value) > 0)
-                            {*@
-                        <li class="nav-item">
-                            <a class="nav-link" href="#approval" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="approval">
-                                <i class="ni ni-check-bold text-green"></i>
-                                <span class="nav-link-text">Approval</span>
-                            </a>
-                            <div class="collapse" id="approval">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a asp-controller="Approval" asp-action="Index" class="nav-link">Pending Approvals</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        @* }*@
+                        @* </li> *@
+                        @if (Convert.ToInt16(HttpContextAccessor.HttpContext.User.FindFirst("UserApprovalLevel").Value) > 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="#approval" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="approval">
+                                    <i class="ni ni-check-bold text-green"></i>
+                                    <span class="nav-link-text">Approval</span>
+                                </a>
+                                <div class="collapse" id="approval">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a asp-controller="Approval" asp-action="Index" class="nav-link">Pending Approvals</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        } 
 
                         @* @if (HttpContextAccessor.HttpContext.User.FindFirst("ApplicationRole").Value.Contains("Store")) *@
                         @* { *@
@@ -283,7 +328,9 @@
                         @*         </div> *@
                         @*     </li> *@
                         @* } *@
-                        @* *@
+                    @* *@
+                   @if (HttpContextAccessor.HttpContext.User.FindFirst("ApplicationRole").Value.Contains("Report")) 
+                    {
                         <li class="nav-item">
                             <a class="nav-link" href="#navbarReport" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbarReport">
                                 <i class="ni ni-chart-pie-35 text-blue"></i>
@@ -306,6 +353,7 @@
                                 </ul>
                             </div>
                         </li>
+                    }
                         @*<li class="nav-item">
                                 <a class="nav-link" href="../charts.html">
                                     <i class="ni ni-chart-pie-35 text-info"></i>

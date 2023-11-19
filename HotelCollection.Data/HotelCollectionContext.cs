@@ -38,6 +38,7 @@ namespace HotelCollection.Data
         public DbSet<HotelCategoryFee> HotelCategoryFees { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<PaymentSetup> PaymentSetups { get; set; }
+        public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

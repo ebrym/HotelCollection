@@ -83,7 +83,20 @@
           alert('Window closed.');
         },
         callback: function(response){
+            let ref =  "Payment/Transaction/" + response.reference;
           let message = 'Payment complete! Reference: ' + response.reference;
+          
+            $.ajax({
+                  url: 'ref',
+                  datatype: "json",
+                  data: {
+                      term: request.term
+                  },
+                  success: function (data) {
+                     
+                  }
+              })
+          
           alert(message);
         }
       });

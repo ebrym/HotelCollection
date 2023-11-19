@@ -17,32 +17,38 @@ namespace HotelCollection.Web.Controllers
     public class HomeController : BaseController
     {
 
-        private readonly IRequisition _requisitionRepository;
+        private readonly IPaymentSetupRepository _paymentRepository;
+        private readonly IHotelRepository _hotelRepository;
         private readonly IApprovalRepository _approvalRepository;
-        public HomeController(IRequisition requisitionRepository,
-                                     IApprovalRepository approvalRepository)
+        public HomeController(IApprovalRepository approvalRepository,
+            IPaymentSetupRepository paymentRepository,
+            IHotelRepository hotelRepository)
         {
-            _requisitionRepository = requisitionRepository;
             _approvalRepository = approvalRepository;
+            _paymentRepository = paymentRepository;
+            _hotelRepository = hotelRepository;
         }
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
             try
             {
-                // var request =await _requisitionRepository.GetRequisitionsDashBoardByUserAsync();
-                // var pendingApproval = await _approvalRepository.GetPendingApprovalAsync();
+                var hotel = await _hotelRepository.GetHotelAsync();
+                 var payments = await _paymentRepository.GetPaymentSetupAsync();
+                 var pendingApproval = await _approvalRepository.GetPendingApprovalAsync();
                 //
                 //
-                // ViewBag.TotalRequest = request.Count();
+                 ViewBag.TotalPayments = payments.Count();
+                 ViewBag.TotalHotel = hotel.Count();
+                 //ViewBag.TotalHotelByCategory = hotel.Count(x=>x.);
                 //
-                // ViewBag.Pending = request.Where(x=>x.ApprovalStatus != "Completed").Count();
-                // ViewBag.Rejected = request.Where(x => x.ApprovalStatus == "Rejected").Count();
-                // ViewBag.Approved = request.Where(x => x.ApprovalStatus == "Completed").Count();
-                // ViewBag.Disbursed = request.Where(x => x.Status == "Complete").Count();
+                 ViewBag.Pending = payments.Where(x=>x.ApprovalStatus != "Completed").Count();
+                 ViewBag.Rejected = payments.Where(x => x.ApprovalStatus == "Rejected").Count();
+                 ViewBag.Approved = payments.Where(x => x.ApprovalStatus == "Completed").Count();
+                 //ViewBag.Disbursed = request.Where(x => x.Status == "Complete").Count();
                 // ViewBag.Partial = request.Where(x => x.Status == "Partial").Count();
                 // ViewBag.AwaitingDisburse = request.Where(x => x.ApprovalStatus == "Completed" && x.Status == null).Count();
-                // ViewBag.PendingApproval = pendingApproval.Count();
+                 ViewBag.PendingApproval = pendingApproval.Count();
             }
             catch(Exception)
             {
