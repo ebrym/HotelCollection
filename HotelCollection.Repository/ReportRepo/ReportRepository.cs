@@ -65,5 +65,28 @@ namespace HotelCollection.Repository.ReportRepo
                                                     .OrderByDescending(x => x.DateCreated)
                                                     .ToListAsync();
         }
+        public async Task<IEnumerable<Hotel>> GetAllHotels()
+        {
+            return await context.Hotels.OrderByDescending(x => x.DateCreated)
+                                             .Include(x => x.Category)
+                                            .Include(x => x.LocalGovernmentArea)
+                                            .ToListAsync();
+        }
+        public async Task<IEnumerable<Hotel>> GetHotelsByCategory(int categoryid)
+        {
+            return await context.Hotels.Where(x => x.CategoryId == categoryid 
+                                                    )
+                                                     .Include(x => x.Category)
+                                                     .Include(x => x.LocalGovernmentArea)
+                                                    .ToListAsync();
+        }
+        public async Task<IEnumerable<Hotel>> GetByHotelsByLGA(int lgaId)
+        {
+            return await context.Hotels.Where(x => x.LGAId == lgaId)
+                                                    .Include(x => x.Category)
+                                                     .Include(x => x.LocalGovernmentArea)
+                                                    .OrderByDescending(x => x.DateCreated)
+                                                    .ToListAsync();
+        }
     }
 }
